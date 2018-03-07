@@ -13208,3 +13208,499 @@ Processing by YojoController#index as HTML
 Completed 200 OK in 144ms (Views: 142.7ms | ActiveRecord: 0.0ms)
 
 
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /home/ec2-user/environment/project/config/initializers/new_framework_defaults.rb:21)
+Started GET "/sample_kitchen" for 73.35.192.68 at 2018-03-07 00:46:19 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/sample_kitchen"):
+  
+actionpack (5.1.5) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:20:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.5) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.5) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.5) lib/rails/engine.rb:522:in `call'
+puma (3.11.2) lib/puma/configuration.rb:225:in `call'
+puma (3.11.2) lib/puma/server.rb:624:in `handle_request'
+puma (3.11.2) lib/puma/server.rb:438:in `process_client'
+puma (3.11.2) lib/puma/server.rb:302:in `block in run'
+puma (3.11.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 73.35.192.68 at 2018-03-07 00:46:25 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#index as HTML
+  Rendering yojo/index.html.erb within layouts/application
+  Rendered yojo/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 406ms (Views: 405.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/index" for 73.35.192.68 at 2018-03-07 00:47:12 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/index"):
+  
+actionpack (5.1.5) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:20:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.5) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.5) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.5) lib/rails/engine.rb:522:in `call'
+puma (3.11.2) lib/puma/configuration.rb:225:in `call'
+puma (3.11.2) lib/puma/server.rb:624:in `handle_request'
+puma (3.11.2) lib/puma/server.rb:438:in `process_client'
+puma (3.11.2) lib/puma/server.rb:302:in `block in run'
+puma (3.11.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 73.35.192.68 at 2018-03-07 00:48:40 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#index as HTML
+  Rendering yojo/index.html.erb within layouts/application
+  Rendered yojo/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 147ms (Views: 146.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rails/sample_kitchen" for 73.35.192.68 at 2018-03-07 00:48:49 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/rails/sample_kitchen"):
+  
+actionpack (5.1.5) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:20:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.5) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.5) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.5) lib/rails/engine.rb:522:in `call'
+puma (3.11.2) lib/puma/configuration.rb:225:in `call'
+puma (3.11.2) lib/puma/server.rb:624:in `handle_request'
+puma (3.11.2) lib/puma/server.rb:438:in `process_client'
+puma (3.11.2) lib/puma/server.rb:302:in `block in run'
+puma (3.11.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/rails/db" for 73.35.192.68 at 2018-03-07 00:48:54 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by RailsDb::DashboardController#index as HTML
+  Rendering /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/dashboard/index.html.erb within layouts/rails_db/application
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/dashboard/index.html.erb within layouts/rails_db/application (1.5ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_header.html.erb (4.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_sidebar.html.erb (1.4ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_gems.html.erb (0.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_footer.html.erb (4.0ms)
+Completed 200 OK in 121ms (Views: 119.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/rails/db/tables/ingredients/data" for 73.35.192.68 at 2018-03-07 00:48:58 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by RailsDb::TablesController#data as JS
+  Parameters: {"table_id"=>"ingredients"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "ingredients"[0m
+  Rendering /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/data.js.erb
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_exp_col.html.erb (0.3ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_condition_fields.html.erb (45.0ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_condition_fields.html.erb (5.4ms)
+  [1m[36m Load (0.2ms)[0m  [1m[34mSELECT  "ingredients".* FROM "ingredients" LIMIT ? OFFSET ?[0m  [["LIMIT", 25], ["OFFSET", 0]]
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (2.4ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.6ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.6ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.6ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.5ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "ingredients"[0m
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_sql.html.erb (0.3ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_data.html.erb (177.6ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/data.js.erb (181.8ms)
+Completed 200 OK in 208ms (Views: 161.2ms | ActiveRecord: 25.5ms)
+
+
+Started GET "/rails/db/tables/seasonings/data" for 73.35.192.68 at 2018-03-07 00:49:05 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by RailsDb::TablesController#data as JS
+  Parameters: {"table_id"=>"seasonings"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "seasonings"[0m
+  Rendering /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/data.js.erb
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_exp_col.html.erb (0.3ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_condition_fields.html.erb (6.5ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_condition_fields.html.erb (5.5ms)
+  [1m[36m Load (0.2ms)[0m  [1m[34mSELECT  "seasonings".* FROM "seasonings" LIMIT ? OFFSET ?[0m  [["LIMIT", 25], ["OFFSET", 0]]
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (2.6ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (2.3ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (2.0ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "seasonings"[0m
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_sql.html.erb (0.3ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_data.html.erb (135.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/data.js.erb (139.8ms)
+Completed 200 OK in 164ms (Views: 118.4ms | ActiveRecord: 26.4ms)
+
+
+Started GET "/rails/db/tables/ingredients/data" for 73.35.192.68 at 2018-03-07 00:49:15 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by RailsDb::TablesController#data as HTML
+  Parameters: {"table_id"=>"ingredients"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "ingredients"[0m
+  Rendering /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/data.html.erb within layouts/rails_db/application
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_exp_col.html.erb (0.3ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_condition_fields.html.erb (6.0ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_condition_fields.html.erb (5.7ms)
+  [1m[36m Load (0.2ms)[0m  [1m[34mSELECT  "ingredients".* FROM "ingredients" LIMIT ? OFFSET ?[0m  [["LIMIT", 25], ["OFFSET", 0]]
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (2.4ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (7.1ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.6ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.6ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.6ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_row.html.erb (1.8ms)
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "ingredients"[0m
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_sql.html.erb (0.3ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/_data.html.erb (125.7ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/tables/data.html.erb within layouts/rails_db/application (126.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_header.html.erb (2.8ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_sidebar.html.erb (1.4ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_gems.html.erb (0.4ms)
+  Rendered /usr/local/rvm/gems/ruby-2.4.1/gems/rails_db-1.6.0/app/views/rails_db/shared/_footer.html.erb (3.1ms)
+Completed 200 OK in 189ms (Views: 145.8ms | ActiveRecord: 25.8ms)
+
+
+Started GET "/yojo/sample_kitchen" for 73.35.192.68 at 2018-03-07 00:56:31 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as HTML
+  Rendering yojo/sample_kitchen.html.erb within layouts/application
+  Rendered yojo/sample_kitchen.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 143ms (Views: 142.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/yojo/sample_kitchen/1?term=wjd" for 73.35.192.68 at 2018-03-07 00:56:36 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"wjd", "id"=>"1"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE (name LIKE '%wjd%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (4.6ms)
+Completed 200 OK in 12ms (Views: 8.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/1?term=%EA%B9%80" for 73.35.192.68 at 2018-03-07 00:56:38 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"김", "id"=>"1"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE (name LIKE '%김%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (4.6ms)
+Completed 200 OK in 10ms (Views: 8.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/2?term=%E3%84%B1" for 73.35.192.68 at 2018-03-07 00:56:41 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"ㄱ", "id"=>"2"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mSeasoning Load (0.2ms)[0m  [1m[34mSELECT "seasonings".* FROM "seasonings" WHERE (name LIKE '%ㄱ%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.4ms)
+Completed 200 OK in 8ms (Views: 5.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/2?term=%EA%B0%84" for 73.35.192.68 at 2018-03-07 00:56:44 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"간", "id"=>"2"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mSeasoning Load (0.2ms)[0m  [1m[34mSELECT "seasonings".* FROM "seasonings" WHERE (name LIKE '%간%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (4.4ms)
+Completed 200 OK in 10ms (Views: 8.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/2?term=%EA%B0%84%EC%9E%A5" for 73.35.192.68 at 2018-03-07 00:56:45 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"간장", "id"=>"2"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mSeasoning Load (0.2ms)[0m  [1m[34mSELECT "seasonings".* FROM "seasonings" WHERE (name LIKE '%간장%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.3ms)
+Completed 200 OK in 6ms (Views: 4.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/2?term=%EA%B0%84%EC%9E%A5" for 73.35.192.68 at 2018-03-07 00:56:53 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"간장", "id"=>"2"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mSeasoning Load (0.2ms)[0m  [1m[34mSELECT "seasonings".* FROM "seasonings" WHERE (name LIKE '%간장%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.3ms)
+Completed 200 OK in 7ms (Views: 5.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/2?term=%EA%B0%84" for 73.35.192.68 at 2018-03-07 00:56:55 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"간", "id"=>"2"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mSeasoning Load (0.2ms)[0m  [1m[34mSELECT "seasonings".* FROM "seasonings" WHERE (name LIKE '%간%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.4ms)
+Completed 200 OK in 6ms (Views: 4.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/2?term=%EA%B0%84%EC%A3%A0" for 73.35.192.68 at 2018-03-07 00:56:56 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"간죠", "id"=>"2"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mSeasoning Load (0.2ms)[0m  [1m[34mSELECT "seasonings".* FROM "seasonings" WHERE (name LIKE '%간죠%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.2ms)
+Completed 200 OK in 6ms (Views: 4.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/2?term=%EA%B0%84%EC%A3%A0" for 73.35.192.68 at 2018-03-07 00:56:57 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"간죠", "id"=>"2"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mSeasoning Load (0.2ms)[0m  [1m[34mSELECT "seasonings".* FROM "seasonings" WHERE (name LIKE '%간죠%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.2ms)
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/1?term=%EA%B9%80" for 73.35.192.68 at 2018-03-07 00:57:00 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"김", "id"=>"1"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE (name LIKE '%김%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.4ms)
+Completed 200 OK in 7ms (Views: 5.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/index" for 73.35.192.68 at 2018-03-07 00:57:26 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/yojo/index"):
+  
+actionpack (5.1.5) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:20:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.5) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.5) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.5) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.5) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.5) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.5) lib/rails/engine.rb:522:in `call'
+puma (3.11.2) lib/puma/configuration.rb:225:in `call'
+puma (3.11.2) lib/puma/server.rb:624:in `handle_request'
+puma (3.11.2) lib/puma/server.rb:438:in `process_client'
+puma (3.11.2) lib/puma/server.rb:302:in `block in run'
+puma (3.11.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 73.35.192.68 at 2018-03-07 00:57:31 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#index as HTML
+  Rendering yojo/index.html.erb within layouts/application
+  Rendered yojo/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 142ms (Views: 140.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 73.35.192.68 at 2018-03-07 00:59:19 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#index as HTML
+  Rendering yojo/index.html.erb within layouts/application
+  Rendered yojo/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 147ms (Views: 146.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 73.35.192.68 at 2018-03-07 00:59:21 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#index as HTML
+  Rendering yojo/index.html.erb within layouts/application
+  Rendered yojo/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 154ms (Views: 152.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/yojo/sample_kitchen" for 69.91.160.91 at 2018-03-07 01:00:36 +0000
+Cannot render console from 69.91.160.91! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as HTML
+  Rendering yojo/sample_kitchen.html.erb within layouts/application
+  Rendered yojo/sample_kitchen.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 154ms (Views: 152.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/yojo/sample_kitchen/1?term=%EB%A7%88%EB%8A%98" for 69.91.160.91 at 2018-03-07 01:00:42 +0000
+Cannot render console from 69.91.160.91! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"마늘", "id"=>"1"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE (name LIKE '%마늘%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.8ms)
+Completed 200 OK in 7ms (Views: 5.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/2?term=%EB%A7%88%EB%8A%98" for 69.91.160.91 at 2018-03-07 01:00:46 +0000
+Cannot render console from 69.91.160.91! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"마늘", "id"=>"2"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mSeasoning Load (0.2ms)[0m  [1m[34mSELECT "seasonings".* FROM "seasonings" WHERE (name LIKE '%마늘%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.2ms)
+Completed 200 OK in 6ms (Views: 4.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/2?term=%EB%A7%88%E3%84%B4" for 69.91.160.91 at 2018-03-07 01:00:47 +0000
+Cannot render console from 69.91.160.91! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"마ㄴ", "id"=>"2"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mSeasoning Load (0.2ms)[0m  [1m[34mSELECT "seasonings".* FROM "seasonings" WHERE (name LIKE '%마ㄴ%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.1ms)
+Completed 200 OK in 6ms (Views: 4.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen/2?term=%EB%A7%88" for 69.91.160.91 at 2018-03-07 01:00:47 +0000
+Cannot render console from 69.91.160.91! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"마", "id"=>"2"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mSeasoning Load (0.2ms)[0m  [1m[34mSELECT "seasonings".* FROM "seasonings" WHERE (name LIKE '%마%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.4ms)
+Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/yojo/sample_kitchen" for 73.35.192.68 at 2018-03-07 01:00:58 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as HTML
+  Rendering yojo/sample_kitchen.html.erb within layouts/application
+  Rendered yojo/sample_kitchen.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 151ms (Views: 150.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/yojo/sample_kitchen/1?term=%E3%84%B9" for 73.35.192.68 at 2018-03-07 01:02:06 +0000
+Cannot render console from 73.35.192.68! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by YojoController#sample_kitchen as JSON
+  Parameters: {"term"=>"ㄹ", "id"=>"1"}
+  Rendering yojo/sample_kitchen.json.jbuilder
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE (name LIKE '%ㄹ%')[0m
+  Rendered yojo/sample_kitchen.json.jbuilder (1.2ms)
+Completed 200 OK in 6ms (Views: 4.7ms | ActiveRecord: 0.2ms)
+
+
+DEPRECATION WARNING: ActiveSupport.halt_callback_chains_on_return_false= is deprecated and will be removed in Rails 5.2. (called from <top (required)> at /home/ec2-user/environment/project/config/initializers/new_framework_defaults.rb:21)
+Started GET "/" for 69.91.160.91 at 2018-03-07 01:06:06 +0000
+Cannot render console from 69.91.160.91! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by YojoController#index as HTML
+  Rendering yojo/index.html.erb within layouts/application
+  Rendered yojo/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 457ms (Views: 450.4ms | ActiveRecord: 0.0ms)
+
+
