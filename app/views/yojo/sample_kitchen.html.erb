@@ -1,0 +1,20 @@
+<div style="margin-top: 2em; margin-left: 2em;">
+    <div class="autocomplete">
+        재료 검색: <input type="text" id="ingredient_search" autofocus>
+        <div class="results" id="ingredient_results"></div>
+    </div>
+    
+    <br>
+
+    <div class="autocomplete">
+        조미료 검색: <input type="text" id="seasoning_search" autofocus>
+        <div class="results" id="seasoning_results"></div>
+    </div>
+    
+    <script>
+        $(function() {
+            new app.Ingredients;
+            new app.Seasonings;
+        });
+    </script>
+</div>

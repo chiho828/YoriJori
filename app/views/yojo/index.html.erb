@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+
+<!-- Home -->
+     <header>
+        <div>
+            <h1> YORIJORI </h1>
+            <h3> 우리집 셰프는 YOJO </h3>
+        </div>
+    </header>
+    
+    <button> 재료 조합하러 가기 </button>
+    <button type="button" data-toggle="modal" data-target="#sign_in"> 로그인 </button>
+    <button> 회원가입 </button>
+    
+<!-- Search Page-->
+<br>
+<form>
+    <input type="radio" name="search type" checked> 재료 조합하기
+    <input type="radio" name="search type"> 레시피 검색하기
+    <input type="radio" name="search type"> 유저아이디로 검색하기
+</form>
+
+
+<form>
+     <p>
+         <input type="text">
+         <input type='submit'>
+     </p>
+</form>
+
+<form>
+    <input type="radio" name="search type" checked> 오늘의 추천메뉴
+    <input type="radio" name="search type"> 신메뉴
+    <input type="radio" name="search type"> 이번주 베스트
+    <input type="radio" name="search type"> 이번달 베스트
+</form> 
+
+<br>
+
+<!--Navigation-->
+
+<a>KITCHEN</a> <br>
+<a>SCRAP BOOK</a>
+
+
+<!--Modal Sign_in & Sign_Up -->
+
+<div id="sign_in" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+      
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">WELCOME TO YOJO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>ID</p>
+        <p>Password</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Sign in</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
