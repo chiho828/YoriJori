@@ -1,0 +1,17 @@
+<h1><%= @recipe.food %></h1>
+<h3>주재료: <%= @recipe.ingredient %></h3>
+<h3>부재료: <%= @recipe.seasoning %></h3>
+<h3>조리법: <%= @recipe.step %></h3>
+
+<%= link_to "뒤로가기", :back %>
+
+<p>댓글</p>
+<p>댓글달기</p>
+<p>스크랩하기</p>
+
+<!--
+<div>
+     link_to '수정하기', "/yojo/recipe/#/edit" %>
+     link_to '삭제', "/yojo/recipe/#", method: 'delete', date: {"삭제 하시겠습니까?"} %>
+</div>
+-->

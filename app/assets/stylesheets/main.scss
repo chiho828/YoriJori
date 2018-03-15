@@ -1,0 +1,14 @@
+html {
+    background-color: #000;
+}
+
+body {
+    background-color: #fff;
+    padding-top: 56px;
+    min-height: 100vh;
+    
+    &.show-popup {
+        transition: opacity .8s ease-out;
+        opacity: 0.5;
+    }
+}

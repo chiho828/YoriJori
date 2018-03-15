@@ -1,73 +1,206 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-
-<!-- Home -->
-     <header>
-        <div>
-            <h1> YORIJORI </h1>
-            <h3> 우리집 셰프는 YOJO </h3>
+<!--Header-->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#">YOJO</a>
+        <div class="navbar-collapse" style="">
+          <ul class="navbar-nav ml-auto">
+            <li>
+              <% if user_signed_in? %>
+                <li class="nav-link">
+                <%= link_to 'Log Out', destroy_user_session_path, method: 'delete' %>
+                </li>
+              <% else %>
+                <li class="nav-link">
+                <%= link_to 'Log In', new_user_session_path %>
+                </li>
+                <li class="nav-link">
+                <%= link_to 'Sign Up', new_user_registration_path %>
+                </li>
+              <% end %>
+            </li>
+          </ul>
         </div>
+      </div>
+    </nav>
+
+<!-- Home Page-->   
+     <header class="masthead d-flex">
+        <div class="container text-center my-auto">
+            <p class="mb-1 "> 우리집 셰프는 YOJO </p>
+            <h1 class="mb-5 "> YORIJORI </h1>
+            <a class="btn btn-primary btn-xl rounded-pill js-scroll-trigger" href="#search">재료 조합하러 가기</a>
+        </div>
+        <div class="overlay"></div>
     </header>
-    
-    <button> 재료 조합하러 가기 </button>
-    <button type="button" data-toggle="modal" data-target="#sign_in"> 로그인 </button>
-    <button> 회원가입 </button>
-    
+
 <!-- Search Page-->
-<br>
-<form>
-    <input type="radio" name="search type" checked> 재료 조합하기
-    <input type="radio" name="search type"> 레시피 검색하기
-    <input type="radio" name="search type"> 아이디로 검색하기
-</form>
-
-
-<form>
-     <p>
-         <input type="text">
-         <input type='submit'>
-     </p>
-</form>
-
-<form>
-    <input type="radio" name="search type" checked> 오늘의 추천메뉴
-    <input type="radio" name="search type"> 신메뉴
-    <input type="radio" name="search type"> 이번주 베스트
-    <input type="radio" name="search type"> 이번달 베스트
-</form> 
-
-<br>
-
-<!--Navigation-->
-
-<a>KITCHEN</a> <br>
-<a>SCRAP BOOK</a>
-
-
-<!--Modal Sign_in & Sign_Up -->
-
-<div id="sign_in" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-      
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">WELCOME TO YOJO</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>ID</p>
-        <p>Password</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Sign in</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+    <section class="content-section bg-light" id="search">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <div class="main">
+    <div class="types">
+        <a href="/">홈</a>
+        <input type="radio" name="search type" onclick="buttonClicked(this)" value=1 
+        <% if @type == 1 %>
+            checked
+        <% end %>
+        >재료 조합하기
+        <input type="radio" name="search type" onclick="buttonClicked(this)" value=2
+        <% if @type == 2 %>
+            checked
+        <% end %>
+        >요리 검색하기
+        <input type="radio" name="search type" onclick="buttonClicked(this)" value=3
+        <% if @type == 3 %>
+            checked
+        <% end %>
+        >아이디로 검색하기
+        
+        <a style="margin-left: 1em" href='/yojo/test'>리셋</a>
     </div>
-  </div>
+    <br>
+    
+    <form action="/yojo/test" id="search">
+        <% if @type == 1 %>
+            재료: 
+            <input id="ingredient_search" class="bar" type="text" autofocus>
+            <button id="button" type="button" onclick="combine()">조합</button>
+            
+            <div id="ingredient_results"></div>
+            <div id="filters"></div>
+            <script>
+                $(function() {
+                    new app.Ingredients;
+                });
+                
+                $("#ingredient_search").keydown(function(event) {
+                     if (event.keyCode == 13) {
+                         event.preventDefault();
+                     }
+                });
+            </script>
+        <% elsif @type == 2 %>
+            요리:
+            <input class="bar" type="text" name="yori" autocomplete="off" autofocus>
+            <input type="submit" value="검색">
+        <% else %>
+            아이디:
+            <input class="bar" type="text" name="id" autocomplete="off" autofocus>
+            <input type="submit" value="검색">
+        <% end %>
+    </form>
+    
 </div>
 
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<hr>
+
+<div id="results">
+    <% if @results != nil %>
+        <% @results.each do |result| %>
+            <%= result.name %>
+            <br>
+        <% end %>
+    <% end %>
+</div>
+
+<script>
+    // $("#ingredient_search")[0].addEventListener("keyup", function(event) {
+    //   event.preventDefault();
+    //   // Number 13 is the "Enter" key on the keyboard
+    //   if (event.keyCode === 13) {
+    //     // Trigger the button element with a click
+    //     $("button").click();
+    //   }
+    // });
+    
+    function combine() {
+        console.log(map);
+        var array = [];
+        map.forEach(function(value, key) {
+            array.push(value.id);
+        });
+        
+        $.ajax({
+            url : "/yojo/combine",
+            type : "get",
+            data : { data_value: array }
+        });
+    }
+    
+    function removeFilter(a) {
+        var name = a.innerHTML;
+        map.delete(name);
+        a.remove();
+    }
+    
+    function buttonClicked(radio) {
+        if (radio.value != 1) {
+            $("#filters span").remove();
+            map.clear();
+        }
+        
+        $.ajax({
+            url : "/yojo/switch",
+            type : "get",
+            data : { data_value: radio.value }
+        });
+    }
+</script>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">요리 이름 1</a>
+              </h4>
+              <p class="card-text">필요한 재료 리스트</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">요리 이름 2</a>
+              </h4>
+              <p class="card-text">필요한 재료 리스트</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">요리 이름 3</a>
+              </h4>
+              <p class="card-text">필요한 재료 리스트</p>
+            </div>
+          </div>
+        </div>
+
+     </section>  
+     
+     
+<!--Navigation-->
+<a href='/yojo/kitchen'>KITCHEN</a><br>
+<a href='/yojo/test'>TEST</a><br>
+<a href='/yojo/yori_book'>요리책</a>
+
+
+<!--Script-->
+<script src= "https://blackrockdigital.github.io/startbootstrap-stylish-portfolio/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src= "https://blackrockdigital.github.io/startbootstrap-stylish-portfolio/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src= "https://blackrockdigital.github.io/startbootstrap-stylish-portfolio/js/stylish-portfolio.min.js"></script>

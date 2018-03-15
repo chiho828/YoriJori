@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!--Header-->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="/">YOJO</a>
+        <div class="navbar-collapse" style="">
+          <ul class="navbar-nav ml-auto">
+            <li>
+              <% if user_signed_in? %>
+                <li class="nav-link">
+                <%= link_to 'Log Out', destroy_user_session_path, method: 'delete' %>
+                </li>
+              <% else %>
+                <li class="nav-link">
+                <%= link_to 'Log In', new_user_session_path %>
+                </li>
+                <li class="nav-link">
+                <%= link_to 'Sign Up', new_user_registration_path %>
+                </li>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div>
+        <h2> My Kitchen </h2>
+    </div>
+    
+    
+    <!--Profile Section-->
+    <div class="profile-wrapper">
+        <p>
+            <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            프로필
+            </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">계정 설정</a>
+                    <a class="dropdown-item" href="#">내 요리북</a>
+                </div>
+            </div>
+        </p>
+    </div>
+    
+    <div class="main-wrapper">
+        <div class="main-left">
+            <div class="fridge-wrapper"></div>
+        </div>
+        <div class="main-right">
+            <div class="shelf-wrapper">
+                <div class="shelf-upper">
+                    <span></span>
+                </div>
+                <div class="shelf-lower">
+                   <div></div>
+                    <span></span>
+                </div>
+            </div>
+            <div class="recommendation-wrapper"></div>
+        </div>
+    </div>
+    
+
+    <!--Navigation-->
+    <a href="/yojo/test">레시피 찾기</a>
+    
+<% if !user_signed_in? %>
+
+    <script>
+        // add popup class to fade
+        document.body.className = 'show-popup';
+        // alert ("로그인을 하세요 :)");
+        
+        window.onload = function () {
+            
+            alert ("로그인을 하세요 :)");
+            
+            // remove popup class to fade
+            // TODO: this should be moved to auth callback
+            // document.body.className = '';
+        }
+        
+    </script>
+    
+<% end %>

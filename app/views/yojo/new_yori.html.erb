@@ -1,0 +1,46 @@
+<form action="/create">
+    
+<h3>메인사진</h3>
+<!--사진첨부기능추가하기-->
+   
+<h3>음식명: </h3>
+<input type="text" name="food">
+
+<h3>주재료: </h3>
+<input type="text" name="ingredient">
+
+<h3>부재료: </h3>
+<input type="text" name="seasoning">
+    
+<h3>조리과정: </h3>
+<p>Step 1</p>
+<textarea name="step" rows="10" cols="30"></textarea>
+<!--조리과정 스탭별로 나눠 입력하게 하기-->
+
+
+<input type="submit">
+<h2><a href="/"> cancel </a></h3>
+    
+</form>
+
+
+<% form_tag('/create', method: 'post') do %>
+<!--사진첨부기능추가하기-->
+   
+<%= label_tag(:food, "음식명:") %>
+<%= text_field_tag(:food) %>  
+
+<%= label_tag(:ingredient, "주재료:") %>
+<%= text_field_tag(:ingredient) %> 
+
+<%= label_tag(:ingredient, "부재료:") %>
+<%= text_field_tag(:seasoning) %> 
+
+<%= label_tag(:step, "조리과정:") %>
+<%= text_field_tag(:step) %> 
+<!--조리과정 스탭별로 나눠 입력하게 하기-->
+
+
+<%= submit_tag("Submit") %>
+<% end %>
+

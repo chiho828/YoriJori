@@ -28,5 +28,17 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+    
+    # Let everyone read Post even when they are not logged in
+    can :show, Recipe
+    can :create, Recipe
+    # QUESTION: how do you let a guest destroy his recipe?
+    
+    # Allow additional features for logged in users
+    if user.present?
+      can :manage, Recipe, user_id: user.id
+      can :manage, Kitchen, user_id: user.id
+      # QUESTION: "recipe" instead of "Post"?
+    end
   end
 end

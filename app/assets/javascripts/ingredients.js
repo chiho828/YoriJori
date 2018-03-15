@@ -7,23 +7,34 @@ app.Ingredients.prototype = {
     _initAutocomplete: function() {
         this._input
         .autocomplete({
-            source: '/yojo/sample_kitchen/1',
+            source: '/yojo/test',
             appendTo: '#ingredient_results',
-            select: $.proxy(this._select, this)
+            select: $.proxy(this._select, this),
+            focus: $.proxy(this._focus, this)
         })
         .autocomplete('instance')._renderItem = $.proxy(this._render, this);
     },
-    _select: function(e, ui) {
-        this._input.val(ui.item.name);
-        return false;
-    },
     _render: function(ul, item) {
-        console.log("render")
         var markup = [
-            '<span class = "name">' + item.name + '</span>'
+            '<span class="name">' + item.name + '</span>'
         ];
         return $('<li>')
             .append(markup.join(''))
             .appendTo(ul);
+    },
+    _select: function(e, ui) {
+        this._input.val("");
+        
+        var item = ui.item;
+        console.log(item);
+        if (!map.has(item.name)) {
+            $('#filters').append('<a onclick="removeFilter(this)">'+item.name+'</a>');
+            map.set(item.name, item);
+        }
+       
+        return false;
+    },
+    _focus: function(e, ui) {
+        e.preventDefault();
     }
 }

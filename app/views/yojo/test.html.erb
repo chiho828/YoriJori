@@ -1,0 +1,109 @@
+<div class="main">
+    <div class="types">
+        <a href="/">홈</a>
+        <input type="radio" name="search type" onclick="buttonClicked(this)" value=1 
+        <% if @type == 1 %>
+            checked
+        <% end %>
+        >재료 조합하기
+        <input type="radio" name="search type" onclick="buttonClicked(this)" value=2
+        <% if @type == 2 %>
+            checked
+        <% end %>
+        >요리 검색하기
+        <input type="radio" name="search type" onclick="buttonClicked(this)" value=3
+        <% if @type == 3 %>
+            checked
+        <% end %>
+        >아이디로 검색하기
+        
+        <a style="margin-left: 1em" href='/yojo/test'>리셋</a>
+    </div>
+    <br>
+    
+    <form action="/yojo/test" id="search">
+        <% if @type == 1 %>
+            재료: 
+            <input id="ingredient_search" class="bar" type="text" autofocus>
+            <button id="button" type="button" onclick="combine()">조합</button>
+            
+            <div id="ingredient_results"></div>
+            <div id="filters"></div>
+            <script>
+                $(function() {
+                    new app.Ingredients;
+                });
+                
+                $("#ingredient_search").keydown(function(event) {
+                     if (event.keyCode == 13) {
+                         event.preventDefault();
+                     }
+                });
+            </script>
+        <% elsif @type == 2 %>
+            요리:
+            <input class="bar" type="text" name="yori" autocomplete="off" autofocus>
+            <input type="submit" value="검색">
+        <% else %>
+            아이디:
+            <input class="bar" type="text" name="id" autocomplete="off" autofocus>
+            <input type="submit" value="검색">
+        <% end %>
+    </form>
+    
+</div>
+
+<hr>
+
+<div id="results">
+    <% if @results != nil %>
+        <% @results.each do |result| %>
+            <%= result.name %>
+            <br>
+        <% end %>
+    <% end %>
+</div>
+
+<script>
+    // $("#ingredient_search")[0].addEventListener("keyup", function(event) {
+    //   event.preventDefault();
+    //   // Number 13 is the "Enter" key on the keyboard
+    //   if (event.keyCode === 13) {
+    //     // Trigger the button element with a click
+    //     $("button").click();
+    //   }
+    // });
+    
+    function combine() {
+        console.log(map);
+        var array = [];
+        map.forEach(function(value, key) {
+            array.push(value.id);
+        });
+        
+        $.ajax({
+            url : "/yojo/combine",
+            type : "get",
+            data : { data_value: array }
+        });
+    }
+    
+    function removeFilter(a) {
+        var name = a.innerHTML;
+        map.delete(name);
+        a.remove();
+    }
+    
+    function buttonClicked(radio) {
+        if (radio.value != 1) {
+            $("#filters span").remove();
+            map.clear();
+        }
+        
+        $.ajax({
+            url : "/yojo/switch",
+            type : "get",
+            data : { data_value: radio.value }
+        });
+    }
+</script>

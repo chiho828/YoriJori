@@ -1,0 +1,27 @@
+<% if @type == "1" %>
+    재료: 
+    <input id="ingredient_search" class="bar" type="text" autofocus>
+    <button id="button" type="button" onclick="combine()">조합</button>
+    
+    <div id="ingredient_results"></div>
+    
+    <script>
+        $(function() {
+            new app.Ingredients;
+        });
+        
+        $("#ingredient_search").keydown(function(event) {
+                 if (event.keyCode == 13) {
+                     event.preventDefault();
+                 }
+            });
+    </script>
+<% elsif @type == "2" %>
+    요리:
+    <input class="bar" type="text" name="yori" autocomplete="off" autofocus>
+    <input type="submit" value="검색">
+<% else %>
+    아이디:
+    <input class="bar" type="text" name="id" autocomplete="off" autofocus>
+    <input type="submit" value="검색">
+<% end %>
