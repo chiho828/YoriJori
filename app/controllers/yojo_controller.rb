@@ -66,6 +66,27 @@ class YojoController < ApplicationController
     # root
     def index
         # get + show recommendations
+        @yori = params[:yori]
+        @id = params[:id]
+        
+        @type = 1
+        if @yori != nil 
+            @type = 2
+        elsif @id != nil
+            @type = 3
+        end
+            
+        if @type == 2
+            @results = Yori.where('name LIKE ?', "%#{@yori}%")
+        elsif @type == 3
+            @user = User.where("username LIKE ?", "%#{@id}%")
+            @results = Yori.where('user_id = ?', @user.ids)
+        end
+        
+        respond_to do |format|
+            format.html
+            format.json { @ingredients = Ingredient.search(params[:term]) }
+        end
     end
 
     # GET /recipes/1
