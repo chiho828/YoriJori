@@ -27,10 +27,13 @@ app.Ingredients.prototype = {
         
         var item = ui.item;
         console.log(item);
+        
         if (!map.has(item.name)) {
-            $('#filters').append('<a onclick="removeFilter(this)">'+item.name+'</a>');
+            $('#filters').append('<span onclick="removeFilter(this)">'+item.name+'</span>');
             map.set(item.name, item);
         }
+        
+        console.log(map);
        
         return false;
     },

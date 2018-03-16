@@ -15,7 +15,8 @@ class YojoController < ApplicationController
         if @type == 2
             @results = Yori.where('name LIKE ?', "%#{@yori}%")
         elsif @type == 3
-            @results = Yori.where('user_id = ?', @id)
+            @user = User.where("username LIKE ?", "%#{@id}%")
+            @results = Yori.where('user_id = ?', @user.ids)
         end
         
         respond_to do |format|
@@ -90,9 +91,6 @@ class YojoController < ApplicationController
     
     # DELETE /recipes/1
     def destroy
-    end
-    
-    def test_index
     end
     
     def yori_book

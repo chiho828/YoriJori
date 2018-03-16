@@ -17,6 +17,4 @@ Rails.application.routes.draw do
   
   # New Recipe
   get '/yojo/new_yori' => 'yojo#new_yori'
-  
-  get '/yojo/test_index' => 'yojo#test_index'
 end
