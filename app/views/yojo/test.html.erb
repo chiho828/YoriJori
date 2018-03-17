@@ -58,7 +58,7 @@
     <% if @results != nil %>
         <% @results.each do |result| %>
             <%= result.name %>
-            <span class="tab"><%= User.find(result.user_id).username %></span>
+            <span class="tab"><%= result.user.username %></span>
             <br>
         <% end %>
     <% end %>
