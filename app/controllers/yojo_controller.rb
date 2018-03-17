@@ -123,4 +123,7 @@ class YojoController < ApplicationController
         
         def recipe_params
         end
+
+
+
 end

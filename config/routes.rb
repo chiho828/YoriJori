@@ -17,4 +17,11 @@ Rails.application.routes.draw do
   
   # New Recipe
   get '/yojo/new_yori' => 'yojo#new_yori'
+  
+  
+  # Testing post
+  get '/posts/new' => 'posts#new'
+  get '/posts/create' => 'posts#create'
+  get '/posts/index' => 'posts#index'
+  get '/posts/show/:yori_id' => 'posts#show'
 end
