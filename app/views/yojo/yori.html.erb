@@ -1,7 +1,11 @@
-<h1><%= @recipe.food %></h1>
-<h3>주재료: <%= @recipe.ingredient %></h3>
-<h3>부재료: <%= @recipe.seasoning %></h3>
-<h3>조리법: <%= @recipe.step %></h3>
+<div>
+<h1><%= @post.yori.name %></h1>
+<h2><%= @post.subtitle %></h2>
+<h3>주재료: <%= @post.main %></h3>
+<h3>부재료: <%= @post.optional %></h3>
+<h3>양념: <%= @post.seasoning %></h3>
+</div>
+<h3>조리법: </h3>
 
 <%= link_to "뒤로가기", :back %>
 

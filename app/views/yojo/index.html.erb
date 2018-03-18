@@ -2,98 +2,91 @@
 
 <!--Header-->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#">YOJO</a>
-        <div class="navbar-collapse" style="">
-          <ul class="navbar-nav ml-auto">
-            <li>
-              <% if user_signed_in? %>
-                <li class="nav-link">
-                <%= link_to 'Log Out', destroy_user_session_path, method: 'delete' %>
-                </li>
-              <% else %>
-                <li class="nav-link">
-                <%= link_to 'Log In', new_user_session_path %>
-                </li>
-                
-                <li class="nav-link">
-                <%= link_to 'Sign Up', new_user_registration_path %>
-                </li>
-              <% end %>
+  <div class="container">
+    <a class="navbar-brand js-scroll-trigger" href="#">YOJO</a>
+    <div class="navbar-collapse" style="">
+      <ul class="navbar-nav ml-auto">
+        <li>
+          <% if user_signed_in? %>
+            <li class="nav-link">
+            <%= link_to 'Log Out', destroy_user_session_path, method: 'delete' %>
             </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+          <% else %>
+            <li class="nav-link">
+            <%= link_to 'Log In', new_user_session_path %>
+            </li>
+      
+            <li class="nav-link">
+            <%= link_to 'Sign Up', new_user_registration_path %>
+            </li>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <!-- Home Page-->   
-     <header class="masthead d-flex" >
-        <div class="container text-center my-auto">
-            <p class="mb-1 "> 우리집 셰프는 YOJO </p>
-            <h1 class="mb-5 "> YORIJORI </h1>
-            <a class="btn btn-primary btn-xl rounded-pill js-scroll-trigger" href="#search">재료 조합하러 가기</a>
-      </div>
-        <div class="overlay"></div>
-    </header>
+<header class="masthead d-flex" >
+  <div class="container text-center my-auto">
+    <p class="mb-1 "> 우리집 셰프는 YOJO </p>
+    <h1 class="mb-5 "> YORIJORI </h1>
+    <a class="btn btn-primary btn-xl rounded-pill js-scroll-trigger" href="#search">재료 조합하러 가기</a>
+  </div>
+  <div class="overlay"></div>
+</header>
 
 <!-- Search Page-->
-    <section class="content-section bg-light" id="search">
-      <div class="container text-center">
-        <div class="row">
-          <div class="col-lg-10 mx-auto">
-            <div class="main">
-    <div class="types">
-        <a href="/">홈</a>
-        <input type="radio" name="search type" onclick="buttonClicked(this)" value=1 
-        <% if @type == 1 %>
-            checked
-        <% end %>
-        >재료 조합하기
-        <input type="radio" name="search type" onclick="buttonClicked(this)" value=2
-        <% if @type == 2 %>
-            checked
-        <% end %>
-        >요리 검색하기
-        <input type="radio" name="search type" onclick="buttonClicked(this)" value=3
-        <% if @type == 3 %>
-            checked
-        <% end %>
-        >아이디로 검색하기
-        
-        <a style="margin-left: 1em" href='/yojo/test'>리셋</a>
-    </div>
-    <br>
-    
-    <form action="/yojo/test" id="search">
-        <% if @type == 1 %>
-            재료: 
-            <input id="ingredient_search" class="bar" type="text" autofocus>
-            <button id="button" type="button" onclick="combine()">조합</button>
-            
-            <div id="ingredient_results"></div>
-            <div id="filters"></div>
-            <script>
-                $(function() {
-                    new app.Ingredients;
-                });
-                
-                $("#ingredient_search").keydown(function(event) {
-                     if (event.keyCode == 13) {
-                         event.preventDefault();
-                     }
-                });
-            </script>
-        <% elsif @type == 2 %>
-            요리:
-            <input class="bar" type="text" name="yori" autocomplete="off" autofocus>
-            <input type="submit" value="검색">
-        <% else %>
-            아이디:
-            <input class="bar" type="text" name="id" autocomplete="off" autofocus>
-            <input type="submit" value="검색">
-        <% end %>
-    </form>
-    
+<div class="main">
+  <div class="types">
+    <input type="radio" name="search type" onclick="buttonClicked(this)" value=1 
+    <% if @type == 1 %>
+      checked
+    <% end %>
+    >재료 조합하기
+    <input type="radio" name="search type" onclick="buttonClicked(this)" value=2
+    <% if @type == 2 %>
+      checked
+    <% end %>
+    >요리 검색하기
+    <input type="radio" name="search type" onclick="buttonClicked(this)" value=3
+    <% if @type == 3 %>
+      checked
+    <% end %>
+    >아이디로 검색하기
+  </div>
+  <br>
+  
+  <form action="/" id="search">
+      <% if @type == 1 %>
+          재료: 
+          <input id="ingredient_search" class="bar" type="text" autofocus>
+          <button id="button" type="button" onclick="combine()">조합</button>
+          
+          <div id="ingredient_results"></div>
+          
+          <script>
+              $(function() {
+                new app.Ingredients;
+              });
+              
+              $("#ingredient_search").keydown(function(event) {
+                   if (event.keyCode == 13) {
+                       event.preventDefault();
+                   }
+              });
+          </script>
+      <% elsif @type == 2 %>
+          요리:
+          <input class="bar" type="text" name="yori" autocomplete="off" autofocus>
+          <input type="submit" value="검색">
+      <% else %>
+          아이디:
+          <input class="bar" type="text" name="id" autocomplete="off" autofocus>
+          <input type="submit" value="검색">
+      <% end %>
+  </form>
+  <div id="filters"></div>
 </div>
 
 <hr>
@@ -106,17 +99,9 @@
         <% end %>
     <% end %>
 </div>
+<br>
 
 <script>
-    // $("#ingredient_search")[0].addEventListener("keyup", function(event) {
-    //   event.preventDefault();
-    //   // Number 13 is the "Enter" key on the keyboard
-    //   if (event.keyCode === 13) {
-    //     // Trigger the button element with a click
-    //     $("button").click();
-    //   }
-    // });
-    
     function combine() {
         console.log(map);
         var array = [];
@@ -150,58 +135,54 @@
         });
     }
 </script>
-          </div>
-        </div>
-      </div>
       
-      <div class="row">
-        <div class="col-lg-2 col-md-4 col-sm-6 portfolio-item">
-          <!--Navigation-->
-          <a href='/yojo/kitchen'>KITCHEN</a><br>
-          <a href='/yojo/test'>TEST</a><br>
-          <a href='/yojo/yori_book'>요리책</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">요리 이름 1</a>
-              </h4>
-              <p class="card-text">필요한 재료 리스트</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">요리 이름 2</a>
-              </h4>
-              <p class="card-text">필요한 재료 리스트</p>
-            </div>
-          </div>
-        </div>
-
-      
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">요리 이름 3</a>
-              </h4>
-              <p class="card-text">필요한 재료 리스트</p>
-            </div>
-          </div>
-        </div>
+<div class="row">
+  <div class="col-lg-2 col-md-4 col-sm-6 portfolio-item">
+    <!--Navigation-->
+    <a href='/yojo/kitchen'>내키친</a><br>
+    <a href='/yojo/yori_book'>요리책</a><br>
+    <a href='/yojo/new_yori'>레시피 올리기</a><br>
+    <a href='/yojo/test'>TEST</a><br>
+    
+  </div>
+  <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+    <div class="card h-100">
+      <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="/yojo/yori">요리 이름 1</a>
+        </h4>
+        <p class="card-text">필요한 재료 리스트</p>
       </div>
+    </div>
+  </div>
+  
+  <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+    <div class="card h-100">
+      <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="/yojo/yori">요리 이름 2</a>
+        </h4>
+        <p class="card-text">필요한 재료 리스트</p>
+      </div>
+    </div>
+  </div>
 
-     </section>  
-     
-     
+
+  <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+    <div class="card h-100">
+      <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="/yojo/yori">요리 이름 3</a>
+        </h4>
+        <p class="card-text">필요한 재료 리스트</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--Script-->
 <script src= "https://blackrockdigital.github.io/startbootstrap-stylish-portfolio/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src= "https://blackrockdigital.github.io/startbootstrap-stylish-portfolio/vendor/jquery-easing/jquery.easing.min.js"></script>

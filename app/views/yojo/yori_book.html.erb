@@ -25,47 +25,55 @@
       </div>
     </nav>
 
-<% if user_signed_in? %>
     <header>
         <div>
             <h2> My Yoribook </h2>
         </div>
     </header>
-
-    <!--Yoribook-->
-    <div class="main-wrapper">
-        <div class="cover-wrapper">
-            
-            <!--Yoribook page: left-->
-                <div class="page-left">
-                    <div class="recipe-wrapper">
-                        <span></span>
-                    </div>
-                    <div class="comment-wrapper">
-                    </div>
-                </div>
-                
-            <!--Yoribook page: right-->
-                <div class="page-right">
-                    <div class="recipe-wrapper">
-                        <span></span>
-                    </div>
-                    <div class="comment-wrapper">
-                    </div>
-                </div>
-                
+    
+    <div class="main-wrapper yoribook">
+      <!--Yoribook-->
+      <div class="tab tab-outside">
+          <button class="tablinks" onclick="openCity(event, 'myrecipe')">내 레시피</button>
+          <button class="tablinks" onclick="openCity(event, 'scrapbook')">내 스크랩</button>
+          <button class="tablinks" onclick="openCity(event, 'all')">전체보기</button>
+      </div>
+      
+      
+      <div class="cover-wrapper">
+          <!--Yoribook page: left-->
+          <div class="page-left">
+              <div class="recipe-wrapper">
+                  <span></span>
+              </div>
+              <div class="comment-wrapper">
+          
+              </div>
+          </div>
+              
+          <!--Yoribook page: right-->
+          <div class="page-right">
+              <div class="recipe-wrapper">
+                  <span></span>
+              </div>
+              <div class="comment-wrapper">
+              
+              </div>
+          </div>
         </div>
     </div>
 
     <!--Navigation-->
-    <!--첫번째, 두번째 페이지로 넘어가기 기능 추가하기-->
+    <div class="pagination">
+      <a href="#">&laquo;</a>
+      <a href="#">1</a>
+      <a class="active" href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+      <a href="#">&raquo;</a>
+    </div>
     <a href="/yojo/test">레시피 찾기</a>
     <a href="/yojo/new_yori">레시피 등록</a>
     
-
-
-<% else %>
-<script>
-    로그인 후에 사용이 가능합니다!
-</script>
-<% end %>

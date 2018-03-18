@@ -1,6 +1,6 @@
 <h1>레시피 등록하기</h1>
 <form action="/posts/create">
-    <div style="background-color:lightblue">
+    <div>
         <p>Name</p>
         <input type="text" name="input_name">
         
@@ -10,8 +10,46 @@
     
     <div>
         <p>Ingredients</p>
-        <input type="text" name="input_ingredients">
-        <!--<button id="btn1">Add Ingredient</button>-->
+        재료: 
+        <input id="ingredient_search" class="bar" type="text" autofocus>
+        <button id="button" type="button" onclick="addIngredients()">추가</button>
+        
+        <div id="ingredient_results"></div>
+        
+        <div id="filters"></div>
+        <script>
+            $(function() {
+                new app.Ingredients;
+            });
+            
+            $("#ingredient_search").keydown(function(event) {
+                 if (event.keyCode == 13) {
+                     event.preventDefault();
+                 }
+            });
+            
+            function removeFilter(a) {
+                var name = a.innerHTML;
+                map.delete(name);
+                a.remove();
+            }
+            
+            function addIngredients() {
+                console.log(map);
+                var array = [];
+                map.forEach(function(value, key) {
+                    array.push(value.id);
+                });
+                
+                $.ajax({
+                    url : "/yojo/addIngredients",
+                    type : "get",
+                    data : { user: <%=current_user.id%>,
+                            list: array
+                    }
+                });
+            }
+        </script>
     </div>
     
     <div>

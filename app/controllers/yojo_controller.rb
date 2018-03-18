@@ -12,9 +12,9 @@ class YojoController < ApplicationController
             @type = 3
         end
             
-        if @type == 2
+        if @type == 2 and @yori != ""
             @results = Yori.where('name LIKE ?', "%#{@yori}%")
-        elsif @type == 3
+        elsif @type == 3 and @id != ""
             @user = User.where("username LIKE ?", "%#{@id}%")
             @results = Yori.where('user_id = ?', @user.ids)
         end
@@ -45,11 +45,14 @@ class YojoController < ApplicationController
     end
     
     def kitchen
+        if user_signed_in?
+            @user = current_user
+            @kitchen = @user.kitchen
+        end
     end
     
     def addIngredients
         @user = User.find(params[:user])
-        logger.debug @user
         @kitchen = @user.kitchen
         
         if @user.kitchen == nil
@@ -76,9 +79,9 @@ class YojoController < ApplicationController
             @type = 3
         end
             
-        if @type == 2
+        if @type == 2 and @yori != ""
             @results = Yori.where('name LIKE ?', "%#{@yori}%")
-        elsif @type == 3
+        elsif @type == 3 and @id != ""
             @user = User.where("username LIKE ?", "%#{@id}%")
             @results = Yori.where('user_id = ?', @user.ids)
         end
@@ -114,7 +117,12 @@ class YojoController < ApplicationController
     def destroy
     end
     
+    def yori
+        @post = Post.find(35)
+    end
+    
     def yori_book
+       
     end
     
     private
@@ -123,7 +131,23 @@ class YojoController < ApplicationController
         
         def recipe_params
         end
-
-
+        
+    #     def 
+    #         store_current_location
+    #         store_location_for(:user, request.url)
+    #     end
+        
+    #     private
+    #     def after_sign_out_path_for(resource)
+    #             request.referrer || root_path
+    #     end
+        
+    #     private
+    #     def 
+    #         after_sign_in_path_for(resource)
+    #         session["user_return_to"] || root_path
+    #     end
+        
+ 
 
 end

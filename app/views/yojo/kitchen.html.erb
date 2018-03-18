@@ -32,24 +32,66 @@
     </div>
     
     
-    <!--Profile Section-->
-    <div class="profile-wrapper">
-        <p>
-            <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            프로필
-            </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">계정 설정</a>
-                    <a class="dropdown-item" href="#">내 요리북</a>
-                </div>
-            </div>
-        </p>
-    </div>
-    
     <div class="main-wrapper">
         <div class="main-left">
-            <div class="fridge-wrapper"></div>
+            <div class="fridge-wrapper">
+                <% if user_signed_in? %>
+                    <div id="fridge" class="fridge-top">
+                        <div class="fridge-left">
+                            <% if @kitchen != nil %>
+                                <% @kitchen.ingredients.each do |i| %>
+                                    <%= Ingredient.find(i).name %>
+                                <% end %>
+                            <% end %> 
+                        </div>
+                        <span class="fridge-handle-left"></span>
+                        <span class="fridge-handle-right"></span>
+                    </div>
+                    <div class="fridge-bottom">
+                        재료: 
+                        <input id="ingredient_search" class="bar" type="text" autofocus>
+                        <button id="button" type="button" onclick="addIngredients()">업데이트</button>
+                        
+                        <div id="ingredient_results"></div>
+                        
+                        <div id="filters"></div>
+                        <script>
+                            $(function() {
+                                new app.Ingredients;
+                            });
+                            
+                            $("#ingredient_search").keydown(function(event) {
+                                 if (event.keyCode == 13) {
+                                     event.preventDefault();
+                                 }
+                            });
+                            
+                            function removeFilter(a) {
+                                var name = a.innerHTML;
+                                map.delete(name);
+                                a.remove();
+                            }
+                            
+                            function addIngredients() {
+                                console.log(map);
+                                var array = [];
+                                map.forEach(function(value, key) {
+                                    array.push(value.id);
+                                });
+                                
+                                $.ajax({
+                                    url : "/yojo/addIngredients",
+                                    type : "get",
+                                    data : { user: <%=current_user.id%>,
+                                            list: array
+                                    }
+                                });
+                            }
+                        </script>
+                        <span class="fridge-handle-bottom"></span>
+                    </div>
+                <% end %>
+            </div>
         </div>
         <div class="main-right">
             <div class="shelf-wrapper">
@@ -57,32 +99,33 @@
                     <div>
                         <a href="/users/edit">비밀번호바꾸기</a>
                     </div>
-                <span></span>
                 </div>
                 <div class="shelf-lower">
-                       <div class="row">
-                          <div>
-                            <a href="/yojo/yori_book"> <img class="icon" src="/assets/book.png"></a><br>
-                            요리북
-                          </div>
-                          <div>
-                        <a href="/yojo/new_yori">레시피 올리기 </a>
-                        <a href="/#search"> 재료 조합하러 가기 </a>
-                       
-                   </div>
-                    <span></span>
+                    <div>
+                        <a href="/yojo/yori_book"> <img class="icon" src="/assets/book.png" /></a>
+                        요리북
+                    </div>
+                </div>
+                <div class="shelf-bottom">
+                    <ul>
+                        <li class="shelf-yoribook">
+                            <a><p>YORIBOOK</p></a>
+                        </li>
+                        <li class="shelf-postyori">
+                            <a href="/yojo/new_yori"><p>POST YORI</p></a>
+                        </li>
+                        <li class="shelf-yorijohap">
+                            <a href="/#search"><p>YORI JOHAP</p></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="recommendation-wrapper">
                 <p>추천 레시피</p>
             </div>
-            
         </div>
     </div>
     
-
-    <!--Navigation-->
-    <a href="/yojo/test">레시피 찾기</a>
     
 <% if !user_signed_in? %>
 

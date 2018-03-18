@@ -1,0 +1,76 @@
+
+.fridge-wrapper {
+    width: 100%;
+}
+
+.fridge-wrapper {
+    background-color: white;
+    height: 100%;
+    position: relative;
+    border: 1px solid black;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+}
+
+.fridge-top,
+.fridge-bottom {
+    width: 100%;
+    position: relative;
+}
+
+.fridge-top {
+    height: 70%;
+}
+
+.fridge-bottom {
+    height: 30%;
+    border-top: 1px solid black;
+    padding: 60px;
+}
+
+
+.fridge-left {
+    padding: 70px 40px 40px;
+    border-right: 1px solid #000;
+    height: 100%;
+    width: 50%;
+}
+
+$fridgeHandleWidth: 17px;
+$fridgeHandleHeight: 207px;
+$fridgeHandleOffset: 32px;
+
+
+.fridge-handle-left,
+.fridge-handle-right,
+.fridge-handle-bottom {
+    border: 1px solid black;
+    background: #fff;
+    position: absolute;
+}
+
+.fridge-handle-left,
+.fridge-handle-right {
+    top: 30%;
+    left: 50%;
+    width: $fridgeHandleWidth;
+    height: 60%;
+    max-height: $fridgeHandleHeight;
+}
+
+.fridge-handle-left {
+    transform: translateX(-$fridgeHandleWidth - $fridgeHandleOffset);
+}
+
+.fridge-handle-right {
+    transform: translateX($fridgeHandleOffset);
+}
+.fridge-handle-bottom {
+    top: $fridgeHandleOffset;
+    left: 50%;
+    transform: translateX(-50%);
+    height: $fridgeHandleWidth;
+    width: 100%;
+    max-width: $fridgeHandleHeight;
+}
