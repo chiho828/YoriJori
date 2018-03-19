@@ -47,7 +47,7 @@ class PostsController < ApplicationController
         # # Add new post
         # @post = Post.new
         # @post.yori_id = @yori.id
-        # @post.subtitle = params[:input_name]
+        # @post.subtitle = params[:input_subtitle]
         
         # # If input ingredient is "main"
         # @main_ingredient = []
