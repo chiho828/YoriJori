@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180316074609) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "yori_id"
+    t.string "title"
     t.string "subtitle"
     t.string "main"
     t.string "optional"

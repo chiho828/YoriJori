@@ -1,79 +1,117 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 <!--Header-->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="/">YOJO</a>
-        <div class="navbar-collapse" style="">
-          <ul class="navbar-nav ml-auto">
-            <li>
-              <% if user_signed_in? %>
-                <li class="nav-link">
-                <%= link_to 'Log Out', destroy_user_session_path, method: 'delete' %>
-                </li>
-              <% else %>
-                <li class="nav-link">
-                <%= link_to 'Log In', new_user_session_path %>
-                </li>
-                <li class="nav-link">
-                <%= link_to 'Sign Up', new_user_registration_path %>
-                </li>
-              <% end %>
+  <div class="container">
+    <a class="navbar-brand js-scroll-trigger" href="/">YOJO</a>
+    <div class="navbar-collapse" style="">
+      <ul class="navbar-nav ml-auto">
+        <li>
+          <% if user_signed_in? %>
+            <li class="nav-link">
+            <%= link_to 'Log Out', destroy_user_session_path, method: 'delete' %>
             </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+          <% else %>
+            <li class="nav-link">
+            <%= link_to 'Log In', new_user_session_path %>
+            </li>
+            <li class="nav-link">
+            <%= link_to 'Sign Up', new_user_registration_path %>
+            </li>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-    <header>
-        <div>
-            <h2> My Yoribook </h2>
-        </div>
-    </header>
+<header>
+  <div>
+    <h2> My Yoribook </h2>
+  </div>
+</header>
     
-    <div class="main-wrapper yoribook">
-      <!--Yoribook-->
-      <div class="tab tab-outside">
-          <button class="tablinks" onclick="openCity(event, 'myrecipe')">내 레시피</button>
-          <button class="tablinks" onclick="openCity(event, 'scrapbook')">내 스크랩</button>
-          <button class="tablinks" onclick="openCity(event, 'all')">전체보기</button>
+<div class="horizontal-tab">
+  <button class="tablinks" onclick="openCity(event, 'myrecipe')">ㄱ,ㄴ,ㄷ 정렬</button>
+  <button class="tablinks" onclick="openCity(event, 'scrapbook')">날짜순 정렬</button>
+</div>
+    
+<!--Yoribook-->    
+<div class="main-wrapper yoribook">
+
+  <div class="tab tab-outside">
+      <button class="tablinks" onclick="openCity(event, 'myrecipe')">내 레시피</button>
+      <button class="tablinks" onclick="openCity(event, 'scrapbook')">내 스크랩</button>
+      <button class="tablinks" onclick="openCity(event, 'all')">전체보기</button>
+  </div>
+  
+  <div class="cover-wrapper">
+    
+      <!--Yoribook page: left-->
+      <div class="page-left">
+          <div class="recipe-top-wrapper">
+              <div class="recipe-left">
+                <div class="recipe-picture-wrapper">
+                </div>
+                <div class="recipe-name-wrapper">
+                </div>
+              </div>
+              <div class="recipe-right">
+                <div class="recipe-description-wrapper">
+                </div>
+              </div>
+          </div>
+          <div class="recipe-bottom-wrapper">
+              <div class="recipe-left">
+                <div class="recipe-picture-wrapper">
+                </div>
+                <div class="recipe-name-wrapper">
+                </div>
+              </div>
+              <div class="recipe-right">
+                <div class="recipe-description-wrapper">
+                </div>
+              </div>
+          </div>
+      </div>
+          
+      <!--Yoribook page: right-->
+      <div class="page-right">
+          <div class="recipe-top-wrapper">
+              <div class="recipe-left">
+                <div class="recipe-picture-wrapper">
+                </div>
+                <div class="recipe-name-wrapper">
+                </div>
+              </div>
+              <div class="recipe-right">
+                <div class="recipe-description-wrapper">
+                </div>
+              </div>
+          </div>
+          <div class="recipe-bottom-wrapper">
+              <div class="recipe-left">
+                <div class="recipe-picture-wrapper">
+                </div>
+                <div class="recipe-name-wrapper">
+                </div>
+              </div>
+              <div class="recipe-right">
+                <div class="recipe-description-wrapper">
+                </div>
+              </div>
+          </div>
       </div>
       
-      
-      <div class="cover-wrapper">
-          <!--Yoribook page: left-->
-          <div class="page-left">
-              <div class="recipe-wrapper">
-                  <span></span>
-              </div>
-              <div class="comment-wrapper">
-          
-              </div>
-          </div>
-              
-          <!--Yoribook page: right-->
-          <div class="page-right">
-              <div class="recipe-wrapper">
-                  <span></span>
-              </div>
-              <div class="comment-wrapper">
-              
-              </div>
-          </div>
-        </div>
-    </div>
+  </div>
+</div>
 
-    <!--Navigation-->
-    <div class="pagination">
-      <a href="#">&laquo;</a>
-      <a href="#">1</a>
-      <a class="active" href="#">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">6</a>
-      <a href="#">&raquo;</a>
-    </div>
-    <a href="/yojo/test">레시피 찾기</a>
-    <a href="/yojo/new_yori">레시피 등록</a>
+<!--Navigation-->
+<ul class="pagination">
+  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+  <li class="page-item"><a class="page-link" href="#">1</a></li>
+  <li class="page-item active"><a class="page-link" href="#">2</a></li>
+  <li class="page-item"><a class="page-link" href="#">3</a></li>
+  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+</ul>
+<a href="/">레시피 찾기</a>
+<a href="/yojo/new_yori">레시피 등록</a>
     

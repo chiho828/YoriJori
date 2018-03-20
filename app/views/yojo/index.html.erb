@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 <!--Header-->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
   <div class="container">
@@ -67,13 +65,7 @@
           
           <script>
               $(function() {
-                new app.Ingredients;
-              });
-              
-              $("#ingredient_search").keydown(function(event) {
-                   if (event.keyCode == 13) {
-                       event.preventDefault();
-                   }
+                new app.SearchIngredients;
               });
           </script>
       <% elsif @type == 2 %>
@@ -93,6 +85,7 @@
     <% if @results != nil %>
         <% @results.each do |result| %>
             <%= result.name %>
+            <span id="username"><%= result.user.username %></span>
             <br>
         <% end %>
     <% end %>
@@ -114,10 +107,10 @@
         });
     }
     
-    function removeFilter(a) {
-        var name = a.innerHTML;
+    function removeFilter(span) {
+        var name = span.innerHTML;
         map.delete(name);
-        a.remove();
+        span.remove();
     }
     
     function buttonClicked(radio) {
@@ -135,13 +128,12 @@
 </script>
       
 <div class="row">
-  <div class="col-lg-2 col-md-4 col-sm-6 portfolio-item">
+  <div class="col-lg-2 col-md-4 col-sm-6 text-center">
     <!--Navigation-->
-    <a href='/yojo/kitchen'>내키친</a><br>
-    <a href='/yojo/yori_book'>요리책</a><br>
-    <a href='/yojo/new_yori'>레시피 올리기</a><br>
-    <a href='/yojo/test'>TEST</a><br>
     
+    <a href='/yojo/kitchen' data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"></a><br>
+    <a href='/yojo/yori_book' data-toggle="tooltip" data-placement="right" title="요리북"><img class="icon mb-3" src="/assets/book.png"></a><br>
+    <a href='/yojo/new_yori'data-toggle="tooltip" data-placement="right" title="레시피 올리기"><img class="icon" src="/assets/edit.png"></a><br>
   </div>
   <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
     <div class="card h-100">

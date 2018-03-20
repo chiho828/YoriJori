@@ -1,7 +1,3 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 <!--Header-->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
       <div class="container">
@@ -48,8 +44,7 @@
                         <span class="fridge-handle-right"></span>
                     </div>
                     <div class="fridge-bottom">
-                        재료: 
-                        <input id="ingredient_search" class="bar" type="text" autofocus>
+                        <input align="right" id="ingredient_search" class="bar" type="text" autofocus>
                         <button id="button" type="button" onclick="addIngredients()">업데이트</button>
                         
                         <div id="ingredient_results"></div>
@@ -57,13 +52,7 @@
                         <div id="filters"></div>
                         <script>
                             $(function() {
-                                new app.Ingredients;
-                            });
-                            
-                            $("#ingredient_search").keydown(function(event) {
-                                 if (event.keyCode == 13) {
-                                     event.preventDefault();
-                                 }
+                                new app.SearchIngredients;
                             });
                             
                             function removeFilter(a) {
@@ -95,21 +84,28 @@
         </div>
         <div class="main-right">
             <div class="shelf-wrapper">
+                
                 <div class="shelf-upper">
                     <div>
-                        <a href="/users/edit">비밀번호바꾸기</a>
+                        <a href="/users/edit">----</a>
                     </div>
                 </div>
+                
                 <div class="shelf-lower">
-                    <div>
-                        <a href="/yojo/yori_book"> <img class="icon" src="/assets/book.png" /></a>
-                        요리북
-                    </div>
+                    <ul>
+                        <li class="shelf p">
+                        <a href="/joyo/"> <img class="icon" src="/assets/profile.png" /></a>
+                        </li>
+                        <li class="shelf p">
+                        <a href="/users/edit">프로필 수정하기</a>
+                        </li>
+                    </ul>
                 </div>
+                
                 <div class="shelf-bottom">
                     <ul>
                         <li class="shelf-yoribook shelf p">
-                            <a><p>YORIBOOK</p></a>
+                            <a href="/yojo/yori_book"><p>YORIBOOK</p></a>
                         </li>
                         <li class="shelf-postyori">
                             <a href="/yojo/new_yori"><p>POST YORI</p></a>
@@ -120,8 +116,45 @@
                     </ul>
                 </div>
             </div>
+            
             <div class="recommendation-wrapper">
-                <p>추천 레시피</p>
+                 <div class="row">
+                  <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                      <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                         <div class="card-body">
+                        <h4 class="card-title">
+                          <a href="/yojo/yori">요리 이름 1</a>
+                        </h4>
+                        <p class="card-text">필요한 재료 리스트</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                      <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <a href="/yojo/yori">요리 이름 2</a>
+                        </h4>
+                        <p class="card-text">필요한 재료 리스트</p>
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                      <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <a href="/yojo/yori">요리 이름 3</a>
+                        </h4>
+                        <p class="card-text">필요한 재료 리스트</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
     </div>

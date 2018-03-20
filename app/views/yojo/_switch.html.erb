@@ -7,13 +7,7 @@
     
     <script>
         $(function() {
-            new app.Ingredients;
-        });
-        
-        $("#ingredient_search").keydown(function(event) {
-             if (event.keyCode == 13) {
-                 event.preventDefault();
-             }
+            new app.SearchIngredients;
         });
     </script>
 <% elsif @type == "2" %>

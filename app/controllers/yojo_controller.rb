@@ -68,7 +68,6 @@ class YojoController < ApplicationController
     
     # root
     def index
-        # get + show recommendations
         @yori = params[:yori]
         @id = params[:id]
         
@@ -92,28 +91,52 @@ class YojoController < ApplicationController
         end
     end
 
-    # GET /recipes/1
+    def post_yori
+        @yori = Yori.new
+        @yori.name = params[:title]
+        @yori.user_id = params[:user]
+        @yori.save
+        
+        @ingredients = params[:ingredients]
+        @ingredients.each do |i|
+            @recipe = Recipe.new
+            @recipe.yori_id = @yori.id
+            @recipe.ingredient_id = i
+            @recipe.save
+        end
+        
+        @post = Post.new
+        @post.yori_id = @yori.id
+        @post.title = params[:title]
+        @post.subtitle = params[:subtitle]
+        @post.main = params[:main]
+        @post.optional = params[:optional]
+        @post.seasoning = params[:seasoning]
+        @post.steps = params[:steps]
+        @post.save
+    end
+    
+    # GET /yojo/1
     def show
     end
     
-    # GET /recipes/new
+    # GET /yojo/new
     def new
-        # recipe = Recipe.new
     end
     
-    # GET /recipes/1/edit
+    # GET /yojo/1/edit
     def edit
     end
     
-    # POST /recipes
+    # POST /yojo
     def create
     end
     
-    # PATCH/PUT /recipes/1
+    # PATCH/PUT /yojo/1
     def update
     end
     
-    # DELETE /recipes/1
+    # DELETE /yojo/1
     def destroy
     end
     
