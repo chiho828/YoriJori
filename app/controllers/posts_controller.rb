@@ -7,33 +7,57 @@ class PostsController < ApplicationController
     def create
         ################test#######################
         
-        # Add new yori
+        # # Add new yori
+        # @yori = Yori.new
+        # @yori.name = "닭도리탕"
+        # @yori.user_id = 10
+        # @yori.save
+        
+        # # Add new post
+        # @post = Post.new
+        # @post.yori_id = @yori.id
+        # @post.subtitle = "test"
+        # @post.main = "닭 (100g), 고추장 (20g)"
+        # @post.optional = "양파 (50g), 감자 (50g)"
+        # @post.seasoning = "고춧가루 (3스푼)"
+        # @post.steps = ["step1", "step2", "step3"]
+        # @post.save
+        
+        # @main_ingredient = ["닭", "고추장"]
+        
+        # # add new recipe
+        # for item in @main_ingredient
+        #     @recipe = Recipe.new
+        #     @ingredient = Ingredient.find_by(name: item)
+        #     @recipe.ingredient_id = @ingredient.id
+        #     @recipe.yori_id = @yori.id
+        #     @recipe.save
+        # end
+        
+        ######################치호############################
+        
         @yori = Yori.new
-        @yori.name = "닭도리탕"
-        @yori.user_id = 10
+        @yori.name = params[:title]
+        @yori.user_id = params[:user]
         @yori.save
         
-        # Add new post
-        @post = Post.new
-        @post.yori_id = @yori.id
-        @post.subtitle = "test"
-        @post.main = "닭 (100g), 고추장 (20g)"
-        @post.optional = "양파 (50g), 감자 (50g)"
-        @post.seasoning = "고춧가루 (3스푼)"
-        @post.steps = ["step1", "step2", "step3"]
-        @post.save
-        
-        @main_ingredient = ["닭", "고추장"]
-        
-        # add new recipe
-        for item in @main_ingredient
+        @ingredients = params[:ingredients]
+        @ingredients.each do |i|
             @recipe = Recipe.new
-            @ingredient = Ingredient.find_by(name: item)
-            @recipe.ingredient_id = @ingredient.id
             @recipe.yori_id = @yori.id
+            @recipe.ingredient_id = i
             @recipe.save
         end
         
+        @post = Post.new
+        @post.yori_id = @yori.id
+        @post.title = params[:title]
+        @post.subtitle = params[:subtitle]
+        @post.main = params[:main]
+        @post.optional = params[:optional]
+        @post.seasoning = params[:seasoning]
+        @post.steps = params[:steps]
+        @post.save
         
         
         ##################complete####################
@@ -95,17 +119,96 @@ class PostsController < ApplicationController
         #     @recipe.save
         # end
         
-        redirect_to '/posts/new'
+        
+        # redirect does not work. maybe javascript?
+        redirect_to "/posts/show/#{@yori.id}"
     end
+    
+    
     
     # show all
     def index
         @yoris = Yori.all
     end
     
+    
+    
     # show specific post
     def show
+        @count = 1
         @yori = Yori.find(params[:yori_id])
         @post = Post.find_by(yori_id: @yori.id)
+        @comments = Comment.where(post_id: @post.id)
+    end
+    
+    
+    # directs to edit page
+    def edit
+        @yori = Yori.find(params[:yori_id])
+        @post = Post.find_by(yori_id: @yori.id)
+    end
+    
+    
+    # update specific post    
+    def update
+        # NEED TO CHECK USER ID
+        
+        @yori = Yori.find(params[:yori_id])
+        @yori.name = params[:title]
+        @yori.user_id = params[:user]
+        @yori.save
+        
+        
+        # WHAT IF USER CHANGES FROM 2 MAIN INGREDIENTS TO 3 MAIN INGREDIENTS?
+        
+        # first, delete previous recipes
+        Recipe.where('yori_id = ?', @yori.id).find_each do |recipe|
+            # puts recipe.id
+            recipe.destroy
+        end
+        
+        # then add new recipes with same yori.id
+        # (호진쌤이 말씀하신 문제... 기존의 데이터를 지우고 다시 새로 만드는 inefficiency)
+        @ingredients = params[:ingredients]
+        @ingredients.each do |i|
+            @recipe = Recipe.new
+            @recipe.yori_id = @yori.id
+            @recipe.ingredient_id = i
+            @recipe.save
+        end
+        
+        @post = Post.find_by(yori_id: @yori.id)
+        # @post.yori_id = @yori.id
+        @post.title = params[:title]
+        @post.subtitle = params[:subtitle]
+        @post.main = params[:main]
+        @post.optional = params[:optional]
+        @post.seasoning = params[:seasoning]
+        @post.steps = params[:steps]
+        @post.save
+        
+        # redirect does not work. maybe javascript?
+        redirect_to "/posts/show/#{@yori.id}"
+    end
+    
+    
+    # delete data from multiple tables: yoris, recipes, posts
+    def destroy
+        
+        # NEED TO CHECK USER ID
+        
+        @yori = Yori.find(params[:yori_id])
+        @post = Post.find_by(yori_id: @yori.id)
+        
+        # is this a good style for large db?
+        Recipe.where('yori_id = ?', @yori.id).find_each do |recipe|
+            # puts recipe.id
+            recipe.destroy
+        end
+        
+        @yori.destroy
+        @post.destroy
+        
+        redirect_to "/posts/index"
     end
 end

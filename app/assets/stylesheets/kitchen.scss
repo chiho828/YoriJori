@@ -81,14 +81,24 @@ $shelfHeight: 10px;
         
         &.shelf-yoribook a{
             background-image: url(/assets/book.png);
+            background-size: 100px 100px;
+            position: absolute;
+            bottom: 0px;
         }
         
         &.shelf-postyori a{
             background-image: url(/assets/edit.png);
+            background-size: 100px 100px;
+            position: absolute;
+            bottom: 0px;
+
         }
         
         &.shelf-yorijohap a{
             background-image: url(/assets/utensil.png);
+            background-size: 100px 100px;
+            position: absolute;
+            bottom: 0px;
         }
     }
     
@@ -101,17 +111,18 @@ $shelfHeight: 10px;
         background-position: center;
         bottom: 0;
         
-        &.shelf p {
+        p {
             position: absolute;
             bottom: 0;
             text-align: center;
             width: 100%;
-            margin: 0;
+            margin-top: 100px;
         }
     }
 }
 
 .recommendation-wrapper {
+    text-align: center;
     border: 1px solid black;
 }
 

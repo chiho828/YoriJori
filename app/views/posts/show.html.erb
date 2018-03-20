@@ -1,8 +1,50 @@
 <h1>제목: <%= @yori.name %></h1>
 <h2><%= @post.subtitle %><h2>
 
-<p>Main Ingredients: <%= @post.main %></p>
+<% if @post.main != "" %>
+    <p>Main Ingredients: <%= @post.main %></p>
+<% end %>
 
-<p>Optional: <%= @post.optional %></p>
 
-<p>Seasoning: <%= @post.seasoning %></p>
+<% if @post.optional != "" %>
+    <p>Optional: <%= @post.optional %></p>
+<% end %>
+
+
+<% if @post.seasoning != "" %>
+    <p>Seasoning: <%= @post.seasoning %></p>
+<% end %>
+
+
+<% if @post.steps != "" %>
+    <%= @post.steps.each do |step| %>
+        <p><%= step %></p>
+    <% end %>
+<% end %>
+
+<h3>댓글</h3>
+<form action='/posts/show/<%= @post.id %>/comments/create'>
+    <input type='text' name='input_comment'>
+    <input type=submit>
+</form>
+
+<hr>
+<h3>댓글은 여기에</h3>
+<hr>
+<%= @comments.each do |comment| %>
+    <p><%= comment.content %>
+        <a href="/posts/show/<%= @yori.id %>/comments/destroy/<%= comment.id %>"
+        data-confirm="댓글을 삭제합니다" data-method="post">
+            [x]
+        </a>
+    </p>
+<% end %>
+
+<p><a href="/posts/index">목록으로 돌아가기</a></p>
+<p><a href="/posts/edit/<%= @yori.id %>">수정</a></p>
+<p>
+    <a href="/posts/destroy/<%= @yori.id %>" data-confirm="진짜로 삭제하시겠어요?"
+    data-method="post">
+        삭제
+    </a>
+</p>

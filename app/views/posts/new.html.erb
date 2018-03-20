@@ -1,62 +1,212 @@
-<h1>레시피 등록하기</h1>
-<form action="/posts/create">
-    <div>
-        <p>Name</p>
-        <input type="text" name="input_name">
+<!--<h1>레시피 등록하기</h1>-->
+<!--<form action="/posts/create">-->
+<!--    <div>-->
+<!--        <p>Name</p>-->
+<!--        <input type="text" name="input_name">-->
         
-        <p>Subtitle</p>
-        <input type="text" name="input_subtitle">
-    </div>
+<!--        <p>Subtitle</p>-->
+<!--        <input type="text" name="input_subtitle">-->
+<!--    </div>-->
     
-    <div>
-        <p>Ingredients</p>
-        재료: 
-        <input id="ingredient_search" class="bar" type="text" autofocus>
-        <button id="button" type="button" onclick="addIngredients()">추가</button>
+<!--    <div>-->
+<!--        <p>Ingredients</p>-->
+<!--        재료: -->
+<!--        <input id="ingredient_search" class="bar" type="text" autofocus>-->
+<!--        <button id="button" type="button" onclick="addIngredients()">추가</button>-->
         
-        <div id="ingredient_results"></div>
+<!--        <div id="ingredient_results"></div>-->
         
-        <div id="filters"></div>
-        <script>
-            $(function() {
-                new app.Ingredients;
-            });
+<!--        <div id="filters"></div>-->
+<!--        <script>-->
+<!--            $(function() {-->
+<!--                new app.Ingredients;-->
+<!--            });-->
             
-            $("#ingredient_search").keydown(function(event) {
-                 if (event.keyCode == 13) {
-                     event.preventDefault();
-                 }
-            });
+<!--            $("#ingredient_search").keydown(function(event) {-->
+<!--                 if (event.keyCode == 13) {-->
+<!--                     event.preventDefault();-->
+<!--                 }-->
+<!--            });-->
             
-            function removeFilter(a) {
-                var name = a.innerHTML;
-                map.delete(name);
-                a.remove();
-            }
+<!--            function removeFilter(a) {-->
+<!--                var name = a.innerHTML;-->
+<!--                map.delete(name);-->
+<!--                a.remove();-->
+<!--            }-->
             
-            function addIngredients() {
-                console.log(map);
-                var array = [];
-                map.forEach(function(value, key) {
-                    array.push(value.id);
-                });
+<!--            function addIngredients() {-->
+<!--                console.log(map);-->
+<!--                var array = [];-->
+<!--                map.forEach(function(value, key) {-->
+<!--                    array.push(value.id);-->
+<!--                });-->
                 
-                $.ajax({
-                    url : "/yojo/addIngredients",
-                    type : "get",
-                    data : { user: <%=current_user.id%>,
-                            list: array
-                    }
-                });
-            }
-        </script>
-    </div>
+<!--                $.ajax({-->
+<!--                    url : "/yojo/addIngredients",-->
+<!--                    type : "get",-->
+<!--                    data : { user: <%=current_user.id%>,-->
+<!--                            list: array-->
+<!--                    }-->
+<!--                });-->
+<!--            }-->
+<!--        </script>-->
+<!--    </div>-->
     
-    <div>
-        <p>Steps</p>
-        <input type="text" name="input_steps">
-    </div>
+<!--    <div>-->
+<!--        <p>Steps</p>-->
+<!--        <input type="text" name="input_steps">-->
+<!--    </div>-->
     
-    <p>Save</p>
-    <input type="submit">
-</form>
+<!--    <p>Save</p>-->
+<!--    <input type="submit">-->
+<!--</form>-->
+
+<h1>레시피 추가하기</h1>
+<div class="container">
+   <!--사진첨부기능추가하기-->
+   <p>메인사진</p>
+   <br>
+   <p>
+      요리명: <input id="title" type="text" >
+   </p>
+   <br>
+   <p>
+      설명글: <input id="subtitle" type="text" >
+   </p>
+   <br>
+   <p>
+      재료: <input id="ingredient_search"  type="text">
+   <div id="ingredient_results"></div>
+   </p>
+   <div class="row">
+      <div class="col-lg-1">
+         <b>필수</b>
+      </div>
+      <div class="col-lg-1">
+         <b>양념</b>
+      </div>
+      <div class="col-lg-2">
+         <b>재료</b>
+      </div>
+      <div class="col-lg-1">
+         <b>개량</b>
+      </div>
+   </div>
+   <div id="new_yori_ingredients"></div>
+   <br>
+   <p>조리법:</p>
+   <div id="steps">
+      <div id="1">
+         <div class="step_num">STEP 1</div>
+         [사진] 
+         <textarea id="step1" rows="5" cols="50"></textarea>
+      </div>
+   </div>
+   <br>
+   <button onclick="addStep()">STEP 추가</button>
+   <br>
+   <br>
+   <button onclick="addYori()">레시피 올리기</button><a href="/posts/index"> <button>취소</button></a>
+   <script>
+      var step = 1;
+      
+      $(function() {
+          new app.YoriIngredients;
+      });
+      
+      function removeRow(button) {
+          var row = button.closest('div');
+          map.delete(row.id);
+          row.remove();
+      }
+      
+      function addStep() {
+          step++;
+          $("#steps").append('<div id='+step+'><div class="step_num">STEP '+step+'</div> \
+                              [사진] <textarea id="step'+step+'" rows="5" cols="50"></textarea> \
+                              <button onclick="removeStep(this)">삭제</button> \
+                              </div>');
+      }
+      
+      function removeStep(button) {
+          var target = button.closest('div');
+          target.remove();
+          
+          var start = parseInt(target.id)+1;
+          for (i = start; i <= step; i++) {
+              var newNum = i-1;
+              $('#'+i).children()[0].innerHTML = "STEP "+newNum;
+              $('#'+i).children()[1].id = "step"+newNum;
+              $('#'+i)[0].id = newNum;
+          }
+          
+          step--;
+      }
+      
+      function addYori() {
+          var title = $('#title').val();
+          var subtitle = $('#subtitle').val()
+          var main_ingredient = "", optional_ingredient = "", seasoning = "";
+          var steps = [];
+          var basket = [];
+          
+          map.forEach(function(value, key) {
+              var row = $('div[id="'+key+'"]').children().children();
+              var main = row[0].checked;
+              var season = row[1].checked;
+              var name = row[2].innerHTML;
+              var quantity = $('div[id="'+key+'"]').children().children('.quantity').val();
+              var unit = $('div[id="'+key+'"]').children().children('.unit').children('option:selected').text();
+              
+              // if (main) {
+              //     basket.push(value.id);
+              //     main_ingredient += name+" ("+quantity+unit+"), ";
+              // } else
+              // else optional_ingredient += name+" ("+quantity+unit+"), ";
+              
+              // if (season) seasoning += name+" ("+quantity+unit+"), ";
+              
+              if (main) {
+                  basket.push(value.id);
+                  main_ingredient += name+" ("+quantity+unit+"), ";
+              } else if (season) {
+                  seasoning += name+" ("+quantity+unit+"), ";
+              }
+              else optional_ingredient += name+" ("+quantity+unit+"), ";
+              
+          });
+          map.clear();
+          main_ingredient = main_ingredient.substring(0, main_ingredient.length-2);
+          optional_ingredient = optional_ingredient.substring(0, optional_ingredient.length-2);
+          seasoning = seasoning.substring(0, seasoning.length-2);
+          
+          for (i = 1; i <= step; i++) {
+              steps.push($("#"+i).children('textarea').val());
+          }
+          
+          console.log(title);
+          console.log(subtitle);
+          console.log(main_ingredient);
+          console.log(optional_ingredient);
+          console.log(seasoning);
+          console.log(steps);
+          console.log(basket);
+         
+          $.ajax({
+              url : "/posts/create",
+              type : "get",
+              data : {user: <%=current_user.id%>,
+                      title: title,
+                      subtitle: subtitle,
+                      main: main_ingredient,
+                      optional: optional_ingredient,
+                      seasoning: seasoning,
+                      steps: steps,
+                      ingredients: basket
+              }
+          });
+          
+          // window.location = "/posts/index";
+      }
+   </script>
+</div>

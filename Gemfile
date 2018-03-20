@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'fog-aws' # 파일을 aws s3에 업로드 가능하게 해줌
+gem 'mini_magick' # 이미지 크기조정
+gem 'carrierwave' #파일 업로드
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"

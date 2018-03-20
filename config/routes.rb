@@ -25,4 +25,11 @@ Rails.application.routes.draw do
   get '/posts/create' => 'posts#create'
   get '/posts/index' => 'posts#index'
   get '/posts/show/:yori_id' => 'posts#show'
+  post '/posts/destroy/:yori_id' => 'posts#destroy'
+  get '/posts/edit/:yori_id' => 'posts#edit'
+  get '/posts/update/:yori_id' => 'posts#update'
+  
+  # Testing comments
+  get '/posts/show/:post_id/comments/create' => 'comments#create'
+  post '/posts/show/:post_id/comments/destroy/:comment_id' => 'comments#destroy'
 end
