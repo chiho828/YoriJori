@@ -17,13 +17,13 @@
 
 
 <% if @post.steps != "" %>
-    <%= @post.steps.each do |step| %>
+    <% @post.steps.each do |step| %>
         <p><%= step %></p>
     <% end %>
 <% end %>
 
 <h3>댓글</h3>
-<form action='/posts/show/<%= @post.id %>/comments/create'>
+<form action='/posts/show/<%= @yori.id %>/comments/create'>
     <input type='text' name='input_comment'>
     <input type=submit>
 </form>
@@ -31,7 +31,7 @@
 <hr>
 <h3>댓글은 여기에</h3>
 <hr>
-<%= @comments.each do |comment| %>
+<% @comments.each do |comment| %>
     <p><%= comment.content %>
         <a href="/posts/show/<%= @yori.id %>/comments/destroy/<%= comment.id %>"
         data-confirm="댓글을 삭제합니다" data-method="post">

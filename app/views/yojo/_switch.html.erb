@@ -6,8 +6,13 @@
     <div id="ingredient_results"></div>
     
     <script>
-        $(function() {
-            new app.SearchIngredients;
+        map.clear();
+        new app.SearchIngredients;
+        
+        $("#ingredient_search").keydown(function(event) {
+             if (event.keyCode == 13) {
+                 event.preventDefault();
+             }
         });
     </script>
 <% elsif @type == "2" %>

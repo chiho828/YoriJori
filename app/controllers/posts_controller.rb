@@ -135,9 +135,10 @@ class PostsController < ApplicationController
     
     # show specific post
     def show
-        @count = 1
+        # @count = 1
         @yori = Yori.find(params[:yori_id])
         @post = Post.find_by(yori_id: @yori.id)
+        # logger.debug @post.steps
         @comments = Comment.where(post_id: @post.id)
     end
     

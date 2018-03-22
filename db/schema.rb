@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320134248) do
+ActiveRecord::Schema.define(version: 20180321084506) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "post_id"
@@ -51,6 +51,10 @@ ActiveRecord::Schema.define(version: 20180320134248) do
     t.integer "yori_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "main"
+    t.boolean "seasoning"
+    t.integer "quantity"
+    t.string "unit"
     t.index ["ingredient_id"], name: "index_recipes_on_ingredient_id"
     t.index ["yori_id"], name: "index_recipes_on_yori_id"
   end

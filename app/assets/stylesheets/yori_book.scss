@@ -1,21 +1,18 @@
 .main-wrapper {
-    
     position: relative;
     margin: auto;
-    width: 88%;
+    width: 90%;
     height: 100vh;
     display: flex;
-    
-   
 
     &.yoribook {
-        background-image: url(http://clipartix.com/wp-content/uploads/2016/06/Book-images-download-open-book-cliparts.png);
+        background-image: url(/assets/openbook.png);
         background-position: center;
-        background-size: cover;
+        // background-size: cover;
+        background-size: 100% 98%;
         background-repeat: no-repeat;
-        border: 3px solid black;
-        background-color: rgba(0,0,0,0.05); 
-        padding: 20px;
+        // background-color: rgba(0,0,0,0.05); 
+        padding: 3%;
     }
 }
 
@@ -23,7 +20,6 @@
     width: 100%;
     height: 100%;
     display: flex;
-    border: 0.75px solid black;
 }
 
 .page-left, 
@@ -31,7 +27,7 @@
     width: 50%;
     height: 100%;
     padding: 10px;
-    border: 0.75px solid black;
+    // border: 0.75px solid black;
 }
 
 .recipe-wrapper,
@@ -39,15 +35,7 @@
     background-color: rgba(255,0,0,.5); 
 }
 
-.recipe-top-wrapper, {
-    width: 100%;
-    height: 48%;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    border: 1px solid black;
-    background-color: white;
-}
-
+.recipe-top-wrapper,
 .recipe-bottom-wrapper {
     width: 100%;
     height: 48%;
@@ -55,6 +43,7 @@
     margin-bottom: 8px;
     border: 1px solid black;
     background-color: white;
+    display: flex;
 }
 
 input {
@@ -65,21 +54,11 @@ input {
 .recipe-right {
   width: 50%;
   height: 100%;
-  padding: 1px;
 }
 
-.recipe-picture-wrapper,
-.recipe-name-wrapper,
-.recipe-description-wrapper {
-    margin-left: 1%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-right: 1%;
-}
-
-.recipe-picture-wrapper,
-.recipe-name-wrapper {
-    width: 85%;
+.recipe-left {
+    padding: 5px;
+    padding-right: 0px;
 }
 
 .recipe-picture-wrapper {
@@ -89,20 +68,18 @@ input {
 }
 
 .recipe-name-wrapper {
-    height: 17%;
+    height: 20%;
     border: 1px solid black;
     background-position: bottom, left;
 }
 
-.recipe-description-wrapper {
-    width: 30%;
-    height: 30%;
-    border: 1px solid black;
+.recipe-description-wrapper p {
+    margin-top: 15%;
+    margin-left: 10%;
+    text-align: left;
+    height: 100%;
     background-position: bottom, right;
 }
-
-
-
 
 .bar {
   font-size: 1em;
@@ -119,35 +96,6 @@ input {
 button {
     margin-left: 1em;
 }
-
-#ingredient_results {
-  text-align: left;
-
-  .ui-widget-content {
-    background: #fff;
-    font-size: .9em;
-    padding: .5em 0;
-    border-color: #ddd;
-    box-shadow: 0 .1em .2em rgba(187, 187, 187, 0.64);
-    line-height: 1.2;
-    max-height: 20em;
-    overflow: hidden;
-    overflow-y: auto;
-  }
-
-  .ui-menu-item {
-    padding: .4em .4em .4em .4em;
-    position: relative;
-    border: 0;
-    border-left: 5px solid transparent;
-    position: relative;
-  }
-
-  .ui-state-active {
-    color: #08c;
-  }
-}
-
 
 .tab {
   position: absolute;
@@ -169,14 +117,15 @@ button {
     color: black;
     padding: 10px 10px;
     margin-bottom: 54px;
-    width: 80px;
+    width: 90px;
+    height: 80px;
     border: none;
     outline: none;
     text-align: center;
     cursor: pointer;
     transition: 0.3s;
-    transform: rotate(-270deg);
-    background-color: red;
+    transform: rotate(90deg);
+    background-color: tomato;
     
     &:last-of-type {
       margin-bottom: 0;

@@ -1,21 +1,59 @@
-<div>
-<h1><%= @post.yori.name %></h1>
-<h2><%= @post.subtitle %></h2>
-<h3>주재료: <%= @post.main %></h3>
-<h3>부재료: <%= @post.optional %></h3>
-<h3>양념: <%= @post.seasoning %></h3>
+<br>
+<div class="container">
+    <p>요리명: <%= @yori.name %></p>
+    <br>
+    
+    <% if @post.subtitle != "" %>
+        <p>설명글: <%= @post.subtitle %></p>
+    <% end %>
+    <br>
+    
+    <% if @post.main != "" %>
+        <p>Main Ingredients: <%= @post.main %></p>
+    <% end %>
+    <br>
+    
+    <% if @post.optional != "" %>
+        <p>Optional: <%= @post.optional %></p>
+    <% end %>
+    <br>
+    
+    <% if @post.seasoning != "" %>
+        <p>Seasoning: <%= @post.seasoning %></p>
+    <% end %>
+    <br>
+    
+    <% if @post.steps[0] != "" %>
+        <% for i in 1..@post.steps.length %>
+            <p>STEP<%=i%>: <%=@post.steps[i-1]%></p>
+        <% end %>
+    <% end %>
+    <br>
+    
+    댓글
+    <form action='/posts/show/<%= @yori.id %>/comments/create'>
+        <input type='text' name='input_comment'>
+        <input type=submit>
+    </form>
+    
+    <hr>
+    댓글은 여기에
+    <hr>
+    <% @comments.each do |comment| %>
+        <p><%= comment.content %>
+            <a href="/posts/show/<%= @yori.id %>/comments/destroy/<%= comment.id %>"
+            data-confirm="댓글을 삭제합니다" data-method="post">
+                [x]
+            </a>
+        </p>
+    <% end %>
+    
+    <p><a href="/yojo/edit_yori/<%= @yori.id %>">수정</a></p>
+    <p>
+        <a href="/" data-confirm="진짜로 삭제하시겠어요?"
+        data-method="get">
+            삭제
+        </a>
+    </p>
+    <p><a href="/yojo/yori_book">요리북</a></p>
 </div>
-<h3>조리법: </h3>
-
-<%= link_to "뒤로가기", :back %>
-
-<p>댓글</p>
-<p>댓글달기</p>
-<p>스크랩하기</p>
-
-<!--
-<div>
-     link_to '수정하기', "/yojo/recipe/#/edit" %>
-     link_to '삭제', "/yojo/recipe/#", method: 'delete', date: {"삭제 하시겠습니까?"} %>
-</div>
--->

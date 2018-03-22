@@ -35,7 +35,7 @@ app.SearchIngredients.prototype = {
         
         if (!map.has(item.name)) {
             $('#filters').append('<span onclick="removeFilter(this)">'+item.name+'</span>');
-            map.set(item.name, item);
+            map.set(item.name, item.id);
         }
         
         console.log(map);
@@ -87,16 +87,16 @@ app.YoriIngredients.prototype = {
                 </div> \
                 <div class="col-lg-1"> \
                     <select class="unit"> \
-                        <option value="g">g</option> \
-                        <option value="ml">ml</option> \
-                        <option value="dog">개</option> \
-                        <option value="spoon">스푼</option> \
-                        <option value="little">조금</option> \
+                        <option>g</option> \
+                        <option>ml</option> \
+                        <option>개</option> \
+                        <option>스푼</option> \
+                        <option>조금</option> \
                     </select> \
                 </div> \
                 <button onclick="removeRow(this)">빼기</button> \
             </div>');
-            map.set(item.name, item);
+            map.set(item.name, item.id);
         }
         
         return false;

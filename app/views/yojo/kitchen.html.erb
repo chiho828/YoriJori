@@ -1,177 +1,132 @@
-<!--Header-->
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="/">YOJO</a>
-        <div class="navbar-collapse" style="">
-          <ul class="navbar-nav ml-auto">
-            <li>
-              <% if user_signed_in? %>
-                <li class="nav-link">
-                <%= link_to 'Log Out', destroy_user_session_path, method: 'delete' %>
-                </li>
-              <% else %>
-                <li class="nav-link">
-                <%= link_to 'Log In', new_user_session_path %>
-                </li>
-                <li class="nav-link">
-                <%= link_to 'Sign Up', new_user_registration_path %>
-                </li>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+<h2> My Kitchen </h2>
 
-    <div>
-        <h2> My Kitchen </h2>
-    </div>
-    
-    
-    <div class="main-wrapper">
-        <div class="main-left">
-            <div class="fridge-wrapper">
-                <% if user_signed_in? %>
-                    <div id="fridge" class="fridge-top">
-                        <div class="fridge-left">
-                            <% if @kitchen != nil %>
-                                <% @kitchen.ingredients.each do |i| %>
-                                    <%= Ingredient.find(i).name %>
-                                <% end %>
-                            <% end %> 
-                        </div>
-                        <span class="fridge-handle-left"></span>
-                        <span class="fridge-handle-right"></span>
+<div class="main-wrapper">
+    <div class="main-left">
+        <div class="fridge-wrapper">
+            <% if user_signed_in? %>
+                <div id="fridge" class="fridge-top">
+                    <div class="fridge-left">
+                        <% if @kitchen != nil %>
+                            <% @kitchen.ingredients.each do |i| %>
+                                <%= Ingredient.find(i).name %>
+                            <% end %>
+                        <% end %> 
                     </div>
-                    <div class="fridge-bottom">
-                        <input align="right" id="ingredient_search" class="bar" type="text" autofocus>
-                        <button id="button" type="button" onclick="addIngredients()">업데이트</button>
+                    <span class="fridge-handle-left"></span>
+                    <span class="fridge-handle-right"></span>
+                </div>
+                <div class="fridge-bottom">
+                    <input align="right" id="ingredient_search" class="bar" type="text" autofocus>
+                    <button id="button" type="button" onclick="addIngredients()">업데이트</button>
+                    
+                    <div id="ingredient_results"></div>
+                    
+                    <div id="filters"></div>
+                    <script>
+                        map.clear();
+                        new app.SearchIngredients;
                         
-                        <div id="ingredient_results"></div>
-                        
-                        <div id="filters"></div>
-                        <script>
-                            $(function() {
-                                new app.SearchIngredients;
+                        function addIngredients() {
+                            console.log(map);
+                            var array = [];
+                            map.forEach(function(value, key) {
+                                array.push(value);
                             });
                             
-                            function removeFilter(a) {
-                                var name = a.innerHTML;
-                                map.delete(name);
-                                a.remove();
-                            }
-                            
-                            function addIngredients() {
-                                console.log(map);
-                                var array = [];
-                                map.forEach(function(value, key) {
-                                    array.push(value.id);
-                                });
-                                
-                                $.ajax({
-                                    url : "/yojo/addIngredients",
-                                    type : "get",
-                                    data : { user: <%=current_user.id%>,
-                                            list: array
-                                    }
-                                });
-                            }
-                        </script>
-                        <span class="fridge-handle-bottom"></span>
-                    </div>
-                <% end %>
-            </div>
+                            $.ajax({
+                                url : "/yojo/addIngredients",
+                                type : "get",
+                                data : { user: <%=current_user.id%>,
+                                        list: array
+                                }
+                            });
+                        }
+                    </script>
+                    <span class="fridge-handle-bottom"></span>
+                </div>
+            <% end %>
         </div>
-        <div class="main-right">
-            <div class="shelf-wrapper">
-                
-                <div class="shelf-upper">
-                    <div>
-                        <a href="/users/edit">----</a>
-                    </div>
-                </div>
-                
-                <div class="shelf-lower">
-                    <ul>
-                        <li class="shelf p">
-                        <a href="/joyo/"> <img class="icon" src="/assets/profile.png" /></a>
+    </div>
+    <div class="main-right">
+        <div class="shelf-wrapper">
+            
+            <div class="shelf-upper">
+                <ul>
+                    <li>
+                        <a href="/users/edit"><img class="icon" src="/assets/profile.png" /><p>프로필 수정</p></a>
+                    </li>
+                    <li>
+                      <% if user_signed_in? %>
+                        <li>
+                            <%= @user.username %>
+                            <%= @user.email %>
                         </li>
-                        <li class="shelf p">
-                        <a href="/users/edit">프로필 수정하기</a>
+                      <% else %>
+                        <li>please sign In 
                         </li>
-                    </ul>
-                </div>
-                
-                <div class="shelf-bottom">
-                    <ul>
-                        <li class="shelf-yoribook">
-                            <a href="/yojo/yori_book"><p>YORIBOOK</p></a>
-                        </li>
-                        <li class="shelf-postyori">
-                            <a href="/yojo/new_yori"><p>POST YORI</p></a>
-                        </li>
-                        <li class="shelf-yorijohap">
-                            <a href="/#search"><p>YORI JOHAP</p></a>
-                        </li>
-                    </ul>
-                </div>
+                      <% end %>
+                    </li>
+                                    
+                </ul>
             </div>
             
-            <div class="recommendation-wrapper">
-                 <div class="row">
-                  <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                      <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                         <div class="card-body">
-                        <h4 class="card-title">
-                          <a href="/yojo/yori">요리 이름 1</a>
-                        </h4>
-                        <p class="card-text">필요한 재료 리스트</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                      <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                      <div class="card-body">
-                        <h4 class="card-title">
-                          <a href="/yojo/yori">요리 이름 2</a>
-                        </h4>
-                        <p class="card-text">필요한 재료 리스트</p>
-                      </div>
-                    </div>
-                  </div>
+            <div class="shelf-lower">
                 
-                  <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                      <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                      <div class="card-body">
+            </div>
+            
+            <div class="shelf-bottom">
+                <ul>
+                    <li class="shelf-yoribook">
+                        <a href="/yojo/yori_book"><span>요리북</span></a>
+                    </li>
+                    <li class="shelf-postyori">
+                        <a href="/yojo/new_yori"><span>레시피 올리기</span></a>
+                    </li>
+                    <li class="shelf-yorijohap">
+                        <a href="/#search"><span>요리 조합</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="recommendation-wrapper">
+             <div class="row">
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
                         <h4 class="card-title">
-                          <a href="/yojo/yori">요리 이름 3</a>
+                            <a href="/yojo/yori/1"><%=Yori.find(1).name%></a>
                         </h4>
-                        <p class="card-text">필요한 재료 리스트</p>
-                      </div>
+                        <p class="card-text"><%=Post.find_by(yori_id: 1).main%></p>
                     </div>
-                  </div>
                 </div>
+              </div>
+              
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="/yojo/yori/2"><%=Yori.find(2).name%></a>
+                        </h4>
+                        <p class="card-text"><%=Post.find_by(yori_id: 2).main%></p>
+                    </div>
+                </div>
+              </div>
+            
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="/yojo/yori/3"><%=Yori.find(3).name%></a>
+                        </h4>
+                        <p class="card-text"><%=Post.find_by(yori_id: 3).main%></p>
+                    </div>
+                </div>
+              </div>
             </div>
         </div>
     </div>
-    
-    
-<!--<% if !user_signed_in? %>-->
-<!--    <script>-->
-<!--        // add popup class to fade-->
-<!--        document.body.className = 'show-popup';-->
-<!--        // alert ("로그인을 하세요 :)");-->
-        
-<!--        window.onload = function () {-->
-            
-<!--            alert ("로그인을 하세요 :)");-->
-            
-<!--            // remove popup class to fade-->
-<!--            // TODO: this should be moved to auth callback-->
-<!--            // document.body.className = '';-->
-
-<!--<% end %>-->
+</div>

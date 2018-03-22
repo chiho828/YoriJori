@@ -1,35 +1,9 @@
-<!--Header-->
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-  <div class="container">
-    <a class="navbar-brand js-scroll-trigger" href="#">YOJO</a>
-    <div class="navbar-collapse" style="">
-      <ul class="navbar-nav ml-auto">
-        <li>
-          <% if user_signed_in? %>
-            <li class="nav-link">
-            <%= link_to 'Log Out', destroy_user_session_path, method: 'delete' %>
-            </li>
-          <% else %>
-            <li class="nav-link">
-            <%= link_to 'Log In', new_user_session_path %>
-            </li>
-      
-            <li class="nav-link">
-            <%= link_to 'Sign Up', new_user_registration_path %>
-            </li>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
 <!-- Home Page-->   
 <header class="masthead d-flex" >
   <div class="container text-center my-auto">
     <p class="mb-1 "> 우리집 셰프는 YOJO </p>
-    <h1 class="mb-5 "> YORIJORI </h1>
-    <a class="btn btn-primary btn-xl rounded-pill js-scroll-trigger" href="#search">재료 조합하러 가기</a>
+    <h1 class="mb-5" id=logo >YO<a id="yojo">RI</a>JO<a id="yojo">RI</a></h1>
+    <a class="btn btn-primary btn-xl rounded-pill js-scroll-trigger" id="rounded" href="#search">재료 조합하러 가기</a>
   </div>
   <div class="overlay"></div>
 </header>
@@ -37,17 +11,17 @@
 <!-- Search Page-->
 <div class="main">
   <div class="types">
-    <input type="radio" name="search type" onclick="buttonClicked(this)" value=1 
+    <input type="radio" name="search type" onclick="switchSearch(this)" value=1 
     <% if @type == 1 %>
       checked
     <% end %>
     >재료 조합하기
-    <input type="radio" name="search type" onclick="buttonClicked(this)" value=2
+    <input type="radio" name="search type" onclick="switchSearch(this)" value=2
     <% if @type == 2 %>
       checked
     <% end %>
     >요리 검색하기
-    <input type="radio" name="search type" onclick="buttonClicked(this)" value=3
+    <input type="radio" name="search type" onclick="switchSearch(this)" value=3
     <% if @type == 3 %>
       checked
     <% end %>
@@ -55,18 +29,23 @@
   </div>
   <br>
   
-  <form action="/" id="search">
+  <form action="/" id="search" >
       <% if @type == 1 %>
           재료: 
-          <input id="ingredient_search" class="bar" type="text" autofocus>
+          <input id="ingredient_search" class="bar" type="text">
           <button id="button" type="button" onclick="combine()">조합</button>
           
           <div id="ingredient_results"></div>
           
           <script>
-              $(function() {
-                new app.SearchIngredients;
-              });
+            map.clear();
+            new app.SearchIngredients;
+            
+            $("#ingredient_search").keydown(function(event) {
+               if (event.keyCode == 13) {
+                   event.preventDefault();
+               }
+            });
           </script>
       <% elsif @type == 2 %>
           요리:
@@ -97,7 +76,7 @@
         console.log(map);
         var array = [];
         map.forEach(function(value, key) {
-            array.push(value.id);
+            array.push(value);
         });
         
         $.ajax({
@@ -107,16 +86,10 @@
         });
     }
     
-    function removeFilter(span) {
-        var name = span.innerHTML;
-        map.delete(name);
-        span.remove();
-    }
-    
-    function buttonClicked(radio) {
+    function switchSearch(radio) {
+        // can comment if we want to keep our filters
         if (radio.value != 1) {
             $("#filters span").remove();
-            map.clear();
         }
         
         $.ajax({
@@ -126,23 +99,24 @@
         });
     }
 </script>
-      
-<div class="row">
-  <div class="col-lg-2 col-md-4 col-sm-6 text-center">
-    <!--Navigation-->
-    
-    <a href='/yojo/kitchen' data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"></a><br>
-    <a href='/yojo/yori_book' data-toggle="tooltip" data-placement="right" title="요리북"><img class="icon mb-3" src="/assets/book.png"></a><br>
-    <a href='/yojo/new_yori'data-toggle="tooltip" data-placement="right" title="레시피 올리기"><img class="icon" src="/assets/edit.png"></a><br>
+
+
+<!--Navigation-->
+          
+<div class="row" style="width: 100%">
+  <div class="col-lg-2 col-md-4 col-sm-6">
+    <a href='/yojo/kitchen' data-toggle="tooltip" data-placement="right" title="마이키친 페이지" id="kitchen"><img class="icon" src="/assets/fridge.png"><p>마이키친</p></a><br>
+    <a href='/yojo/yori_book' data-toggle="tooltip" data-placement="right" title="요리북"><img class="icon" src="/assets/book.png"><p>요리북</p></a><br>
+    <a href='/yojo/new_yori'data-toggle="tooltip" data-placement="right" title="레시피 올리기"><img class="icon" src="/assets/edit.png"><p>레시피 올리기</p></a><br>
   </div>
   <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
     <div class="card h-100">
       <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
       <div class="card-body">
         <h4 class="card-title">
-          <a href="/yojo/yori">요리 이름 1</a>
+          <a href="/yojo/yori/1"><%=Yori.find(1).name%></a>
         </h4>
-        <p class="card-text">필요한 재료 리스트</p>
+        <p class="card-text"><%=Post.find_by(yori_id: 1).main%></p>
       </div>
     </div>
   </div>
@@ -152,9 +126,9 @@
       <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
       <div class="card-body">
         <h4 class="card-title">
-          <a href="/yojo/yori">요리 이름 2</a>
+          <a href="/yojo/yori/2"><%=Yori.find(2).name%></a>
         </h4>
-        <p class="card-text">필요한 재료 리스트</p>
+        <p class="card-text"><%=Post.find_by(yori_id: 2).main%></p>
       </div>
     </div>
   </div>
@@ -165,9 +139,9 @@
       <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
       <div class="card-body">
         <h4 class="card-title">
-          <a href="/yojo/yori">요리 이름 3</a>
+          <a href="/yojo/yori/3"><%=Yori.find(3).name%></a>
         </h4>
-        <p class="card-text">필요한 재료 리스트</p>
+        <p class="card-text"><%=Post.find_by(yori_id: 3).main%></p>
       </div>
     </div>
   </div>

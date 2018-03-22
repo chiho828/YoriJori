@@ -1,7 +1,8 @@
 class YojoController < ApplicationController
     before_action :set_recipe, only: [:show, :edit, :update, :destroy]
     
-    def test
+    # root
+    def index
         @yori = params[:yori]
         @id = params[:id]
         
@@ -28,7 +29,10 @@ class YojoController < ApplicationController
     def combine
         @basket = params[:data_value]
         
-        @comp = Yori.joins(:recipes).where.not("recipes.ingredient_id": @basket)
+        @yori = Yori.find(1)
+        
+        # yoris with main ingredients
+        @comp = Yori.joins(:recipes).where('recipes.main = "t" AND ingredient_id NOT IN (?)', @basket).group("yori_id")
         @yoris = Yori.where.not(id: @comp.ids)
     
         respond_to do |format|
@@ -51,6 +55,7 @@ class YojoController < ApplicationController
         end
     end
     
+    # POST
     def addIngredients
         @user = User.find(params[:user])
         @kitchen = @user.kitchen
@@ -65,32 +70,8 @@ class YojoController < ApplicationController
         
         render :js => "window.location = '/yojo/kitchen'"
     end
-    
-    # root
-    def index
-        @yori = params[:yori]
-        @id = params[:id]
-        
-        @type = 1
-        if @yori != nil 
-            @type = 2
-        elsif @id != nil
-            @type = 3
-        end
-            
-        if @type == 2 and @yori != ""
-            @results = Yori.where('name LIKE ?', "%#{@yori}%")
-        elsif @type == 3 and @id != ""
-            @user = User.where("username LIKE ?", "%#{@id}%")
-            @results = Yori.where('user_id = ?', @user.ids)
-        end
-        
-        respond_to do |format|
-            format.html
-            format.json { @ingredients = Ingredient.search(params[:term]) }
-        end
-    end
 
+    # POST
     def post_yori
         @yori = Yori.new
         @yori.name = params[:title]
@@ -98,10 +79,28 @@ class YojoController < ApplicationController
         @yori.save
         
         @ingredients = params[:ingredients]
-        @ingredients.each do |i|
+        @types = params[:types]
+        @quantities = params[:quantities]
+        @units = params[:units]
+        for i in 0..@ingredients.length-1
             @recipe = Recipe.new
             @recipe.yori_id = @yori.id
-            @recipe.ingredient_id = i
+            @recipe.ingredient_id = @ingredients[i]
+            if @types[i] == "1"
+                @recipe.main = true
+                @recipe.seasoning = true
+            elsif @types[i] == "2"
+                @recipe.main = true
+                @recipe.seasoning = false
+            elsif @types[i] == "3"
+                @recipe.main = false
+                @recipe.seasoning = true
+            else
+                @recipe.main = false
+                @recipe.seasoning = false
+            end
+            @recipe.quantity = @quantities[i]
+            @recipe.unit = @units[i]
             @recipe.save
         end
         
@@ -114,38 +113,75 @@ class YojoController < ApplicationController
         @post.seasoning = params[:seasoning]
         @post.steps = params[:steps]
         @post.save
+        
+        render :js => "window.location = '/yojo/yori/#{@yori.id}'"
     end
     
-    # GET /yojo/1
-    def show
+     def yori
+        @yori = Yori.find(params[:yori_id])
+        @post = Post.find_by(yori_id: @yori.id)
+        @comments = Comment.where(post_id: @post.id)
     end
     
-    # GET /yojo/new
-    def new
+    def edit_yori
+        @post = Post.find_by(yori_id: params[:yori_id])
+        @ingredients = Yori.find(params[:yori_id]).ingredients
     end
     
-    # GET /yojo/1/edit
-    def edit
+    # POST (could depend)
+    def update_yori
+        @yori = Yori.find(params[:yori_id])
+        @yori.name = params[:title]
+        @yori.save
+        
+        @trash = @yori.recipes
+        @trash.each do |i|
+            i.destroy
+        end
+        
+        @ingredients = params[:ingredients]
+        @types = params[:types]
+        @quantities = params[:quantities]
+        @units = params[:units]
+        for i in 0..@ingredients.length-1
+            @recipe = Recipe.new
+            @recipe.yori_id = @yori.id
+            @recipe.ingredient_id = @ingredients[i]
+            if @types[i] == "1"
+                @recipe.main = true
+                @recipe.seasoning = true
+            elsif @types[i] == "2"
+                @recipe.main = true
+                @recipe.seasoning = false
+            elsif @types[i] == "3"
+                @recipe.main = false
+                @recipe.seasoning = true
+            else
+                @recipe.main = false
+                @recipe.seasoning = false
+            end
+            @recipe.quantity = @quantities[i]
+            @recipe.unit = @units[i]
+            @recipe.save
+        end
+        
+        @post = @yori.post
+        @post.title = params[:title]
+        @post.subtitle = params[:subtitle]
+        @post.main = params[:main]
+        @post.optional = params[:optional]
+        @post.seasoning = params[:seasoning]
+        @post.steps = params[:steps]
+        @post.save
+        
+        render :js => "window.location = '/yojo/yori/#{@yori.id}'"
     end
     
-    # POST /yojo
-    def create
-    end
-    
-    # PATCH/PUT /yojo/1
-    def update
-    end
-    
-    # DELETE /yojo/1
-    def destroy
-    end
-    
-    def yori
-        @post = Post.find(35)
+    # DELETE
+    def destroy_yori
     end
     
     def yori_book
-       
     end
     
     private
@@ -154,7 +190,12 @@ class YojoController < ApplicationController
         
         def recipe_params
         end
-        
+    
+    # USER
+    def show
+        @user = User.find(params[:id])
+    end
+    
     #     def 
     #         store_current_location
     #         store_location_for(:user, request.url)
@@ -170,7 +211,4 @@ class YojoController < ApplicationController
     #         after_sign_in_path_for(resource)
     #         session["user_return_to"] || root_path
     #     end
-        
- 
-
 end

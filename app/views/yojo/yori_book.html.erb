@@ -1,42 +1,12 @@
-<!--Header-->
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-  <div class="container">
-    <a class="navbar-brand js-scroll-trigger" href="/">YOJO</a>
-    <div class="navbar-collapse" style="">
-      <ul class="navbar-nav ml-auto">
-        <li>
-          <% if user_signed_in? %>
-            <li class="nav-link">
-            <%= link_to 'Log Out', destroy_user_session_path, method: 'delete' %>
-            </li>
-          <% else %>
-            <li class="nav-link">
-            <%= link_to 'Log In', new_user_session_path %>
-            </li>
-            <li class="nav-link">
-            <%= link_to 'Sign Up', new_user_registration_path %>
-            </li>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<header>
-  <div>
-    <h2> My Yoribook </h2>
-  </div>
-</header>
+<h2> My Yoribook </h2>
     
 <div class="horizontal-tab">
   <button class="tablinks" onclick="openCity(event, 'myrecipe')">ㄱ,ㄴ,ㄷ 정렬</button>
   <button class="tablinks" onclick="openCity(event, 'scrapbook')">날짜순 정렬</button>
 </div>
     
-<!--Yoribook-->    
+<!--Yoribook--> 
 <div class="main-wrapper yoribook">
-
   <div class="tab tab-outside">
       <button class="tablinks" onclick="openCity(event, 'myrecipe')">내 레시피</button>
       <button class="tablinks" onclick="openCity(event, 'scrapbook')">내 스크랩</button>
@@ -44,7 +14,6 @@
   </div>
   
   <div class="cover-wrapper">
-    
       <!--Yoribook page: left-->
       <div class="page-left">
           <div class="recipe-top-wrapper">
@@ -52,10 +21,16 @@
                 <div class="recipe-picture-wrapper">
                 </div>
                 <div class="recipe-name-wrapper">
+                  <h4 class="card-title">
+                    <a href="/yojo/yori/1"><%=Yori.find(1).name%></a>
+                  </h4>
                 </div>
               </div>
               <div class="recipe-right">
                 <div class="recipe-description-wrapper">
+                  <p>매인재료: <%=Post.find_by(yori_id: 1).main%></p>
+                  <p>선택재료: <%=Post.find_by(yori_id: 1).optional%></p>
+                  <p>양념: <%=Post.find_by(yori_id: 1).seasoning%></p>
                 </div>
               </div>
           </div>
@@ -64,10 +39,16 @@
                 <div class="recipe-picture-wrapper">
                 </div>
                 <div class="recipe-name-wrapper">
+                  <h4 class="card-title">
+                    <a href="/yojo/yori/2"><%=Yori.find(2).name%></a>
+                  </h4>
                 </div>
               </div>
               <div class="recipe-right">
                 <div class="recipe-description-wrapper">
+                  <p>매인재료: <%=Post.find_by(yori_id: 2).main%></p>
+                  <p>선택재료: <%=Post.find_by(yori_id: 2).optional%></p>
+                  <p>양념: <%=Post.find_by(yori_id: 2).seasoning%></p>
                 </div>
               </div>
           </div>
@@ -80,10 +61,16 @@
                 <div class="recipe-picture-wrapper">
                 </div>
                 <div class="recipe-name-wrapper">
+                    <h4 class="card-title">
+                      <a href="/yojo/yori/3"><%=Yori.find(3).name%></a>
+                    </h4>
                 </div>
               </div>
               <div class="recipe-right">
                 <div class="recipe-description-wrapper">
+                  <p>매인재료: <%=Post.find_by(yori_id: 3).main%></p>
+                  <p>선택재료: <%=Post.find_by(yori_id: 3).optional%></p>
+                  <p>양념: <%=Post.find_by(yori_id: 3).seasoning%></p>
                 </div>
               </div>
           </div>
@@ -92,15 +79,20 @@
                 <div class="recipe-picture-wrapper">
                 </div>
                 <div class="recipe-name-wrapper">
+                  <h4 class="card-title">
+                    <a href="/yojo/yori/4"><%=Yori.find(4).name%></a>
+                  </h4>
                 </div>
               </div>
               <div class="recipe-right">
                 <div class="recipe-description-wrapper">
+                  <p>매인재료: <%=Post.find_by(yori_id: 4).main%></p>
+                  <p>선택재료: <%=Post.find_by(yori_id: 4).optional%></p>
+                  <p>양념: <%=Post.find_by(yori_id: 4).seasoning%></p>
                 </div>
               </div>
           </div>
       </div>
-      
   </div>
 </div>
 
@@ -112,6 +104,5 @@
   <li class="page-item"><a class="page-link" href="#">3</a></li>
   <li class="page-item"><a class="page-link" href="#">Next</a></li>
 </ul>
-<a href="/">레시피 찾기</a>
+<a href="/#search">레시피 찾기</a>
 <a href="/yojo/new_yori">레시피 등록</a>
-    

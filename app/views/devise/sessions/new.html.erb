@@ -1,8 +1,8 @@
-<div class="text-center">
-  <h2>Log in</h2>
+<div class="text-center sign">
+  <h2>LOG IN</h2>
   
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-inputs bar">
+    <div class="form-inputs">
       <%= f.label :username, required: false%>
       <%= f.text_field :login, required: false, autofocus: true %>
       
