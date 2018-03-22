@@ -29,9 +29,6 @@ class YojoController < ApplicationController
     def combine
         @basket = params[:data_value]
         
-        @yori = Yori.find(1)
-        
-        # yoris with main ingredients
         @comp = Yori.joins(:recipes).where('recipes.main = "t" AND ingredient_id NOT IN (?)', @basket).group("yori_id")
         @yoris = Yori.where.not(id: @comp.ids)
     
@@ -182,33 +179,55 @@ class YojoController < ApplicationController
     end
     
     def yori_book
+        @itemCountPerPage = 4
+        @maxItemNum = Post.count()
+        @maxPageCount = (Float(@maxItemNum) / @itemCountPerPage).ceil
+        
+        @currentPageNum = params[:page_number].to_i
+        @currentItemIndex = Post.first.id + @itemCountPerPage * @currentPageNum
+        @currentPosts = []
+        
+        @nextItemIndex = @currentItemIndex + @itemCountPerPage - 1
+        
+        if @currentPageNum + 1 == @maxPageCount
+            @nextItemIndex = @maxItemNum
+        end
+    
+        # get Current Items
+        for i in @currentItemIndex..@nextItemIndex
+            @currentPosts.push(Post.find_by(id: i))
+        end
+        
+        @posts = Post.all
+            
     end
     
     private
+        def next_yori_book_page_allowed
+            if @currentPageNum < @maxPageCount
+                true
+            end
+            false
+        end
+        
+        def prev_yori_book_page_allowed
+            if @currentPageNum > 0
+                true
+            end
+            false
+        end
+        
         def set_recipe
         end
         
         def recipe_params
+        end
+        
+        def getCurrentPageYoriItems
         end
     
     # USER
     def show
         @user = User.find(params[:id])
     end
-    
-    #     def 
-    #         store_current_location
-    #         store_location_for(:user, request.url)
-    #     end
-        
-    #     private
-    #     def after_sign_out_path_for(resource)
-    #             request.referrer || root_path
-    #     end
-        
-    #     private
-    #     def 
-    #         after_sign_in_path_for(resource)
-    #         session["user_return_to"] || root_path
-    #     end
 end

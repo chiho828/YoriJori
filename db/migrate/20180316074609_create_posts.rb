@@ -8,6 +8,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       t.string :optional
       t.string :seasoning
       t.string :steps
+      t.string :image
       t.timestamps
     end
   end

@@ -13,9 +13,16 @@ $profileWrapperMargin: 20px;
     display: flex;
 }
 
+.main-left {
+    width: 40%
+}
+
+.main-right {
+    width: 60%;
+}
+
 .main-left,
 .main-right {
-    width: 50%;
     height: 100%;
     padding: 20px;
 }
@@ -99,7 +106,7 @@ $shelfHeight: 10px;
         list-style: none;
         
         a {
-            background-size: 75%;
+            background-size: 60%;
             background-position: bottom;
             position: absolute;
             bottom: 0;
@@ -145,6 +152,7 @@ $shelfHeight: 10px;
     height: 40%;
     text-align: center;
     border: 1px solid black;
+    padding: 10px;
 }
 
 input {

@@ -1,108 +1,53 @@
 <h2> My Yoribook </h2>
     
 <div class="horizontal-tab">
-  <button class="tablinks" onclick="openCity(event, 'myrecipe')">ㄱ,ㄴ,ㄷ 정렬</button>
-  <button class="tablinks" onclick="openCity(event, 'scrapbook')">날짜순 정렬</button>
+  <button class="tablinks" onclick="openSort(event, 'sortbyletter')">ㄱㄴㄷ순 정렬</button>
+  <button class="tablinks" onclick="openSort(event, 'sortbydate')">날짜순 정렬</button>
 </div>
     
 <!--Yoribook--> 
 <div class="main-wrapper yoribook">
   <div class="tab tab-outside">
-      <button class="tablinks" onclick="openCity(event, 'myrecipe')">내 레시피</button>
-      <button class="tablinks" onclick="openCity(event, 'scrapbook')">내 스크랩</button>
-      <button class="tablinks" onclick="openCity(event, 'all')">전체보기</button>
+      <button class="tablinks" onclick="openRtab(event, 'myrecipe')">내 레시피</button>
+      <button class="tablinks" onclick="openRtab(event, 'scrapbook')">내 스크랩</button>
+      <button class="tablinks" onclick="openRtab(event, 'all')">전체보기</button>
   </div>
   
   <div class="cover-wrapper">
-      <!--Yoribook page: left-->
-      <div class="page-left">
-          <div class="recipe-top-wrapper">
-              <div class="recipe-left">
-                <div class="recipe-picture-wrapper">
-                </div>
-                <div class="recipe-name-wrapper">
-                  <h4 class="card-title">
-                    <a href="/yojo/yori/1"><%=Yori.find(1).name%></a>
-                  </h4>
-                </div>
-              </div>
-              <div class="recipe-right">
-                <div class="recipe-description-wrapper">
-                  <p>매인재료: <%=Post.find_by(yori_id: 1).main%></p>
-                  <p>선택재료: <%=Post.find_by(yori_id: 1).optional%></p>
-                  <p>양념: <%=Post.find_by(yori_id: 1).seasoning%></p>
-                </div>
-              </div>
+      <!-- Dynamically generate Recipes -->
+      <% @currentPosts.each do |currentPost| %>
+        <div class="recipe-wrapper">
+          <div class="recipe-left">
+            <div class="recipe-picture-wrapper">
+            </div>
+            <div class="recipe-name-wrapper">
+              <h4 class="card-title">
+                <a href="/yojo/yori/<%=currentPost.yori_id%>"><%=Yori.find(currentPost.yori_id).name%></a>
+              </h4>
+            </div>
           </div>
-          <div class="recipe-bottom-wrapper">
-              <div class="recipe-left">
-                <div class="recipe-picture-wrapper">
-                </div>
-                <div class="recipe-name-wrapper">
-                  <h4 class="card-title">
-                    <a href="/yojo/yori/2"><%=Yori.find(2).name%></a>
-                  </h4>
-                </div>
-              </div>
-              <div class="recipe-right">
-                <div class="recipe-description-wrapper">
-                  <p>매인재료: <%=Post.find_by(yori_id: 2).main%></p>
-                  <p>선택재료: <%=Post.find_by(yori_id: 2).optional%></p>
-                  <p>양념: <%=Post.find_by(yori_id: 2).seasoning%></p>
-                </div>
-              </div>
+          <div class="recipe-right">
+            <p>매인재료: <%=currentPost.main%></p>
+            <p>선택재료: <%=currentPost.optional%></p>
+            <p>양념: <%=currentPost.seasoning%></p>
           </div>
-      </div>
-          
-      <!--Yoribook page: right-->
-      <div class="page-right">
-          <div class="recipe-top-wrapper">
-              <div class="recipe-left">
-                <div class="recipe-picture-wrapper">
-                </div>
-                <div class="recipe-name-wrapper">
-                    <h4 class="card-title">
-                      <a href="/yojo/yori/3"><%=Yori.find(3).name%></a>
-                    </h4>
-                </div>
-              </div>
-              <div class="recipe-right">
-                <div class="recipe-description-wrapper">
-                  <p>매인재료: <%=Post.find_by(yori_id: 3).main%></p>
-                  <p>선택재료: <%=Post.find_by(yori_id: 3).optional%></p>
-                  <p>양념: <%=Post.find_by(yori_id: 3).seasoning%></p>
-                </div>
-              </div>
-          </div>
-          <div class="recipe-bottom-wrapper">
-              <div class="recipe-left">
-                <div class="recipe-picture-wrapper">
-                </div>
-                <div class="recipe-name-wrapper">
-                  <h4 class="card-title">
-                    <a href="/yojo/yori/4"><%=Yori.find(4).name%></a>
-                  </h4>
-                </div>
-              </div>
-              <div class="recipe-right">
-                <div class="recipe-description-wrapper">
-                  <p>매인재료: <%=Post.find_by(yori_id: 4).main%></p>
-                  <p>선택재료: <%=Post.find_by(yori_id: 4).optional%></p>
-                  <p>양념: <%=Post.find_by(yori_id: 4).seasoning%></p>
-                </div>
-              </div>
-          </div>
-      </div>
+        </div>
+      <% end %>
   </div>
 </div>
 
-<!--Navigation-->
-<ul class="pagination">
-  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item active"><a class="page-link" href="#">2</a></li>
-  <li class="page-item"><a class="page-link" href="#">3</a></li>
-  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul>
 <a href="/#search">레시피 찾기</a>
 <a href="/yojo/new_yori">레시피 등록</a>
+
+
+<!-- Tab Pagination -->
+<!-- TODO: Disable prev/next if not allowed -->
+<ul class="pagination">
+  <li class="page-item"><a class="page-link" href="<%=@currentPageNum - 1%>">prev</a></li>
+  
+<% for i in 0...@maxPageCount %>
+  <li class="page-item"><a class="page-link" href="<%=i%>"><%=i + 1%></a></li>
+<% end %>
+
+  <li class="page-item"><a class="page-link" href="<%=@currentPageNum + 1%>">next</a></li>
+</ul>

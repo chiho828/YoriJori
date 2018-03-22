@@ -199,16 +199,16 @@ class PostsController < ApplicationController
         # NEED TO CHECK USER ID
         
         @yori = Yori.find(params[:yori_id])
-        @post = Post.find_by(yori_id: @yori.id)
+        # @post = Post.find_by(yori_id: @yori.id)
         
-        # is this a good style for large db?
-        Recipe.where('yori_id = ?', @yori.id).find_each do |recipe|
-            # puts recipe.id
-            recipe.destroy
-        end
+        # # is this a good style for large db?
+        # Recipe.where('yori_id = ?', @yori.id).find_each do |recipe|
+        #     # puts recipe.id
+        #     recipe.destroy
+        # end
         
         @yori.destroy
-        @post.destroy
+        # @post.destroy
         
         redirect_to "/posts/index"
     end

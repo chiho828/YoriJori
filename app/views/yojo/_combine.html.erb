@@ -1,4 +1,21 @@
+<% @count = 0 %>
 <% @yoris.each do |yori| %>
-    <%= yori.name %>
-    <br>
+    <% if (@count % 4) == 0 %>
+      <div class="row" style="width: 98%; margin-top: 1em; margin-left: 1em">
+    <% end %>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="/yojo/yori/<%=yori.id%>"><%=yori.name%></a>
+              </h4>
+              <p class="card-text"><%=Post.find_by(yori_id: yori.id).main%></p>
+            </div>
+          </div>
+        </div>
+    <% if @count % 4 == 3 %>
+      </div>
+    <% end %>
+    <% @count += 1 %> 
 <% end %>

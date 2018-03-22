@@ -57,10 +57,12 @@
                     </li>
                     <li>
                       <% if user_signed_in? %>
-                        <li>
-                            <%= @user.username %>
-                            <%= @user.email %>
-                        </li>
+                        <span>
+                            아이디:
+                            <p><%= @user.username %></p>
+                            이메일:
+                            <p><%= @user.email %></p>
+                        </span>
                       <% else %>
                         <li>please sign In 
                         </li>
@@ -77,7 +79,7 @@
             <div class="shelf-bottom">
                 <ul>
                     <li class="shelf-yoribook">
-                        <a href="/yojo/yori_book"><span>요리북</span></a>
+                        <a href="/yojo/yori_book/0"><span>요리북</span></a>
                     </li>
                     <li class="shelf-postyori">
                         <a href="/yojo/new_yori"><span>레시피 올리기</span></a>
@@ -90,42 +92,43 @@
         </div>
         
         <div class="recommendation-wrapper">
-             <div class="row">
-              <div class="col-md-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="/yojo/yori/1"><%=Yori.find(1).name%></a>
-                        </h4>
-                        <p class="card-text"><%=Post.find_by(yori_id: 1).main%></p>
+
+                    <div class="row">
+                      <div class="col-md-4 col-sm-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                            <div class="card-body1">
+                                <h4 class="card-title">
+                                    <a href="/yojo/yori/5"><%=Yori.find(5).name%></a>
+                                </h4>
+                                <p class="card-text"><%=Post.find_by(yori_id: 5).main%></p>
+                            </div>
+                        </div>
+                      </div>
+                  
+                      <div class="col-md-4 col-sm-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                            <div class="card-body1">
+                                <h4 class="card-title">
+                                    <a href="/yojo/yori/2"><%=Yori.find(2).name%></a>
+                                </h4>
+                                <p class="card-text"><%=Post.find_by(yori_id: 2).main%></p>
+                            </div>
+                        </div>
+                      </div>
+                    
+                      <div class="col-md-4 col-sm-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                            <div class="card-body1">
+                                <h4 class="card-title">
+                                    <a href="/yojo/yori/3"><%=Yori.find(3).name%></a>
+                                </h4>
+                                <p class="card-text"><%=Post.find_by(yori_id: 3).main%></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-              </div>
-              
-              <div class="col-md-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="/yojo/yori/2"><%=Yori.find(2).name%></a>
-                        </h4>
-                        <p class="card-text"><%=Post.find_by(yori_id: 2).main%></p>
-                    </div>
-                </div>
-              </div>
-            
-              <div class="col-md-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="/yojo/yori/3"><%=Yori.find(3).name%></a>
-                        </h4>
-                        <p class="card-text"><%=Post.find_by(yori_id: 3).main%></p>
-                    </div>
-                </div>
-              </div>
             </div>
         </div>
     </div>

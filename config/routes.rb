@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get '/yojo/addIngredients' => 'yojo#addIngredients'
   
   # yoribook
-  get '/yojo/yori_book' => 'yojo#yori_book'
+  get '/yojo/yori_book/:page_number' => 'yojo#yori_book'
   
   get 'users/:id' => 'users#show'
   

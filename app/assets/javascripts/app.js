@@ -35,3 +35,7 @@ function removeStep(button) {
     
     step--;
 }
+
+function back() {
+    window.history.back();
+}

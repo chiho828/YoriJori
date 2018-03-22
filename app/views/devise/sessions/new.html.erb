@@ -5,10 +5,8 @@
     <div class="form-inputs">
       <%= f.label :username, required: false%>
       <%= f.text_field :login, required: false, autofocus: true %>
-      
-      <!--<%= f.input :login, required: false, autofocus: true %>-->
-      
-      <%= f.input :password, required: false %>
+      <br>
+      <%= f.input :password, label: 'Password&nbsp'.html_safe %>
       <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
     </div>
   
@@ -19,3 +17,7 @@
   
   <%= render "devise/shared/links" %>
 </div>
+
+
+
+

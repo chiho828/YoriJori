@@ -2,6 +2,22 @@ body {
     padding-top: 56px;
 }
 
+.sidenav {
+    width: 130px;
+    position: fixed;
+    z-index: 1;
+    top: 15%;
+    left: 0;
+    overflow-x: hidden;
+    padding: 8px 0;
+    text-align: center;
+    
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}
+
 #mi_rectangle {
     width:30%;
     height:30px;
@@ -24,12 +40,12 @@ body {
 
 .ui-helper-hidden-accessible { display:none; }
 
-.main {
+.search-wrapper {
     text-align: center;
     max-width: 35em;
     margin: 1em auto;
     padding: 2em;
-
+    
     .types {
         font-size: 0.9em;
     }
@@ -98,10 +114,9 @@ body {
 }
 
 #results {
-    width: 70%;
-    margin: auto;
     margin-top: 1em;
     text-align: center;
+    min-height: 50vh;
 }
 
 .masthead {
@@ -257,6 +272,11 @@ body {
     margin-bottom: 3rem!important;
 }
 
+.card-wrap {
+    margin: 1em auto;
+    padding: 2em;
+}
+
 .card-title {
     margin-top: .75rem;
     margin-bottom: .75rem;
@@ -269,7 +289,11 @@ body {
     flex: 1 1 auto;
     text-align: center;
     margin-top: 15%;
-    margin-bottom: 15%;
+    height: 200px;
+}
+
+.card-body1 {
+    margin-top: 10%;
 }
 
 .card-img-top {
@@ -299,6 +323,7 @@ a {
     &#yojo {
         color: white;
     }
+}
     
 #kitchen {
     background-image: url(/assets/fridge.png);
@@ -312,14 +337,37 @@ a {
     width: 80px;
 }
 
-@font-face { 
-    font-family: 'godoMaum'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/godoMaum.woff') format('woff'); 
-    font-weight: normal; font-style: normal; }
-
-}
-
 .sign {
   margin: 20px 250px 20px 250px;
   border: 1px solid;
   border-radius: 16px;
+}
+
+
+#navbar-l {
+  overflow: hidden;
+  background-color: #333;
+}
+
+#navbar-l a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.nav-content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.sticky + .nav-content {
+  padding-top: 60px;
 }
