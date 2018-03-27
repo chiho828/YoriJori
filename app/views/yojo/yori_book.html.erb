@@ -1,53 +1,49 @@
-<h2> My Yoribook </h2>
-    
-<div class="horizontal-tab">
-  <button class="tablinks" onclick="openSort(event, 'sortbyletter')">ㄱㄴㄷ순 정렬</button>
-  <button class="tablinks" onclick="openSort(event, 'sortbydate')">날짜순 정렬</button>
-</div>
-    
 <!--Yoribook--> 
+
 <div class="main-wrapper yoribook">
-  <div class="tab tab-outside">
-      <button class="tablinks" onclick="openRtab(event, 'myrecipe')">내 레시피</button>
-      <button class="tablinks" onclick="openRtab(event, 'scrapbook')">내 스크랩</button>
-      <button class="tablinks" onclick="openRtab(event, 'all')">전체보기</button>
+  <div class="navi-tab">
+    <a href="/#search"><button class="tab1">요리조합</button></a>
+    <a href="/yojo/kitchen"><button>마이키친</button></a>
+    <a href="/yojo/new_yori"><button class="recipe-upload">레시피 올리기</button></a>
   </div>
-  
+  <div class="book-tab">
+      <button class="tab1">내 레시피</button>
+      <button>내 스크랩</button>
+      <button class="tab3">전체보기</button>
+  </div>
   <div class="cover-wrapper">
       <!-- Dynamically generate Recipes -->
-      <% @currentPosts.each do |currentPost| %>
+      <% @posts.each do |post| %>
         <div class="recipe-wrapper">
           <div class="recipe-left">
             <div class="recipe-picture-wrapper">
             </div>
             <div class="recipe-name-wrapper">
               <h4 class="card-title">
-                <a href="/yojo/yori/<%=currentPost.yori_id%>"><%=Yori.find(currentPost.yori_id).name%></a>
+                <a href="/yojo/yori/<%=post.yori_id%>"><%=Yori.find(post.yori_id).name%></a>
               </h4>
             </div>
           </div>
           <div class="recipe-right">
-            <p>매인재료: <%=currentPost.main%></p>
-            <p>선택재료: <%=currentPost.optional%></p>
-            <p>양념: <%=currentPost.seasoning%></p>
+            <p>매인재료: <%=post.main%></p>
+            <p>선택재료: <%=post.optional%></p>
+            <p>양념: <%=post.seasoning%></p>
           </div>
         </div>
       <% end %>
   </div>
 </div>
 
-<a href="/#search">레시피 찾기</a>
-<a href="/yojo/new_yori">레시피 등록</a>
-
 
 <!-- Tab Pagination -->
-<!-- TODO: Disable prev/next if not allowed -->
-<ul class="pagination">
-  <li class="page-item"><a class="page-link" href="<%=@currentPageNum - 1%>">prev</a></li>
-  
-<% for i in 0...@maxPageCount %>
-  <li class="page-item"><a class="page-link" href="<%=i%>"><%=i + 1%></a></li>
-<% end %>
-
-  <li class="page-item"><a class="page-link" href="<%=@currentPageNum + 1%>">next</a></li>
-</ul>
+<div class="page-center">
+  <ul id="page-list" class="pagination">
+    <li class="page-item"><a class="page-link" <% if @current_page > 0 %>
+    href="<%=@current_page - 1%>"<%end%>>prev</a></li>
+  <% for i in 0...@max_page %>
+    <li class="page-item"><a <%if i == @current_page%>id="current-page"<%end%>class="page-link" href="<%=i%>"><%=i + 1%></a></li>
+  <% end %>
+    <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %>
+    href="<%=@current_page + 1%>"<%end%>>next</a></li>
+  </ul>
+</div>

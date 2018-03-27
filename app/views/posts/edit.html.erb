@@ -1,148 +1,309 @@
+<!--<h1><%= @yori.name %> 수정하기</h1>-->
+<!--<div class="container">-->
+   <!--사진첨부기능추가하기-->
+<!--   <p>메인사진</p>-->
+<!--   <br>-->
+<!--   <p>-->
+<!--      요리명: <input id="title" type="text" value="<%= @yori.name %>">-->
+<!--   </p>-->
+<!--   <br>-->
+<!--   <p>-->
+<!--      설명글: <input id="subtitle" type="text" value="<%= @post.subtitle %>">-->
+<!--   </p>-->
+<!--   <br>-->
+<!--   <p>-->
+<!--      재료: <input id="ingredient_search" type="text">-->
+<!--   <div id="ingredient_results"></div>-->
+<!--   </p>-->
+<!--   <div class="row">-->
+<!--      <div class="col-lg-1">-->
+<!--         <b>필수</b>-->
+<!--      </div>-->
+<!--      <div class="col-lg-1">-->
+<!--         <b>양념</b>-->
+<!--      </div>-->
+<!--      <div class="col-lg-2">-->
+<!--         <b>재료</b>-->
+<!--      </div>-->
+<!--      <div class="col-lg-1">-->
+<!--         <b>개량</b>-->
+<!--      </div>-->
+<!--   </div>-->
+<!--   <div id="new_yori_ingredients"></div>-->
+<!--   <br>-->
+<!--   <p>조리법:</p>-->
+<!--   <div id="steps">-->
+<!--      <div id="1">-->
+<!--         <div class="step_num">STEP 1</div>-->
+<!--         [사진] -->
+<!--         <textarea id="step1" rows="5" cols="50"></textarea>-->
+<!--      </div>-->
+<!--   </div>-->
+<!--   <br>-->
+<!--   <button onclick="addStep()">STEP 추가</button>-->
+<!--   <br>-->
+<!--   <br>-->
+<!--   <button onclick="addYori()">레시피 수정하기</button><a href="/posts/show/<%= @yori.id %>"> <button>취소</button></a>-->
+<!--   <script>-->
+<!--      var step = 1;-->
+      
+<!--      $(function() {-->
+<!--          new app.YoriIngredients;-->
+<!--      });-->
+      
+<!--      function removeRow(button) {-->
+<!--          var row = button.closest('div');-->
+<!--          map.delete(row.id);-->
+<!--          row.remove();-->
+<!--      }-->
+      
+<!--      function addStep() {-->
+<!--          step++;-->
+<!--          $("#steps").append('<div id='+step+'><div class="step_num">STEP '+step+'</div> \-->
+<!--                              [사진] <textarea id="step'+step+'" rows="5" cols="50"></textarea> \-->
+<!--                              <button onclick="removeStep(this)">삭제</button> \-->
+<!--                              </div>');-->
+<!--      }-->
+      
+<!--      function removeStep(button) {-->
+<!--          var target = button.closest('div');-->
+<!--          target.remove();-->
+          
+<!--          var start = parseInt(target.id)+1;-->
+<!--          for (i = start; i <= step; i++) {-->
+<!--              var newNum = i-1;-->
+<!--              $('#'+i).children()[0].innerHTML = "STEP "+newNum;-->
+<!--              $('#'+i).children()[1].id = "step"+newNum;-->
+<!--              $('#'+i)[0].id = newNum;-->
+<!--          }-->
+          
+<!--          step--;-->
+<!--      }-->
+      
+<!--      function addYori() {-->
+<!--          var title = $('#title').val();-->
+<!--          var subtitle = $('#subtitle').val()-->
+<!--          var main_ingredient = "", optional_ingredient = "", seasoning = "";-->
+<!--          var steps = [];-->
+<!--          var basket = [];-->
+          
+<!--          map.forEach(function(value, key) {-->
+<!--              var row = $('div[id="'+key+'"]').children().children();-->
+<!--              var main = row[0].checked;-->
+<!--              var season = row[1].checked;-->
+<!--              var name = row[2].innerHTML;-->
+<!--              var quantity = $('div[id="'+key+'"]').children().children('.quantity').val();-->
+<!--              var unit = $('div[id="'+key+'"]').children().children('.unit').children('option:selected').text();-->
+              
+              <!--// if (main) {-->
+              <!--//     basket.push(value.id);-->
+              <!--//     main_ingredient += name+" ("+quantity+unit+"), ";-->
+              <!--// } else-->
+              <!--// else optional_ingredient += name+" ("+quantity+unit+"), ";-->
+              
+              <!--// if (season) seasoning += name+" ("+quantity+unit+"), ";-->
+              
+<!--              if (main) {-->
+<!--                  basket.push(value.id);-->
+<!--                  main_ingredient += name+" ("+quantity+unit+"), ";-->
+<!--              } else if (season) {-->
+<!--                  seasoning += name+" ("+quantity+unit+"), ";-->
+<!--              }-->
+<!--              else optional_ingredient += name+" ("+quantity+unit+"), ";-->
+              
+<!--          });-->
+<!--          map.clear();-->
+<!--          main_ingredient = main_ingredient.substring(0, main_ingredient.length-2);-->
+<!--          optional_ingredient = optional_ingredient.substring(0, optional_ingredient.length-2);-->
+<!--          seasoning = seasoning.substring(0, seasoning.length-2);-->
+          
+<!--          for (i = 1; i <= step; i++) {-->
+<!--              steps.push($("#"+i).children('textarea').val());-->
+<!--          }-->
+          
+<!--          console.log(title);-->
+<!--          console.log(subtitle);-->
+<!--          console.log(main_ingredient);-->
+<!--          console.log(optional_ingredient);-->
+<!--          console.log(seasoning);-->
+<!--          console.log(steps);-->
+<!--          console.log(basket);-->
+         
+<!--          $.ajax({-->
+<!--              url : "/posts/update/<%= @yori.id %>",-->
+<!--              type : "get",-->
+<!--              data : {user: <%=current_user.id%>,-->
+<!--                      title: title,-->
+<!--                      subtitle: subtitle,-->
+<!--                      main: main_ingredient,-->
+<!--                      optional: optional_ingredient,-->
+<!--                      seasoning: seasoning,-->
+<!--                      steps: steps,-->
+<!--                      ingredients: basket-->
+<!--              }-->
+<!--          });-->
+          
+<!--      }-->
+<!--   </script>-->
+<!--</div>-->
+
+<!-- ######################치호 2####################### -->
+<br>
 <h1><%= @yori.name %> 수정하기</h1>
 <div class="container">
-   <!--사진첨부기능추가하기-->
-   <p>메인사진</p>
-   <br>
-   <p>
-      요리명: <input id="title" type="text" value="<%= @yori.name %>">
-   </p>
-   <br>
-   <p>
-      설명글: <input id="subtitle" type="text" value="<%= @post.subtitle %>">
-   </p>
-   <br>
-   <p>
-      재료: <input id="ingredient_search" type="text">
-   <div id="ingredient_results"></div>
-   </p>
-   <div class="row">
-      <div class="col-lg-1">
-         <b>필수</b>
-      </div>
-      <div class="col-lg-1">
-         <b>양념</b>
-      </div>
-      <div class="col-lg-2">
-         <b>재료</b>
-      </div>
-      <div class="col-lg-1">
-         <b>개량</b>
-      </div>
-   </div>
-   <div id="new_yori_ingredients"></div>
-   <br>
-   <p>조리법:</p>
-   <div id="steps">
-      <div id="1">
-         <div class="step_num">STEP 1</div>
-         [사진] 
-         <textarea id="step1" rows="5" cols="50"></textarea>
-      </div>
-   </div>
-   <br>
-   <button onclick="addStep()">STEP 추가</button>
-   <br>
-   <br>
-   <button onclick="addYori()">레시피 수정하기</button><a href="/posts/show/<%= @yori.id %>"> <button>취소</button></a>
-   <script>
-      var step = 1;
-      
-      $(function() {
-          new app.YoriIngredients;
-      });
-      
-      function removeRow(button) {
-          var row = button.closest('div');
-          map.delete(row.id);
-          row.remove();
-      }
-      
-      function addStep() {
-          step++;
-          $("#steps").append('<div id='+step+'><div class="step_num">STEP '+step+'</div> \
-                              [사진] <textarea id="step'+step+'" rows="5" cols="50"></textarea> \
-                              <button onclick="removeStep(this)">삭제</button> \
-                              </div>');
-      }
-      
-      function removeStep(button) {
-          var target = button.closest('div');
-          target.remove();
-          
-          var start = parseInt(target.id)+1;
-          for (i = start; i <= step; i++) {
-              var newNum = i-1;
-              $('#'+i).children()[0].innerHTML = "STEP "+newNum;
-              $('#'+i).children()[1].id = "step"+newNum;
-              $('#'+i)[0].id = newNum;
-          }
-          
-          step--;
-      }
-      
-      function addYori() {
-          var title = $('#title').val();
-          var subtitle = $('#subtitle').val()
-          var main_ingredient = "", optional_ingredient = "", seasoning = "";
-          var steps = [];
-          var basket = [];
-          
-          map.forEach(function(value, key) {
-              var row = $('div[id="'+key+'"]').children().children();
-              var main = row[0].checked;
-              var season = row[1].checked;
-              var name = row[2].innerHTML;
-              var quantity = $('div[id="'+key+'"]').children().children('.quantity').val();
-              var unit = $('div[id="'+key+'"]').children().children('.unit').children('option:selected').text();
-              
-              // if (main) {
-              //     basket.push(value.id);
-              //     main_ingredient += name+" ("+quantity+unit+"), ";
-              // } else
-              // else optional_ingredient += name+" ("+quantity+unit+"), ";
-              
-              // if (season) seasoning += name+" ("+quantity+unit+"), ";
-              
-              if (main) {
-                  basket.push(value.id);
-                  main_ingredient += name+" ("+quantity+unit+"), ";
-              } else if (season) {
-                  seasoning += name+" ("+quantity+unit+"), ";
-              }
-              else optional_ingredient += name+" ("+quantity+unit+"), ";
-              
-          });
-          map.clear();
-          main_ingredient = main_ingredient.substring(0, main_ingredient.length-2);
-          optional_ingredient = optional_ingredient.substring(0, optional_ingredient.length-2);
-          seasoning = seasoning.substring(0, seasoning.length-2);
-          
-          for (i = 1; i <= step; i++) {
-              steps.push($("#"+i).children('textarea').val());
-          }
-          
-          console.log(title);
-          console.log(subtitle);
-          console.log(main_ingredient);
-          console.log(optional_ingredient);
-          console.log(seasoning);
-          console.log(steps);
-          console.log(basket);
-         
-          $.ajax({
-              url : "/posts/update/<%= @yori.id %>",
-              type : "get",
-              data : {user: <%=current_user.id%>,
-                      title: title,
-                      subtitle: subtitle,
-                      main: main_ingredient,
-                      optional: optional_ingredient,
-                      seasoning: seasoning,
-                      steps: steps,
-                      ingredients: basket
-              }
-          });
-          
-      }
-   </script>
+    <!--사진첨부기능추가하기-->
+    <p>메인사진</p>
+    <br>
+       
+    <p>요리명: <input id="title" value="<%=@post.title%>" type="text" ></p>
+    <br>
+    
+    <p>설명글: <input id="subtitle" value="<%=@post.subtitle%>" type="text" ></p>
+    <br>
+    
+    <p>재료: <input id="ingredient_search"  type="text">
+        <div id="ingredient_results"></div>
+    </p>
+    <script>
+        map.clear();
+        new app.YoriIngredients;
+    </script>
+    
+    <div class="row">
+        <div class="col-lg-1">
+          <b>필수</b>
+        </div>
+        <div class="col-lg-1">
+          <b>양념</b>
+        </div>
+        <div class="col-lg-2">
+          <b>재료</b>
+        </div>
+        <div class="col-lg-1">
+          <b>개량</b>
+        </div>
+    </div>
+    
+    <div id="new_yori_ingredients">
+        <% @ingredients.each do |i| %>
+            <script>
+                map.set("<%=i.name%>", <%=i.id%>);
+            </script>
+            
+            <% @recipe = Recipe.find_by("ingredient_id = ? and yori_id = ?", i.id, @post.yori_id) %>
+            <div class="row" id="<%=i.name%>">
+            <div class="col-lg-1">
+                <input class="main_ingredient" type="checkbox" <% if @recipe.main %> checked <% end %>>
+            </div>
+            <div class="col-lg-1">
+                <input class="seasoning" type="checkbox" <% if @recipe.seasoning %> checked <% end %>>
+            </div>
+            <div class="col-lg-2">
+                <div class="ingredient_name"><%=i.name%></div>
+            </div>
+            <div class="col-lg-1.5">
+                <input class="quantity" type="text" size="6" value="<%= @recipe.quantity %>">
+            </div>
+            <div class="col-lg-1">
+                <select class="unit">
+                    <option <% if @recipe.unit == "g" %> selected <% end %> >g</option>
+                    <option <% if @recipe.unit == "ml" %> selected <% end %>>ml</option>
+                    <option <% if @recipe.unit == "개" %> selected <% end %>>개</option>
+                    <option <% if @recipe.unit == "스푼" %> selected <% end %>>스푼</option>
+                    <option <% if @recipe.unit == "조금" %> selected <% end %>>조금</option>
+                </select>
+            </div>
+            <button onclick="removeRow(this)">빼기</button>
+        </div>
+        <% end %>
+    </div>
+    <br>
+    
+    <p>조리법:</p>
+    <div id="steps">
+        <% for i in 1..@post.steps.length %>
+            <div id="<%=i%>">
+                <div class="step_num">STEP <%=i%></div>
+                [사진] <textarea id="step<%=i%>" rows="5" cols="50"></textarea>
+                <button onclick="removeStep(this)">삭제</button>
+            </div>
+            <script>
+                $("#step<%=i%>").val("<%=@post.steps[i-1]%>");
+            </script>
+        <% end %>
+    </div>
+    <br>
+    
+    <button onclick="addStep()">STEP 추가</button>
+    <br>
+    <br>
+    
+    <button onclick="updateYori()">수정</button> <button onclick="back()">취소</button>
+    
+    <script>
+        var step = <%=@post.steps.length%>;
+        
+        function updateYori() {
+            var title = $('#title').val();
+            var subtitle = $('#subtitle').val()
+            var main_ingredient = "", optional_ingredient = "", seasoning = "";
+            var steps = [];
+            var ingredients = [], types = [], quantities = [], units = [];
+            
+            map.forEach(function(value, key) {
+                var row = $('div[id="'+key+'"]').children().children();
+                var main = row[0].checked;
+                var season = row[1].checked;
+                var name = row[2].innerHTML;
+                var quantity = $('div[id="'+key+'"]').children().children('.quantity').val();
+                var unit = $('div[id="'+key+'"]').children().children('.unit').children('option:selected').text();
+                
+                if (main) {
+                    main_ingredient += name+" ("+quantity+unit+"), ";
+                }
+                if (season) seasoning += name+" ("+quantity+unit+"), ";
+                if (!main && !season) optional_ingredient += name+" ("+quantity+unit+"), ";
+                
+                ingredients.push(value);
+                if (main && season) types.push(1);
+                if (main && !season) types.push(2);
+                if (!main && season) types.push(3);
+                if (!main && !season) types.push(4);
+                quantities.push(quantity);
+                units.push(unit);
+            });
+            main_ingredient = main_ingredient.substring(0, main_ingredient.length-2);
+            optional_ingredient = optional_ingredient.substring(0, optional_ingredient.length-2);
+            seasoning = seasoning.substring(0, seasoning.length-2);
+            
+            for (i = 1; i <= step; i++) {
+                steps.push($("#"+i).children('textarea').val());
+            }
+            
+            console.log(title);
+            console.log(subtitle);
+            console.log(main_ingredient);
+            console.log(optional_ingredient);
+            console.log(seasoning);
+            console.log(steps);
+            console.log(ingredients);
+           
+            $.ajax({
+                url : "/yojo/update_yori/<%=@post.yori_id%>",
+                type : "get",
+                data : {user: <%=current_user.id%>,
+                        title: title,
+                        subtitle: subtitle,
+                        main: main_ingredient,
+                        optional: optional_ingredient,
+                        seasoning: seasoning,
+                        steps: steps,
+                        ingredients: ingredients,
+                        types: types,
+                        quantities: quantities,
+                        units: units
+                }
+            });
+        }
+    </script>
 </div>

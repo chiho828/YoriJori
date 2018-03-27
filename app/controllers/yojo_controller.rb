@@ -14,15 +14,25 @@ class YojoController < ApplicationController
         end
             
         if @type == 2 and @yori != ""
-            @results = Yori.where('name LIKE ?', "%#{@yori}%")
+            @yoris = Yori.where('name LIKE ?', "%#{@yori}%")
         elsif @type == 3 and @id != ""
             @user = User.where("username LIKE ?", "%#{@id}%")
-            @results = Yori.where('user_id = ?', @user.ids)
+            @yoris = Yori.where('user_id = ?', @user.ids)
         end
         
         respond_to do |format|
             format.html
             format.json { @ingredients = Ingredient.search(params[:term]) }
+        end
+        
+         if @yoris != nil
+            @items_page = 20
+            @current_page = params[:page_number].to_i
+            
+            @max_items = @yoris.length
+            @max_page = (Float(@max_items) / @items_page).ceil
+           
+            @posts = Post.where("yori_id": @yoris.ids).limit(@items_page).offset(@current_page*@items_page)
         end
     end
     
@@ -34,6 +44,16 @@ class YojoController < ApplicationController
     
         respond_to do |format|
             format.js
+        end
+        
+        if @yoris != nil
+            @items_page = 20
+            @current_page = params[:page_number].to_i
+            
+            @max_items = @yoris.length
+            @max_page = (Float(@max_items) / @items_page).ceil
+           
+            @posts = Post.where("yori_id": @yoris.ids).limit(@items_page).offset(@current_page*@items_page)
         end
     end
     
@@ -111,12 +131,15 @@ class YojoController < ApplicationController
         @post.steps = params[:steps]
         @post.save
         
+        logger.debug "test"
+        logger.debug @yori.id
         render :js => "window.location = '/yojo/yori/#{@yori.id}'"
     end
     
-     def yori
+    def yori
         @yori = Yori.find(params[:yori_id])
         @post = Post.find_by(yori_id: @yori.id)
+        @user = User.find(@yori.user_id)
         @comments = Comment.where(post_id: @post.id)
     end
     
@@ -179,44 +202,17 @@ class YojoController < ApplicationController
     end
     
     def yori_book
-        @itemCountPerPage = 4
-        @maxItemNum = Post.count()
-        @maxPageCount = (Float(@maxItemNum) / @itemCountPerPage).ceil
+        @items_page = 4
+        @current_page = params[:page_number].to_i
         
-        @currentPageNum = params[:page_number].to_i
-        @currentItemIndex = Post.first.id + @itemCountPerPage * @currentPageNum
-        @currentPosts = []
-        
-        @nextItemIndex = @currentItemIndex + @itemCountPerPage - 1
-        
-        if @currentPageNum + 1 == @maxPageCount
-            @nextItemIndex = @maxItemNum
-        end
-    
-        # get Current Items
-        for i in @currentItemIndex..@nextItemIndex
-            @currentPosts.push(Post.find_by(id: i))
-        end
-        
-        @posts = Post.all
-            
+        @user = User.find(current_user.id)
+        @posts = Post.joins(:yori).where("yoris.user_id": @user.id).limit(@items_page).offset(@current_page*@items_page)
+        @yoris = @user.yoris
+        @max_page = (Float(@yoris.length) / @items_page).ceil
     end
     
+    
     private
-        def next_yori_book_page_allowed
-            if @currentPageNum < @maxPageCount
-                true
-            end
-            false
-        end
-        
-        def prev_yori_book_page_allowed
-            if @currentPageNum > 0
-                true
-            end
-            false
-        end
-        
         def set_recipe
         end
         
@@ -230,4 +226,5 @@ class YojoController < ApplicationController
     def show
         @user = User.find(params[:id])
     end
+
 end

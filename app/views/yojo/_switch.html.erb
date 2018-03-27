@@ -1,7 +1,7 @@
 <% if @type == "1" %>
     재료: 
     <input id="ingredient_search" class="bar" type="text" autofocus>
-    <button id="button" type="button" onclick="combine()">조합</button>
+    <button class="roundbtn" type="button" onclick="combine()">조합</button>
     
     <div id="ingredient_results"></div>
     
@@ -18,9 +18,9 @@
 <% elsif @type == "2" %>
     요리:
     <input class="bar" type="text" name="yori" autocomplete="off" autofocus>
-    <input type="submit" value="검색">
+    <input class="roundbtn" type="submit" value="검색">
 <% else %>
     아이디:
     <input class="bar" type="text" name="id" autocomplete="off" autofocus>
-    <input type="submit" value="검색">
+    <input class="roundbtn" type="submit" value="검색">
 <% end %>

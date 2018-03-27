@@ -1,23 +1,26 @@
 <div class="text-center sign">
-  <h2>LOG IN</h2>
+  <h2>로그인</h2>
   
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-inputs">
-      <%= f.label :username, required: false%>
-      <%= f.text_field :login, required: false, autofocus: true %>
+  
+    <div class="form-inputs sign-wrap">
+      <%= f.text_field :login, autofocus: true, class: 'form-control',  placeholder: '아이디를 입력하세요' %>
       <br>
-      <%= f.input :password, label: 'Password&nbsp'.html_safe %>
-      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: '비밀번호를 입력하세요', as: :boolean if devise_mapping.rememberable? %>
     </div>
   
     <div class="form-actions">
-      <%= f.button :submit, "Log in" %>
+      <%= f.button :submit, "로그인" %>
     </div>
+    
   <% end %>
+  <br>
   
+  <span>
   <%= render "devise/shared/links" %>
+  </span>
 </div>
 
-
-
-
+      
+<!--<= f.input :password, class: 'sr-only', label: 'Password&nbsp'.html_safe %>-->
+<!--<= f.input :remember_me, class: 'form-control', placeholder: '비밀번호를 입력하세요', as: :boolean if devise_mapping.rememberable? %>-->

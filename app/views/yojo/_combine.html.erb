@@ -1,21 +1,42 @@
-<% @count = 0 %>
-<% @yoris.each do |yori| %>
-    <% if (@count % 4) == 0 %>
-      <div class="row" style="width: 98%; margin-top: 1em; margin-left: 1em">
-    <% end %>
-        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-          <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="/yojo/yori/<%=yori.id%>"><%=yori.name%></a>
-              </h4>
-              <p class="card-text"><%=Post.find_by(yori_id: yori.id).main%></p>
+<% if @posts != nil %>
+    <% @count = 0 %>
+    <% @posts.each do |post| %>
+        <% @yori = Yori.find(post.yori_id) %>
+        <% if (@count % 4) == 0 %>
+          <div class="row" style="width: 98%; margin-top: 1em; margin-left: 1em">
+        <% end %>
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+              <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="/yojo/yori/<%=@yori.id%>"><%=@yori.name%></a>
+                    <p>by. <%= User.find(@yori.user_id).username %></p>
+                  </h4>
+                  <p class="card-text"><%=Post.find_by(yori_id: @yori.id).main%></p>
+                </div>
+              </div>
             </div>
+        <% if @count % 4 == 3 %>
           </div>
-        </div>
-    <% if @count % 4 == 3 %>
+        <% end %>
+        <% @count += 1 %> 
+    <% end %>
+    <% if @count % 4 != 0 %>
       </div>
     <% end %>
-    <% @count += 1 %> 
+<% end %>
+
+<% if @yoris != nil %>
+  <div class="page-center">
+    <ul id="page-list" class="pagination">
+      <li class="page-item"><a class="page-link" <% if @current_page > 0 %>
+      onclick="combinePage(<%=@current_page - 1%>)"<% end %>>prev</a></li>
+    <% for i in 0...@max_page %>
+      <li class="page-item"><a <% if i == @current_page%>id="current-page"<%end%> class="page-link" onclick="combinePage(<%=i%>)"><%=i + 1%></a></li>
+    <% end %>
+      <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %>
+      onclick="combinePage(<%=@current_page + 1%>)"<% end %>>next</a></li>
+    </ul>
+  </div>
 <% end %>

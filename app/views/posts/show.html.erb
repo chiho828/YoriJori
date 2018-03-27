@@ -3,6 +3,10 @@
 <h1>제목: <%= @yori.name %></h1>
 <h2><%= @post.subtitle %><h2>
 
+<% if @post.image != "" %>
+    <p><img src=<%= @post.image %>></p>
+<% end %>
+
 <% if @post.main != "" %>
     <p>Main Ingredients: <%= @post.main %></p>
 <% end %>

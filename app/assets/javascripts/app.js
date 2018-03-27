@@ -16,8 +16,8 @@ function removeRow(button) {
 function addStep() {
     step++;
     $("#steps").append('<div id='+step+'><div class="step_num">STEP '+step+'</div> \
-                        [사진] <textarea id="step'+step+'" rows="5" cols="50"></textarea> \
-                        <button onclick="removeStep(this)">삭제</button> \
+                        [사진] <textarea class="bar" id="step'+step+'" rows="5" cols="50"></textarea> \
+                        <button class="roundbtn" onclick="removeStep(this)">삭제</button> \
                         </div>');
 }
 

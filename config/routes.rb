@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   root 'yojo#index'
+  get '/:page_number' => 'yojo#index'
   
   # search
-  get '/yojo/combine' => 'yojo#combine'
+  get '/yojo/combine/(:page_number)' => 'yojo#combine'
   get '/yojo/switch' => 'yojo#switch'
   
   # yori CRUD
@@ -24,6 +25,10 @@ Rails.application.routes.draw do
   
   get 'users/:id' => 'users#show'
   
+  # Comments
+  get '/yojo/yori/:yori_id/comments/create' => 'comments#create'
+  post '/yojo/yori/:yori_id/comments/destroy/:comment_id' => 'comments#destroy'
+  
   
   # Testing post
   get '/posts/new' => 'posts#new'
@@ -37,4 +42,14 @@ Rails.application.routes.draw do
   # Testing comments
   get '/posts/show/:yori_id/comments/create' => 'comments#create'
   post '/posts/show/:yori_id/comments/destroy/:comment_id' => 'comments#destroy'
+  
+  # IDEAL ROUTES
+  # get '/posts' => 'posts#index'
+  # post '/posts' => 'posts#create'
+  # get '/posts/new' => 'posts#new'
+  # get '/posts/:id/edit' => 'posts#edit', as: "edit_post"
+  # get '/posts/:id' => 'posts#show', as: "post"
+  # put '/posts/:id' => 'posts#update'
+  # patch '/posts/:id' => 'posts#update'
+  # delete '/posts/:id' => 'posts#destroy'
 end

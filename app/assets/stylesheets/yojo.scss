@@ -1,21 +1,91 @@
+// Fonts
+
+body, 
+.font, 
+.sign, 
+.yori-wrapper, 
+.card-body,
+.recipe-left,
+.yori {
+    font-family: godo;
+}
+
+.book-tab,
+.navi-tab,
+.card-text,
+.recipe-right, {
+    font-family: godoMaum;
+}
+
+
+
 body {
     padding-top: 56px;
+
+    .sign {
+        margin-top: 20px;
+    }
+}
+
+#page-list {
+    display: inline-flex;
+}
+
+#current-page {
+    color: tomato;
+}
+
+.page-center {
+    margin-top: 3rem;
+    text-align: center;
+}
+// .font {
+//         font-family: godo;
+// }
+
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .sidenav {
-    width: 130px;
-    position: fixed;
+    width: 12%;
+    position: sticky;
     z-index: 1;
-    top: 15%;
-    left: 0;
+    top: 6rem;
+    margin-top: 3rem;
+    left: -5%;
     overflow-x: hidden;
     padding: 8px 0;
     text-align: center;
+    min-width: 100px;
     
     a {
+        font-family: godoMaum;
+        font-size: 1.5em;
         text-decoration: none;
         color: black;
     }
+        a:hover {
+        color: tomato;
+        text-decoration: none;
+    }
+}
+
+.search-wrapper,
+#results
+{
+    position: relative;
+    top: -75vh;
+}
+
+.result-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 5px;
 }
 
 #mi_rectangle {
@@ -43,11 +113,14 @@ body {
 .search-wrapper {
     text-align: center;
     max-width: 35em;
-    margin: 1em auto;
+    margin: auto;
     padding: 2em;
     
     .types {
-        font-size: 0.9em;
+        margin-top: 3rem;
+        font-size: .9em;
+        font-family: godo;
+        
     }
     
     input {
@@ -114,40 +187,34 @@ body {
 }
 
 #results {
-    margin-top: 1em;
+    width: 88%;
+    margin-top: 3rem;
+    left: 12%;
     text-align: center;
-    min-height: 50vh;
+        p {
+            font-size: 1.4rem;
+            font-family: godoMaum;
+            color: gray;
+        }
 }
 
 .masthead {
     min-height: 92.5vh;
     display: table;
-    width: 100%;
     height: auto;
     padding-top: 8rem;
     padding-bottom: 8rem;
-    background: linear-gradient(90deg,rgba(255,255,255,.1) 0,rgba(255,255,255,.1) 100%),url('/assets/cover.jpg');
-    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0px, rgba(255, 255, 255, 0.1) 100%),url('/assets/cover.jpg');
-    background-position-x: center;
-    background-position-y: center;
-    background-size: cover;
-    background-repeat-x: no-repeat;
-    background-repeat-y: no-repeat;
-    background-attachment: initial, initial;
-    background-origin: initial, initial;
-    background-clip: initial, initial;
-    background-color: initial;
+    background-image: url('/assets/cover.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    a:hover {
+        color: black;
+        text-decoration: none;
+    }
 }
 
-#rounded {
-    background-color: tomato;
-    color: white;
-    border-color: tomato;
-    border-radius: 5rem;
-}
 
 #logo {
     color: tomato;
@@ -179,33 +246,63 @@ body {
     text-align: center;
 }
 
-.btn {
-    display: inline-block;
+
+.roundbtn {
+    background-color: tomato;
+    color: white;
+    border-color: tomato;
+    border-radius: 5rem;
+    text-decoration: none;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.2);
     text-align: center;
+    line-height: .5;
+    display: inline-block;
     white-space: nowrap;
     vertical-align: middle;
     user-select: none;
-    border: 1px solid transparent;
-    border-radius: 5rem;
-    line-height: 1.5;
+    border: .5px solid transparent;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-
-    box-shadow: 0 3px 3px 0 rgba(0,0,0,.1);
-    font-weight: 700;
-}
-
-.btn-primary {
-    background-color: white;
-    border-color: white;
-}
-
-.btn-xl {
     text-transform: uppercase;
-    padding: 1.5rem 3rem;
+    padding: 1rem 1.5rem;
     font-size: .9rem;
     font-weight: 700;
-    /* letter-spacing: .1rem; */
 }
+
+.roundbtn:focus {
+    outline: none;
+}
+
+.roundbtn:hover {
+    color: black;
+}
+
+// .btn {
+//     display: inline-block;
+//     text-align: center;
+//     white-space: nowrap;
+//     vertical-align: middle;
+//     user-select: none;
+//     border: 1px solid transparent;
+//     border-radius: 5rem;
+//     line-height: 1.5;
+//     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+//     box-shadow: 0 3px 3px 0 rgba(0,0,0,.1);
+//     font-weight: 700;
+// }
+
+// .btn-primary {
+//     background-color: white;
+//     border-color: white;
+// }
+
+// .btn-xl {
+//     text-transform: uppercase;
+//     padding: 1.5rem 3rem;
+//     font-size: .9rem;
+//     font-weight: 700;
+//     /* letter-spacing: .1rem; */
+// }
 
 .navbar-collapse {
     -ms-flex-preferred-size: 100%;
@@ -281,6 +378,15 @@ body {
     margin-top: .75rem;
     margin-bottom: .75rem;
     text-align: center;
+    a {
+        color: tomato;
+    }
+    font-family: godo;
+    text-decoration: none;
+        a:hover {
+            text-decoration: none;
+            color: black;
+        }
 }
 
 .card-body {
@@ -288,12 +394,12 @@ body {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     text-align: center;
-    margin-top: 15%;
     height: 200px;
 }
 
 .card-body1 {
-    margin-top: 10%;
+    margin: auto;
+    font-size: 1.5rem;
 }
 
 .card-img-top {
@@ -317,6 +423,7 @@ body {
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,.1);
 }
 
 a {
@@ -325,49 +432,54 @@ a {
     }
 }
     
-#kitchen {
-    background-image: url(/assets/fridge.png);
-    height: 80px;
+.kitchen_icon {
+    background: url(/assets/fridge.png) no-repeat;
     width: 80px;
-}
+    height: 80px;
+    display: inline-block;
 
-#kitchen a:hover {
-    background-image: url(/assets/fridge_color.png);
-    height: 80px;
-    width: 80px;
+    &:hover {
+        background: url(/assets/fridge_color.png) no-repeat;
+    }
 }
 
 .sign {
-  margin: 20px 250px 20px 250px;
-  border: 1px solid;
+  margin-top: 40px;
+  margin: auto;
+  width: 400px;
+  border: 4px solid;
+  border-color: tomato;
   border-radius: 16px;
+  padding: 20px;
+  min-width: 300px;
+  font-size: 1.2em;
+//   font-family: godo;
+  
+  span {
+      font-size: .8em;
+  }
+  
+}
+
+.sign-wrap {
+    padding: 20px;
+}
+
+@font-face {
+  font-family: "godoMaum";
+  font-weight: normal;
+  font-style: normal;
+  src: url(/assets/godoMaum.ttf) format("truetype");
+}
+.godoMaum * { font-family: 'GodoMaum', sans-serif; 
 }
 
 
-#navbar-l {
-  overflow: hidden;
-  background-color: #333;
-}
-
-#navbar-l a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px;
-  text-decoration: none;
-}
-
-.nav-content {
-  padding: 16px;
-}
-
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%
-}
-
-.sticky + .nav-content {
-  padding-top: 60px;
-}
+@font-face { 
+    font-family: 'Godo'; 
+    font-style: normal; 
+    font-weight: 400; 
+    src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff'); } @font-face { font-family: 'Godo'; font-style: normal; font-weight: 700; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoB.woff') format('woff'); 
+    } 
+    .godo * { font-family: 'Godo', sans-serif; 
+    }

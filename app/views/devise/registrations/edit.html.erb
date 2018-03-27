@@ -1,30 +1,36 @@
 <div class="text-center sign">
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>회원정보 수정</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs text-left">
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :username, required: true %>
+  <div class="form-inputs sign-wrap">
+  
+    <%= f.email_field :email, required: true, autofocus: true, class: "form-control" %><br>
+    <%= f.email_field :username, required: true, autofocus: true, class: "form-control" %><br>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
+  
+    <%= f.password_field :password, autocomplete: "off", placeholder: "새 비밀번호 (6자 이상)", class: "form-control", required: false %><br>
+    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "새 비밀번호 확인", class: "form-control", required: false %><br>
+    <%= f.password_field :current_password, autocomplete: "off", placeholder: "현재 비밀번호 (필수)", class: "form-control" %><br>
 
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-    <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
   </div>
 
   <div class="form-actions text-center">
-    <%= f.button :submit, "Update" %>
-  </div>
+    <%= f.button :submit, "수정" %>
+  </div><br>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<span>
+<%= link_to "계정 삭제하기", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %><br>
+<%= link_to "뒤로", :back %>
+</span>
 </div>
+
+
+    <!--<= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>-->
+    <!--<= f.input :password_confirmation, required: false %>-->
+    <!--<= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>-->

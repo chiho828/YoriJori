@@ -20,5 +20,6 @@ class User < ApplicationRecord
   end
   
   has_many :yoris
+  has_many :posts, through: :yoris
   has_one :kitchen
 end

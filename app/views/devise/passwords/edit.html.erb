@@ -1,4 +1,6 @@
-<h2>Change your password</h2>
+<div class="text-center sign">
+<h2>비빌번호 변경</h2>
+
 
 <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
@@ -6,14 +8,22 @@
   <%= f.input :reset_password_token, as: :hidden %>
   <%= f.full_error :reset_password_token %>
 
-  <div class="form-inputs">
-    <%= f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, label: "Confirm your new password", required: true %>
+  <div class="form-inputs sign-wrap">
+    <%= f.password_field :password, autocomplete: "off", placeholder: "새 비밀번호 (6자 이상)", class: "form-control", required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %><br>
+    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "새 비밀번호 확인", class: "form-control", required: true %><br>
+
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Change my password" %>
-  </div>
+    <%= f.button :submit, "비밀번호 변경" %>
+  </div><br>
 <% end %>
 
+<span>
 <%= render "devise/shared/links" %>
+</span>
+</div>
+
+
+<!--<= f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>-->
+<!--<= f.input :password_confirmation, label: "Confirm your new password", required: true %>-->

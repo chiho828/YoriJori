@@ -1,59 +1,74 @@
-<br>
-<div class="container">
-    <p>요리명: <%= @yori.name %></p>
-    <br>
+
+    <!--<div class="sidenav">-->
+    <!--    <a href<% if user_signed_in? %>='/yojo/kitchen'<% else %> onclick="guestWarning()" <% end %>-->
+    <!--      data-toggle="tooltip" data-placement="right" title="마이키친 페이지" id="kitchen"><img class="icon" src="/assets/fridge.png"><p>마이키친</p></a><br>-->
+    <!--    <a href<% if user_signed_in? %>='/yojo/yori_book/0'<% else %> onclick="guestWarning()" <% end %>-->
+    <!--      data-toggle="tooltip" data-placement="right" title="요리북"><img class="icon" src="/assets/book.png"><p>요리북</p></a><br>-->
+    <!--    <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>-->
+    <!--      data-toggle="tooltip" data-placement="right" title="레시피 올리기"><img class="icon" src="/assets/edit.png"><p>레시피 올리기</p></a><br>-->
+    <!-- </div>-->
+     
+    <div class="yori-wrapper">
     
-    <% if @post.subtitle != "" %>
-        <p>설명글: <%= @post.subtitle %></p>
-    <% end %>
-    <br>
-    
-    <% if @post.main != "" %>
-        <p>Main Ingredients: <%= @post.main %></p>
-    <% end %>
-    <br>
-    
-    <% if @post.optional != "" %>
-        <p>Optional: <%= @post.optional %></p>
-    <% end %>
-    <br>
-    
-    <% if @post.seasoning != "" %>
-        <p>Seasoning: <%= @post.seasoning %></p>
-    <% end %>
-    <br>
-    
-    <% if @post.steps[0] != "" %>
-        <% for i in 1..@post.steps.length %>
-            <p>STEP<%=i%>: <%=@post.steps[i-1]%></p>
+        <h1 class="mt-5 mb-1 title"><%= @yori.name %></h1>
+        <p> by. <%= @user.username %></p>
+        <% if @post.subtitle != "" %> 
+            <span><%= @post.subtitle %></span>
+        <% end %><br>
+        
+    <div class="yori">
+        
+        <div class="yori-top">
+            
+            <div class="image">
+            </div>
+            
+            <div class="ingredient">
+                <% if @post.main != "" %>
+                    <h4>메인 재료</h4>
+                    <p><%= @post.main %></p>
+                <% end %>
+                
+                <% if @post.optional != "" %>
+                    <h4>선택 재료</h4> 
+                    <p><%= @post.optional %></p>
+                <% end %>
+                
+                <% if @post.seasoning != "" %>
+                    <h4>소스</h4> 
+                    <p><%= @post.seasoning %></p>
+                <% end %>
+            </div>
+        </div>
+        
+        
+        <% if @post.steps[0] != "" %>
+            <% for i in 1..@post.steps.length %>
+            <div class="steps mt-4">
+                <p>STEP <%=i%><br>
+                <%=@post.steps[i-1]%></p>
+            </div>
+            <% end %>
         <% end %>
-    <% end %>
-    <br>
     
-    댓글
-    <form action='/posts/show/<%= @yori.id %>/comments/create'>
-        <input type='text' name='input_comment'>
-        <input type=submit>
-    </form>
-    
-    <hr>
-    댓글은 여기에
-    <hr>
-    <% @comments.each do |comment| %>
-        <p><%= comment.content %>
-            <a href="/posts/show/<%= @yori.id %>/comments/destroy/<%= comment.id %>"
-            data-confirm="댓글을 삭제합니다" data-method="post">
-                [x]
-            </a>
-        </p>
-    <% end %>
-    
-    <p><a href="/yojo/edit_yori/<%= @yori.id %>">수정</a></p>
-    <p>
-        <a href="/" data-confirm="진짜로 삭제하시겠어요?"
-        data-method="get">
-            삭제
-        </a>
-    </p>
-    <p><a href="/yojo/yori_book">요리북</a></p>
-</div>
+        <br>
+        
+        <% if user_signed_in? %>
+            <% if current_user.id == @yori.user_id %>
+                <a href="/yojo/edit_yori/<%= @yori.id %>">수정</a>
+                <a href="/" data-confirm="진짜로 삭제하시겠어요?" data-method="get">삭제</a>
+            <% end %>
+        <% end %> 
+        
+        <a href="/yojo/yori/<%= @yori.id %>">스크랩하기</a>
+        <%= link_to "뒤로", :back %>
+        
+      </div>
+    </div>
+
+
+<script>
+  function guestWarning() {
+    alert("로그인 후 이용해주세요!")
+  }
+</script>

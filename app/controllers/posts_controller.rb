@@ -52,6 +52,8 @@ class PostsController < ApplicationController
         @post = Post.new
         @post.yori_id = @yori.id
         @post.title = params[:title]
+        @post.image = params[:image]
+        # @post.image = params[:file]
         @post.subtitle = params[:subtitle]
         @post.main = params[:main]
         @post.optional = params[:optional]
@@ -59,6 +61,7 @@ class PostsController < ApplicationController
         @post.steps = params[:steps]
         @post.save
         
+        render :js => "window.location = '/posts/show/#{@yori.id}'"
         
         ##################complete####################
         
@@ -121,7 +124,7 @@ class PostsController < ApplicationController
         
         
         # redirect does not work. maybe javascript?
-        redirect_to "/posts/show/#{@yori.id}"
+        # redirect_to "/posts/show/#{@yori.id}"
     end
     
     
@@ -147,6 +150,7 @@ class PostsController < ApplicationController
     def edit
         @yori = Yori.find(params[:yori_id])
         @post = Post.find_by(yori_id: @yori.id)
+        @ingredients = Yori.find(params[:yori_id]).ingredients
     end
     
     
