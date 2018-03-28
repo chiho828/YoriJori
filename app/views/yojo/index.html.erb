@@ -8,6 +8,7 @@
   <!--<div class="overlay"></div>-->
 </header>
 
+<!-- Sidebar -->
 <div class="sidenav">
   <a href<% if user_signed_in? %>='/yojo/kitchen'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>마이키친</p></a><br>
@@ -76,7 +77,7 @@
         <% @posts.each do |post| %>
             <% @yori = Yori.find(post.yori_id) %>
             <% if (@count % 4) == 0 %>
-              <div class="row" style="width: 98%; margin-top: 1em; margin-left: 1em">
+              <div class="row" style="margin-top: 1em; margin-left: 1em">
             <% end %>
                 <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
                   <div class="card h-100">

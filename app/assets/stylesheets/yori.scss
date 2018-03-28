@@ -26,26 +26,25 @@
 
 .yori-wrapper {
     width: 100%;
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
     padding: 5px;
     position: relative;
     margin: auto;
 }
 
 .yori {
-    width: 70%;
+    width: 75%;
     height: 100%;
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
+    // display: flex;
+    // flex-flow: column wrap;
+    // align-items: center;
+    text-align: center;
     padding: 20px;
     border: 3px solid;
     border-color: tomato;
     border-radius: 16px;
     font-size: 1em;
     min-width: 300px;
+    overflow: auto;
 }
 
 .yori-top {
@@ -104,15 +103,22 @@
     min-height: 100px;
 }
 
-.steps {
+// .steps {
+//     text-align: left;
+//     padding: 30px;
+//     margin: auto;
+//     border: 1px dashed;
+//     border-color: tomato;
+//     border-radius: 16px;
+//     padding: 20px;
+//     min-width: 90%;
+// }
+
+#steps {
     text-align: left;
-    padding: 30px;
-    margin: auto;
-    border: 1px dashed;
-    border-color: tomato;
-    border-radius: 16px;
-    padding: 20px;
-    min-width: 90%;
+    position: relative;
+    left: 17vw;
+    width: 70%;
 }
 
 .bar-input {

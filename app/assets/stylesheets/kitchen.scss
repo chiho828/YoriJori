@@ -244,13 +244,10 @@ button {
         height: 100%;
     }
     .carousel-inner {
-        border-left: 1px solid black;
-        border-right: 1px solid black;
+        border: 1px solid black;
     }
     
     .carousel-item {
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
         padding: 10px;
     }
     

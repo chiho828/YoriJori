@@ -70,6 +70,11 @@ class YojoController < ApplicationController
             @user = current_user
             @kitchen = @user.kitchen
         end
+        
+        @recommended = 9
+        @basket = @kitchen.ingredients
+        @comp = Yori.joins(:recipes).where('recipes.main = "t" AND ingredient_id NOT IN (?)', @basket).group("yori_id")
+        @yoris = Yori.where.not(id: @comp.ids).limit(@recommended)
     end
     
     # POST

@@ -53,6 +53,7 @@ body {
 .sidenav {
     width: 12%;
     position: sticky;
+    float: left;
     z-index: 1;
     top: 6rem;
     margin-top: 3rem;
@@ -72,13 +73,6 @@ body {
         color: tomato;
         text-decoration: none;
     }
-}
-
-.search-wrapper,
-#results
-{
-    position: relative;
-    top: -75vh;
 }
 
 .result-wrapper {
@@ -188,14 +182,17 @@ body {
 
 #results {
     width: 88%;
+    position: relative;
     margin-top: 3rem;
-    left: 12%;
     text-align: center;
-        p {
-            font-size: 1.4rem;
-            font-family: godoMaum;
-            color: gray;
-        }
+    overflow: auto;
+    
+    p {
+        font-size: 1.4rem;
+        font-family: godoMaum;
+        color: gray;
+    }
+    
 }
 
 .masthead {

@@ -4,10 +4,19 @@
             <% if user_signed_in? %>
                 <div id="fridge" class="fridge-top">
                     <div class="fridge-left">
+                        <script>
+                            map.clear();
+                        </script>
                         <% if @kitchen != nil %>
+                            <ul id="kitchen-list">
                             <% @kitchen.ingredients.each do |i| %>
-                                <%= Ingredient.find(i).name %>
+                                <% @ingredient = Ingredient.find(i) %>
+                                <li onclick="removeFilter(this)"><%=@ingredient.name%></li>
+                                <script>
+                                    map.set("<%=@ingredient.name%>", <%=@ingredient.id%>);
+                                </script>
                             <% end %>
+                            </ul>
                         <% end %> 
                     </div>
                     <span class="fridge-handle-left"></span>
@@ -20,9 +29,9 @@
                     <div id="ingredient_results"></div>
                     
                     <div id="filters"></div>
+                    
                     <script>
-                        map.clear();
-                        new app.SearchIngredients;
+                        new app.KitchenIngredients;
                         
                         function addIngredients() {
                             console.log(map);
@@ -76,7 +85,7 @@
             <div class="shelf-bottom">
                 <ul>
                     <li class="shelf-yoribook">
-                        <a href="/yojo/yori_book"><span>요리북</span></a>
+                        <a href="/yojo/yori_book/0"><span>요리북</span></a>
                     </li>
                     <li class="shelf-postyori">
                         <a href="/yojo/new_yori"><span>레시피 올리기</span></a>
@@ -89,134 +98,50 @@
         </div>
         
         <div id="carousel" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row" style="height: 100%">
+            <div class="carousel-inner">
+                <% @count = 0 %>
+                <% @yoris.each do |yori| %>
+                    <% if @count % 3 == 0 %>
+                        <div class="carousel-item <%if @count == 0%>active<%end%>">
+                            <div class="row" style="height: 100%">
+                    <% end %>
+                    
                     <div class="col-md-4 col-sm-6 portfolio-item">
                         <div class="card h-100">
                             <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                             <div class="card-body1">
                                 <h4 class="card-title">
-                                    <a href="/yojo/yori/2"><%=Yori.find(2).name%></a>
+                                    <a href="/yojo/yori/<%=yori.id%>"><%=yori.name%></a>
                                 </h4>
-                                <p class="card-text"><%=Post.find_by(yori_id: 2).main%></p>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body1">
-                                <h4 class="card-title">
-                                    <a href="/yojo/yori/3"><%=Yori.find(3).name%></a>
-                                </h4>
-                                <p class="card-text"><%=Post.find_by(yori_id: 3).main%></p>
+                                <p class="card-text"><%=Post.find_by(yori_id: yori.id).main%></p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body1">
-                                <h4 class="card-title">
-                                    <a href="/yojo/yori/4"><%=Yori.find(4).name%></a>
-                                </h4>
-                                <p class="card-text"><%=Post.find_by(yori_id: 4).main%></p>
+                    <% if @count % 3 == 2 %>
                             </div>
                         </div>
+                    <% end %>
+                    <% @count += 1 %>
+                <% end %>
+                
+                <% if @count % 3 != 0 %>
+                        </div>
                     </div>
-                </div>
+                <% end %> 
+                
+                <% if @count > 3 %>
+                    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" ></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                <% end %>
             </div>
-            <div class="carousel-item">
-                <div class="row" style="height: 100%">
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body1">
-                                <h4 class="card-title">
-                                    <a href="/yojo/yori/5"><%=Yori.find(5).name%></a>
-                                </h4>
-                                <p class="card-text"><%=Post.find_by(yori_id: 5).main%></p>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body1">
-                                <h4 class="card-title">
-                                    <a href="/yojo/yori/9"><%=Yori.find(9).name%></a>
-                                </h4>
-                                <p class="card-text"><%=Post.find_by(yori_id: 9).main%></p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body1">
-                                <h4 class="card-title">
-                                    <a href="/yojo/yori/10"><%=Yori.find(10).name%></a>
-                                </h4>
-                                <p class="card-text"><%=Post.find_by(yori_id: 10).main%></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row" style="height: 100%">
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body1">
-                                <h4 class="card-title">
-                                    <a href="/yojo/yori/23"><%=Yori.find(23).name%></a>
-                                </h4>
-                                <p class="card-text"><%=Post.find_by(yori_id: 23).main%></p>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body1">
-                                <h4 class="card-title">
-                                    <a href="/yojo/yori/24"><%=Yori.find(24).name%></a>
-                                </h4>
-                                <p class="card-text"><%=Post.find_by(yori_id: 24).main%></p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body1">
-                                <h4 class="card-title">
-                                    <a href="/yojo/yori/32"><%=Yori.find(32).name%></a>
-                                </h4>
-                                <p class="card-text"><%=Post.find_by(yori_id: 32).main%></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-          
-          <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" ></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
+        
     </div>
-</div>
+</div

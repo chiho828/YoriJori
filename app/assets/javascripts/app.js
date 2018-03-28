@@ -3,7 +3,9 @@ var map = new Map();
 
 function removeFilter(span) {
     var name = span.innerHTML;
+    console.log(name);
     map.delete(name);
+    console.log(map)
     span.remove();
 }
 
@@ -15,10 +17,11 @@ function removeRow(button) {
 
 function addStep() {
     step++;
-    $("#steps").append('<div id='+step+'><div class="step_num">STEP '+step+'</div> \
+    $("#steps").append('<div id='+step+', class="step"><div class="step_num">STEP '+step+'</div> \
                         [사진] <textarea class="bar" id="step'+step+'" rows="5" cols="50"></textarea> \
                         <button class="roundbtn" onclick="removeStep(this)">삭제</button> \
-                        </div>');
+                        </div><br>');
+                        
 }
 
 function removeStep(button) {
