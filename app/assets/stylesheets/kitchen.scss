@@ -1,3 +1,7 @@
+.kitchen-background-wrapper {
+   
+}    
+
 $profileWrapperMargin: 20px;
 
 .profile-wrapper {
@@ -257,6 +261,10 @@ button {
     .carousel-control-prev,
     .carousel-control-next {
         width: 2rem;
-        background-color: grey;
+    }
+    
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        background-color: rgba(200, 200, 200, 0.7);
     }
 }

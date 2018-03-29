@@ -213,12 +213,15 @@
 
 
 <!-- ########################치호 2########################## -->
+
 <br>
 <h1>레시피 추가하기</h1>
 <div class="container">
     <!--사진첨부기능추가하기-->
-    <p>메인사진</p>
-    <input id="main_image" type="file">
+    <!--<p>메인사진</p>-->
+    <input name="inputfile" id="inputfile" type="file">
+
+    <!--<button onclik="addImage">메인 사진</button>-->
     <br>
        
     <p>요리명: <input id="title" type="text" ></p>
@@ -273,9 +276,33 @@
         map.clear();
         new app.YoriIngredients;
         
+            $(document).ready(function() {
+                $('#inputfile').change(function(){
+                    var file_data = $('#inputfile').prop('files')[0];   
+                    var form_data = new FormData();                  
+                    form_data.append('file', file_data);
+                    $.ajax({
+                        url: "/posts/create",
+                        type: "get",
+                        data:  {image: form_data},
+                        contentType: false,
+                        cache: false,
+                        processData:false,
+                        success: function(data){
+                            console.log(data);
+                        }
+                    });
+                });
+            });
+        
+        // function addImage() {
+            
+        //     var image = $('#main_image').val();
+        // }
+        
         function addYori() {
             var title = $('#title').val();
-            var image = $('#main_image').val();
+            // var image = $('#main_image').val();
             var subtitle = $('#subtitle').val()
             var main_ingredient = "", optional_ingredient = "", seasoning = "";
             var steps = [];
@@ -325,7 +352,7 @@
                 type : "get",
                 data : {user: <%=current_user.id%>,
                         title: title,
-                        image: image,
+                        // image: image,
                         subtitle: subtitle,
                         main: main_ingredient,
                         optional: optional_ingredient,

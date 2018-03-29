@@ -2,37 +2,41 @@
 
 <div class="main-wrapper yoribook">
   <div class="navi-tab">
-    <a href="/#search"><button class="tab1">요리조합</button></a>
-    <a href="/yojo/kitchen"><button>마이키친</button></a>
-    <a href="/yojo/new_yori"><button class="recipe-upload">레시피 올리기</button></a>
+    <a href="/#search"><button style="right: 20px">요리조합</button></a>
+    <a href="/yojo/kitchen/<%=current_user.id%>"><button style="right: 15px">my키친</button></a>
+    <a href="/yojo/new_yori"><button style="width: 100px; right: 20px">레시피 올리기</button></a>
   </div>
   <div class="book-tab">
-      <button class="tab1">내 레시피</button>
-      <button>내 스크랩</button>
-      <button class="tab3">전체보기</button>
+      <button style="left: 2px">책 레시피</button>
+      <button style="left: 5px">스크랩</button>
+      <button style="left: 8px">팔로윙</button>
+      <button style="left: 12px"">전체보기</button>
   </div>
+  
   <div class="cover-wrapper">
-      <!-- Dynamically generate Recipes -->
-      <% @posts.each do |post| %>
-        <div class="recipe-wrapper">
-          <div class="recipe-left">
-            <div class="recipe-picture-wrapper">
-            </div>
-            <div class="recipe-name-wrapper">
-              <h4 class="card-title">
-                <a href="/yojo/yori/<%=post.yori_id%>"><%=Yori.find(post.yori_id).name%></a>
-              </h4>
-            </div>
+    <!-- Dynamically generate Recipes -->
+    <% @posts.each do |post| %>
+      <% @yori = Yori.find(post.yori_id) %>
+      <div class="recipe-wrapper">
+        <div class="recipe-left">
+          <div class="recipe-picture-wrapper">
           </div>
-          <div class="recipe-right">
-            <p>매인재료: <%=post.main%></p>
-            <p>선택재료: <%=post.optional%></p>
-            <p>양념: <%=post.seasoning%></p>
+          <div class="recipe-name-wrapper">
+            <h4 class="card-title">
+              <a href="/yojo/yori/<%=post.yori_id%>"><%=Yori.find(post.yori_id).name%></a>
+            </h4>
           </div>
         </div>
-      <% end %>
+        <div class="recipe-right">
+          <p>매인재료: <%=post.main%></p>
+          <p>선택재료: <%=post.optional%></p>
+          <p>양념: <%=post.seasoning%></p>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
+    
 
 <% if @posts.length > 0 %>
   <!-- Tab Pagination -->

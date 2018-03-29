@@ -39,7 +39,7 @@ app.SearchIngredients.prototype = {
         console.log(item);
         
         if (!map.has(item.name)) {
-            $('#filters').append('<span onclick="removeFilter(this)">'+item.name+'</span>');
+            $('#filters').append('<span onclick="removeFilter(this)">'+item.name+" X"+'</span>');
             map.set(item.name, item.id);
         }
         
@@ -78,7 +78,7 @@ app.KitchenIngredients.prototype = {
         console.log(item);
         
         if (!map.has(item.name)) {
-            $('#kitchen-list').append('<li onclick="removeFilter(this)">'+item.name+'</li>');
+            $('#kitchen_list').append('<li onclick="removeFilter(this)">'+item.name+'</li>');
             map.set(item.name, item.id);
         }
         

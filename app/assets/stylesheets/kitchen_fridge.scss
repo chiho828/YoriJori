@@ -1,4 +1,13 @@
 
+$fridgeBorderRadius: 28px;
+$fridgeHandleWidth: 17px;
+$fridgeHandleHeight: 207px;
+$fridgeHandleOffset: 32px;
+$fridgeOpenPerspective: 800;
+$fridgeOpenRotateDeg: 120deg;
+$fridgeOpenTransition: 600ms;
+
+
 .fridge-wrapper {
     width: 100%;
 }
@@ -8,7 +17,7 @@
     height: 100%;
     position: relative;
     border: 1px solid black;
-    border-radius: 28px;
+    border-radius: $fridgeBorderRadius;
     display: flex;
     flex-direction: column;
 }
@@ -26,46 +35,78 @@
 .fridge-bottom {
     height: 30%;
     border-top: 1px solid black;
-    padding: 60px;
+    padding: 20px;
     text-align: center;
 }
 
-.fridge-left {
-    padding: 70px 40px 40px;
-    border-right: 1px solid #000;
-    height: 100%;
-    width: 50%;
-}
 
-$fridgeHandleWidth: 17px;
-$fridgeHandleHeight: 207px;
-$fridgeHandleOffset: 32px;
-
-
-.fridge-handle-left,
-.fridge-handle-right,
-.fridge-handle-bottom {
-    border: 1px solid black;
-    background: #fff;
+.fridge-door-left,
+.fridge-door-right {
+    display: block;
     position: absolute;
+    background: white;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    transition: all $fridgeOpenTransition linear;
+    will-change: transform;
+    border: 1px solid black;
+    
+    // handle
+    &:after {
+        position: absolute;
+        content: "";
+        display: block;
+        width: $fridgeHandleWidth;
+        height: $fridgeHandleHeight;
+        border: 1px solid black;
+        background: #fff;
+        top: 25%;
+        height: 50%;
+    }
+    
+    //fade out fridge doors
+    .fridge-opened & {
+        animation: fridge-door-fadeOut 300ms $fridgeOpenTransition ease-out forwards;
+    }
+}
+.fridge-door-left {
+    transform-origin: 0% 50%;
+    border-top-left-radius: $fridgeBorderRadius;
+    &:after {
+        right: $fridgeHandleOffset - $fridgeHandleWidth;
+    }
+    
+    .fridge-opened & {
+        -webkit-transform: perspective($fridgeOpenPerspective) rotateY(-$fridgeOpenRotateDeg);
+        transform: perspective($fridgeOpenPerspective) rotateY(-$fridgeOpenRotateDeg);
+    }
+}
+.fridge-door-right {
+    transform-origin: 100% 50%;
+    right: 0;
+    border-top-right-radius: $fridgeBorderRadius;
+    
+    &:after {
+        left: $fridgeHandleOffset - $fridgeHandleWidth;
+    }
+    
+    .fridge-opened & {
+        -webkit-transform: perspective($fridgeOpenPerspective) rotateY($fridgeOpenRotateDeg);
+        transform: perspective($fridgeOpenPerspective) rotateY($fridgeOpenRotateDeg);
+    }
 }
 
-.fridge-handle-left,
-.fridge-handle-right {
-    top: 30%;
-    left: 50%;
-    width: $fridgeHandleWidth;
-    height: 60%;
-    max-height: $fridgeHandleHeight;
+@keyframes fridge-door-fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
-.fridge-handle-left {
-    transform: translateX(-$fridgeHandleWidth - $fridgeHandleOffset);
-}
 
-.fridge-handle-right {
-    transform: translateX($fridgeHandleOffset);
-}
 .fridge-handle-bottom {
     top: $fridgeHandleOffset;
     left: 50%;
@@ -73,4 +114,10 @@ $fridgeHandleOffset: 32px;
     height: $fridgeHandleWidth;
     width: 100%;
     max-width: $fridgeHandleHeight;
+}
+
+.fridge-wrapper {
+    #kitchen_list, #ingredient_search, #update_button, #close_fridge {
+        display: none;
+    }
 }

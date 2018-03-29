@@ -1,6 +1,14 @@
 var app = window.app = {};
 var map = new Map();
 
+//
+// var myFormData = new FormData();
+//
+
+function guestWarning() {
+    alert("로그인 후 이용해주세요!");
+}
+
 function removeFilter(span) {
     var name = span.innerHTML;
     console.log(name);
@@ -17,7 +25,7 @@ function removeRow(button) {
 
 function addStep() {
     step++;
-    $("#steps").append('<div id='+step+', class="step"><div class="step_num">STEP '+step+'</div> \
+    $("#steps").append('<div id='+step+'><div class="step_num">STEP '+step+'</div> \
                         [사진] <textarea class="bar" id="step'+step+'" rows="5" cols="50"></textarea> \
                         <button class="roundbtn" onclick="removeStep(this)">삭제</button> \
                         </div><br>');
@@ -26,7 +34,6 @@ function addStep() {
 
 function removeStep(button) {
     var target = button.closest('div');
-    target.remove();
     
     var start = parseInt(target.id)+1;
     for (i = start; i <= step; i++) {
@@ -36,6 +43,7 @@ function removeStep(button) {
         $('#'+i)[0].id = newNum;
     }
     
+    target.remove();
     step--;
 }
 

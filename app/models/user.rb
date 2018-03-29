@@ -22,4 +22,6 @@ class User < ApplicationRecord
   has_many :yoris
   has_many :posts, through: :yoris
   has_one :kitchen
+  has_many :likes, dependent: :destroy
+  has_many :scraps, dependent: :destroy
 end

@@ -119,7 +119,48 @@ body {
     
     input {
         margin-left: 1em;
+        
+        // &[type="radio"] {
+        //     display: none;
+        // }
     }
+    
+    label {
+        position: relative;
+    }
+    
+    p {
+        padding-left: 24px;
+    }
+    
+    // span{
+    //     position: absolute;
+    //     width: 20px;
+    //     height: 20px;
+    //     left: 0;
+    //     cursor: pointer;
+        
+    //     &.button {
+    //         border:1px;
+    //         border-radius: 999px;
+    //         background: #eee;
+            
+    //     }
+    //     &.check {
+    //         background: tomato;
+    //         border-radius: 999px;
+    //         display: none;
+    //     }
+    // }
+    
+    // span:hover {
+    //     color: #2196F3;
+        
+    // }
+    
+    // input:checked ~ span.check {
+    //     display: block;
+    // }
     
     .bar {
       font-size: 1em;
@@ -132,13 +173,11 @@ body {
         outline: none;
       }
     }
-    
-    button {
-        margin-left: 1em;
-    }
 }
 
- #ingredient_results {
+
+
+#ingredient_results {
     text-align: left;
     
     .ui-widget-content {
@@ -151,7 +190,7 @@ body {
         max-height: 20em;
         overflow: hidden;
         overflow-y: auto;
-        width: 50%;
+        width: 10rem;
     }
     
     .ui-menu-item {
@@ -176,7 +215,16 @@ body {
     width: 70%;
     text-align: left;
     span {
-        margin-right: 1em;
+        margin-right: .5em;
+        color: black;
+        padding: 6px;
+        box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+        border-radius: 5em;
+        background-color: lightgray;
+        font-family: godoMaum;
+        font-size: 1.5em;
+        cursor: pointer;
+
     }
 }
 
@@ -480,3 +528,13 @@ a {
     } 
     .godo * { font-family: 'Godo', sans-serif; 
     }
+    
+    .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}

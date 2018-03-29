@@ -1,10 +1,10 @@
 <!-- Sidebar -->
 <div class="sidenav">
-  <a href<% if user_signed_in? %>='/yojo/kitchen'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>마이키친</p></a><br>
+  <a href<% if user_signed_in? %>='/yojo/kitchen/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
+    data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>my키친</p></a><br>
   
-  <a href<% if user_signed_in? %>='/yojo/yori_book/0'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>요리북</p></a><br>
+  <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>/0'<% else %> onclick="guestWarning()" <% end %>
+    data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>my요리북</p></a><br>
   <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="나만의 레시피를 올려보아요"><img class="icon" src="/assets/edit.png"><p>레시피 올리기</p></a><br>
 </div>
@@ -15,14 +15,14 @@
             <div class="image-post"><p>메인에 보여질 사진이에요. 완성된 요리사진을 올려주세요.</p></div>
             <br>
             
-             <div class="title-post">
-                <p>요리명: <input id="title" class="bar bar-input" type="text" placeholder='레시피의 제목을 입력해 주세요'></p>
+            <div class="title-post">
+                <p>요리명: <input id="title" class="bar bar-input" type="text" placeholder='레시피의 제목을 입력해 주세요.'></p>
+                <p id="title-alert" ></p>
                 <br>
-                
-                <p>설명글: <input id="subtitle" class="bar bar-input" placeholder='레시피를 소개할 수 있는 한 줄 설명을 입력해 주세요' type="text-box" ></p>
+                <p>설명글: <input id="subtitle" class="bar bar-input" placeholder='레시피를 소개할 수 있는 한 줄 설명을 입력해 주세요.' type="text-box" ></p>
                 <br>
+                <p id="subtitle-alert"></p>
             </div>
-        
         </div>
         
         <div class="ingredient-post mt-4">
@@ -32,6 +32,7 @@
             </p>
             <br>
             
+            <p id="main-alert"></p> <p id="quantity-alert"></p>
             <div class="row" style="display: inline-flex; width: 90%; margin-bottom: 1rem">
                 <div class="col-lg-3 col-md-4 col-sm-6">
                   <b>필수</b>
@@ -43,7 +44,7 @@
                   <b>재료</b>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -2vw">
-                  <b>개량</b>
+                  <b>계량</b>
                 </div>
             </div>
             
@@ -52,21 +53,23 @@
         <br>
         <br>
         
-        <p style="text-align: left; margin-left: 7rem">조리법:</p>
+        <p style="text-align: left; margin-left: 5rem">조리법:</p>
+        <p id="step-alert"></p>
         <div id="steps">
-            <div id="1" class="step">
+            <div id="1">
                 <div class="step_num">STEP 1</div>
-                [사진] <textarea id="step1" rows="5" cols="50" class="bar" placeholder='레시피 조리 과정을 입력해 주세요'></textarea>
+                [사진] <textarea id="step1" class="bar" rows="5" cols="50" placeholder='레시피 조리 과정을 입력해 주세요.'></textarea>
             </div>
             <br>
         </div>
-        <br>
         
         <button onclick="addStep()" class="roundbtn">STEP 추가</button>
         <br>
         <br>
+        <br>
         
-        <button onclick="addYori()" class="roundbtn">레시피 올리기</button> <button class="roundbtn" onclick="back()">취소</button>
+        <button onclick="addYori()" class="roundbtn">레시피 올리기</button>
+        <button class="roundbtn" onclick="back()">취소</button>
    </div>
 </div>       
 
@@ -104,7 +107,6 @@
             if (!main && !season) types.push(4);
             quantities.push(quantity);
             units.push(unit);
-            
         });
         main_ingredient = main_ingredient.substring(0, main_ingredient.length-2);
         optional_ingredient = optional_ingredient.substring(0, optional_ingredient.length-2);
@@ -114,16 +116,48 @@
             steps.push($("#"+i).children('textarea').val());
         }
 
-        if (title == "" || main_ingredient == "" || steps == "") {
+        var empty_quantity = false;
+        console.log(quantities);
+        quantities.forEach(function(i) {
+            if (i == "") {
+                empty_quantity = true;
+            }
+        });
+        
+        var empty_step = false;
+        console.log(steps);
+        steps.forEach(function(i) {
+            if (i == "") {
+                empty_step = true;
+            }
+        });
+        
+        if (title == "" || main_ingredient == "" || empty_quantity || empty_step) {
             if (title == "") {
-                alert ("레시피 제목을 추가주세요!");
+                $("#title-alert")[0].innerHTML = "*레시피 제목을 추가해주세요*";
+            } else {
+                $("#title-alert")[0].innerHTML = "";
             }
+            
             if (main_ingredient == "") {
-                alert ("필수 재료를 추가해주세요!");
+                $("#main-alert")[0].innerHTML = "*필수 재료를 추가해주세요*"
+            } else {
+                $("#main-alert")[0].innerHTML = "";
             }
-            if (steps == "") {
-                alert ("조리 과정을 추가해주세요!");
+            
+            if (empty_step) {
+                $("#step-alert")[0].innerHTML = "*조리 과정을 추가해주세요*"
+            } else {
+                $("#step-alert")[0].innerHTML = "";
             }
+           
+            if (empty_quantity) {
+                $("#quantity-alert")[0].innerHTML = "*계량을 추가해주세요*"
+            } else {
+                $("#quantity-alert")[0].innerHTML = "";
+            }
+            
+            window.scrollTo(0, 0);
         }
         else {
             console.log(title);

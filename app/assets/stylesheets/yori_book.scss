@@ -19,8 +19,7 @@
     height: 100%;
     display: flex;
     flex-flow: column wrap;
-    align-items: center;
-    padding: 10px; 
+    padding: 10px;
 }
 
 .recipe-wrapper,
@@ -30,6 +29,8 @@
 
 .recipe-wrapper {
     width: 48%;
+    position: relative;
+    left: 1%;
     height: calc(50% - 16px);
     margin-top: 8px;
     margin-bottom: 8px;
@@ -108,12 +109,6 @@ button {
     top: 10vh;
     left: -50px;
     
-    .recipe-upload {
-        position: relative;
-        top: 10px;
-        width: 105px;
-    }
-    
     a:hover {
         text-decoration: none;
         button {
@@ -130,37 +125,37 @@ button {
 .book-tab button,    
 .navi-tab button {
     display: block;
-    padding: 10px 10px;
-    margin-bottom: 55px;
-    width: 85px;
+    padding: 5px 5px;
+    margin-bottom: 30px;
+    width: 80px;
     height: 50px;
     border: none;
     outline: none;
     text-align: center;
     cursor: pointer;
     transition: 0.3s;
-    border-radius: 10px 10px 0px 0px; 
+    position: relative;
+}
+
+    
+.navi-tab button {
+    border-radius: 10px 0px 0px 10px; 
+    background-color: rgba(200,200,200, 1);
 }
 
 .book-tab button {
-    transform: rotate(90deg);
+    border-radius: 0px 10px 10px 0px; 
     background-color: tomato;
-}
-    
-.navi-tab button {
-    transform: rotate(-90deg);
-    background-color: rgba(200,200,200, 1);
+    bottom: 2rem;
 }
      
-.tab1 {
+
+.recipe-upload {
     position: relative;
-    right: 5px;
+    top: 10px;
+    width: 105px;
 }
 
-.tab3 {
-    position: relative;
-    left: 5px;
-}
 
 .pagination a {
     color: black;

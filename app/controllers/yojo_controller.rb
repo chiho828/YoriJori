@@ -65,34 +65,6 @@ class YojoController < ApplicationController
         end
     end
     
-    def kitchen
-        if user_signed_in?
-            @user = current_user
-            @kitchen = @user.kitchen
-        end
-        
-        @recommended = 9
-        @basket = @kitchen.ingredients
-        @comp = Yori.joins(:recipes).where('recipes.main = "t" AND ingredient_id NOT IN (?)', @basket).group("yori_id")
-        @yoris = Yori.where.not(id: @comp.ids).limit(@recommended)
-    end
-    
-    # POST
-    def addIngredients
-        @user = User.find(params[:user])
-        @kitchen = @user.kitchen
-        
-        if @user.kitchen == nil
-            @kitchen = Kitchen.new
-            @kitchen.user_id = @user.id
-        end
-        
-        @kitchen.ingredients = params[:list]
-        @kitchen.save
-        
-        render :js => "window.location = '/yojo/kitchen'"
-    end
-
     # POST
     def post_yori
         @yori = Yori.new
@@ -145,6 +117,12 @@ class YojoController < ApplicationController
         @yori = Yori.find(params[:yori_id])
         @post = Post.find_by(yori_id: @yori.id)
         @user = User.find(@yori.user_id)
+        @likes = []
+        @scraps = []
+        if user_signed_in?
+            @likes = Like.where('user_id = ? AND post_id = ?', current_user.id, @post.id)
+            @scraps = Scrap.where('user_id = ? AND post_id = ?', current_user.id, @post.id)
+        end
         @comments = Comment.where(post_id: @post.id)
     end
     
@@ -204,18 +182,81 @@ class YojoController < ApplicationController
     
     # DELETE
     def destroy_yori
+        @yori = Yori.find(params[:yori_id])
+        @yori.destroy
+        redirect_to "/yojo/yori_book/0"
+    end
+    
+    # POST (could depend)
+    def kitchen
+        @kitchen_user = User.find(params[:user_id])
+        @current_kitchen = @kitchen_user.kitchen
+        
+        if @kitchen_user.id == current_user.id and @current_kitchen == nil
+            @current_kitchen = Kitchen.new
+            @current_kitchen.user_id = current_user.id
+            @current_kitchen.save
+        end
+        
+        @recommended = 9
+        if @current_kitchen != nil
+            @basket = @current_kitchen.ingredients
+            @comp = Yori.joins(:recipes).where('recipes.main = "t" AND ingredient_id NOT IN (?)', @basket).group("yori_id")
+            @yoris = Yori.where.not(id: @comp.ids).limit(@recommended)
+        end
+    end
+    
+    # POST
+    def addIngredients
+        @kitchen = current_user.kitchen
+        @kitchen.ingredients = params[:list]
+        @kitchen.save
+        
+        render :js => "window.location = '/yojo/kitchen/#{current_user.id}'"
     end
     
     def yori_book
         @items_page = 4
         @current_page = params[:page_number].to_i
+        @user = User.find(params[:user_id])
         
-        @user = User.find(current_user.id)
         @posts = Post.joins(:yori).where("yoris.user_id": @user.id).limit(@items_page).offset(@current_page*@items_page)
         @yoris = @user.yoris
         @max_page = (Float(@yoris.length) / @items_page).ceil
     end
     
+    def like
+        @like = Like.new
+        @like.user_id = params[:user_id]
+        @like.post_id = params[:post_id]
+        @like.save
+        render :js => "window.location = '/yojo/yori/#{params[:post_id]}'"
+    end
+    
+    @DELETE
+    def unlike
+        Like.destroy(params[:like_id])
+        render :js => "window.location = '/yojo/yori/#{params[:post_id]}'"
+    end
+    
+    def scrap
+        @scrap = Scrap.new
+        @scrap.user_id = params[:user_id]
+        @scrap.post_id = params[:post_id]
+        @scrap.save
+        render :js => "window.location = '/yojo/yori/#{params[:post_id]}'"
+    end
+    
+    # DELETE
+    def unscrap
+        Scrap.destroy(params[:scrap_id])
+        render :js => "window.location = '/yojo/yori/#{params[:post_id]}'"
+    end
+    
+     # USER
+    def show
+        @user = User.find(params[:user_id])
+    end
     
     private
         def set_recipe
@@ -223,13 +264,4 @@ class YojoController < ApplicationController
         
         def recipe_params
         end
-        
-        def getCurrentPageYoriItems
-        end
-    
-    # USER
-    def show
-        @user = User.find(params[:id])
-    end
-
 end

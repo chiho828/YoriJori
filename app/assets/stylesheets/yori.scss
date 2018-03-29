@@ -10,7 +10,9 @@
 }
 
 .title {
-        p{
+    position: relative;
+    left: -6%;
+    p{
         display:inline;
         font-size: 2em;
         font-family: godoMaum;
@@ -29,6 +31,7 @@
     padding: 5px;
     position: relative;
     margin: auto;
+    text-align: center;
 }
 
 .yori {
@@ -54,12 +57,6 @@
     margin-bottom: 8px;
     display: flex;
 }
-
-// .sidenav,
-// .yori {
-//     height: 80%;
-//     padding: 5px;
-// }
 
 .ingredient {
     width: 50%;
@@ -103,16 +100,16 @@
     min-height: 100px;
 }
 
-// .steps {
-//     text-align: left;
-//     padding: 30px;
-//     margin: auto;
-//     border: 1px dashed;
-//     border-color: tomato;
-//     border-radius: 16px;
-//     padding: 20px;
-//     min-width: 90%;
-// }
+.steps {
+    text-align: left;
+    padding: 30px;
+    margin: auto;
+    border: 1px dashed;
+    border-color: tomato;
+    border-radius: 16px;
+    padding: 20px;
+    min-width: 90%;
+}
 
 #steps {
     text-align: left;
@@ -122,5 +119,15 @@
 }
 
 .bar-input {
-    width: 100%;
+    width: 70%;
+}
+
+#title-alert,
+#main-alert,
+#ingredient-alert,
+#quantity-alert,
+#step-alert {
+    color: red;
+    font-family: godo;
+    font-size: .7em;
 }

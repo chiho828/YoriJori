@@ -27,16 +27,16 @@
     <% end %>
 <% end %>
 
-<% if @yoris != nil %>
+<% if @yoris != nil and @yoris.length > 0 %>
   <div class="page-center">
     <ul id="page-list" class="pagination">
       <li class="page-item"><a class="page-link" <% if @current_page > 0 %>
-      onclick="combinePage(<%=@current_page - 1%>)"<% end %>>prev</a></li>
+      onclick="combine(<%=@current_page - 1%>)"<% end %>>prev</a></li>
     <% for i in 0...@max_page %>
-      <li class="page-item"><a <% if i == @current_page%>id="current-page"<%end%> class="page-link" onclick="combinePage(<%=i%>)"><%=i + 1%></a></li>
+      <li class="page-item"><a <% if i == @current_page%>id="current-page"<%end%> class="page-link" onclick="combine(<%=i%>)"><%=i + 1%></a></li>
     <% end %>
       <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %>
-      onclick="combinePage(<%=@current_page + 1%>)"<% end %>>next</a></li>
+      onclick="combine(<%=@current_page + 1%>)"<% end %>>next</a></li>
     </ul>
   </div>
 <% end %>

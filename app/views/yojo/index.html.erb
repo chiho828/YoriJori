@@ -10,11 +10,11 @@
 
 <!-- Sidebar -->
 <div class="sidenav">
-  <a href<% if user_signed_in? %>='/yojo/kitchen'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>마이키친</p></a><br>
+  <a href<% if user_signed_in? %>='/yojo/kitchen/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
+    data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>my키친</p></a><br>
   
-  <a href<% if user_signed_in? %>='/yojo/yori_book/0'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>요리북</p></a><br>
+  <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>/0'<% else %> onclick="guestWarning()" <% end %>
+    data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>my요리북</p></a><br>
   <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="나만의 레시피를 올려보아요"><img class="icon" src="/assets/edit.png"><p>레시피 올리기</p></a><br>
 </div>
@@ -22,21 +22,36 @@
 <!-- Search Page-->
 <div class="search-wrapper">
   <div class="types">
-    <input type="radio" name="search type" onclick="switchSearch(this)" value=1 
-    <% if @type == 1 %>
-      checked
-    <% end %>
-    > 재료 조합하기
-    <input type="radio" name="search type" onclick="switchSearch(this)" value=2
-    <% if @type == 2 %>
-      checked
-    <% end %>
-    > 요리 검색하기
-    <input type="radio" name="search type" onclick="switchSearch(this)" value=3
-    <% if @type == 3 %>
-      checked
-    <% end %>
-    > 아이디로 검색하기
+    <!--<label>-->
+      <input type="radio" name="search type" onclick="switchSearch(this)" value=1 
+      <% if @type == 1 %>
+        checked
+      <% end %>
+      > 재료 조합하기
+    <!--  <span class="button"></span>-->
+    <!--  <span class="check"></span>-->
+    <!--  <p>재료 조합하기</p>-->
+    <!--</label>-->
+    <!--<label>-->
+      <input type="radio" name="search type" onclick="switchSearch(this)" value=2
+      <% if @type == 2 %>
+        checked
+      <% end %>
+      > 요리 검색하기
+    <!--  <span class="button"></span>-->
+    <!--  <span class="check"></span>-->
+    <!--  <p>요리 검색하기기</p>-->
+    <!--</label>-->
+    <!--<label>-->
+      <input type="radio" name="search type" onclick="switchSearch(this)" value=3
+      <% if @type == 3 %>
+        checked
+      <% end %>
+      > 아이디로 검색하기
+    <!--  <span class="button"></span>-->
+    <!--  <span class="check"></span>-->
+    <!--  <p>아이디로 검색하기</p>-->
+    <!--</label>-->
   </div>
   <br>
   
@@ -44,7 +59,7 @@
       <% if @type == 1 %>
           재료:
           <input id="ingredient_search" class="bar" type="text">
-          <button class="roundbtn" type="button" onclick="combine()">조합</button>
+          <button class="roundbtn" type="button" onclick="combine(0)">조합</button>
           
           <div id="ingredient_results"></div>
           
@@ -101,7 +116,7 @@
         <% end %>
     <% end %>
     
-    <% if @yoris != nil %>
+    <% if @yoris != nil and @yoris.length > 0 %>
       <div class="page-center">
         <ul id="page-list" class="pagination">
           <li class="page-item"><a class="page-link" <% if @current_page > 0 %> href="<%=@current_page - 1%>?
@@ -133,21 +148,7 @@ id=<%=params[:id]%>
 </div>
 
 <script>
-    function combine() {
-        console.log(map);
-        var array = [];
-        map.forEach(function(value, key) {
-            array.push(value);
-        });
-        
-        $.ajax({
-            url : "/yojo/combine",
-            type : "get",
-            data : { data_value: array }
-        });
-    }
-    
-    function combinePage(page) {
+    function combine(page) {
       console.log(map);
       var array = [];
       map.forEach(function(value, key) {
@@ -176,12 +177,6 @@ id=<%=params[:id]%>
             data : { data_value: radio.value }
         });
     }
-</script>
-
-<script>
-  function guestWarning() {
-    alert("로그인 후 이용해주세요!")
-  }
 </script>
 
 <!--Script-->

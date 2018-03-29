@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/:page_number' => 'yojo#index'
   
   # search
-  get '/yojo/combine/(:page_number)' => 'yojo#combine'
+  get '/yojo/combine/:page_number' => 'yojo#combine'
   get '/yojo/switch' => 'yojo#switch'
   
   # yori CRUD
@@ -16,16 +16,26 @@ Rails.application.routes.draw do
   get '/yojo/edit_yori/:yori_id' => 'yojo#edit_yori'
   get '/yojo/update_yori/:yori_id' => 'yojo#update_yori'
   
+  post '/yojo/destroy_yori/:yori_id' => 'yojo#destroy_yori'
+  
   # kitchen
-  get '/yojo/kitchen' => 'yojo#kitchen'
+  get '/yojo/kitchen/:user_id' => 'yojo#kitchen'
   get '/yojo/addIngredients' => 'yojo#addIngredients'
   
   # yoribook
-  get '/yojo/yori_book/:page_number' => 'yojo#yori_book'
+  get '/yojo/yori_book/:user_id/:page_number' => 'yojo#yori_book'
   
-  get 'users/:id' => 'users#show'
+  get 'users/:user_id' => 'users#show'
   
-  # Comments
+  # like
+  get '/yojo/like' => 'yojo#like'
+  get '/yojo/unlike' => 'yojo#unlike'
+  
+  # scrap
+  get '/yojo/scrap' => 'yojo#scrap'
+  get '/yojo/unscrap' => 'yojo#unscrap'
+  
+  # comments
   get '/yojo/yori/:yori_id/comments/create' => 'comments#create'
   post '/yojo/yori/:yori_id/comments/destroy/:comment_id' => 'comments#destroy'
   

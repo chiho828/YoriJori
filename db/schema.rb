@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322134520) do
+ActiveRecord::Schema.define(version: 20180329093727) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "post_id"
     t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower"
+    t.integer "followed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,6 +40,15 @@ ActiveRecord::Schema.define(version: 20180322134520) do
     t.index ["user_id"], name: "index_kitchens_on_user_id", unique: true
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer "yori_id"
     t.string "title"
@@ -41,21 +57,21 @@ ActiveRecord::Schema.define(version: 20180322134520) do
     t.string "optional"
     t.string "seasoning"
     t.string "steps"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image"
     t.index ["yori_id"], name: "index_posts_on_yori_id"
   end
 
   create_table "recipes", force: :cascade do |t|
     t.integer "ingredient_id"
     t.integer "yori_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.boolean "main"
     t.boolean "seasoning"
     t.integer "quantity"
     t.string "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["ingredient_id"], name: "index_recipes_on_ingredient_id"
     t.index ["yori_id"], name: "index_recipes_on_yori_id"
   end
@@ -71,7 +87,17 @@ ActiveRecord::Schema.define(version: 20180322134520) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
+  create_table "scraps", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_scraps_on_post_id"
+    t.index ["user_id"], name: "index_scraps_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
+    t.string "username", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -84,7 +110,6 @@ ActiveRecord::Schema.define(version: 20180322134520) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
