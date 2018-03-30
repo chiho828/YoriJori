@@ -1,0 +1,13 @@
+<% if @posts.length > 0 %>
+    <ul id="page-list" class="pagination">
+      <li class="page-item"><a class="page-link" <% if @current_page > 0 %>
+      onclick="tabClicked(<%=@tab%>, <%=@current_page-1%>)"<%end%>>prev</a></li>
+    <% for i in 0...@max_page %>
+      <li class="page-item"><a <%if i == @current_page%>id="current-page"<%end%> class="page-link"
+      onclick="tabClicked(<%=@tab%>, <%=i%>)"><%=i+1%></a></li>
+    <% end %>
+      <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %>
+      onclick="tabClicked(<%=@tab%>, <%=@current_page+1%>)"<%end%>>next</a></li>
+    </ul>
+    <a href="/yojo/kitchen/<%=@user.id%>" style="position: absolute; left: 5rem;"><p><%=@user.username%>님 키친으로 돌아가기</p></a>
+<% end %>

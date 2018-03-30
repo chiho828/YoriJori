@@ -13,7 +13,7 @@
   <a href<% if user_signed_in? %>='/yojo/kitchen/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>my키친</p></a><br>
   
-  <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>/0'<% else %> onclick="guestWarning()" <% end %>
+  <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>my요리북</p></a><br>
   <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="나만의 레시피를 올려보아요"><img class="icon" src="/assets/edit.png"><p>레시피 올리기</p></a><br>
@@ -91,8 +91,9 @@
         <% @count = 0 %>
         <% @posts.each do |post| %>
             <% @yori = Yori.find(post.yori_id) %>
+            <% @user = User.find(@yori.user_id) %>
             <% if (@count % 4) == 0 %>
-              <div class="row" style="margin-top: 1em; margin-left: 1em">
+              <div class="row" style="width: 98%; margin-top: 1em">
             <% end %>
                 <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
                   <div class="card h-100">
@@ -100,7 +101,7 @@
                     <div class="card-body">
                       <h4 class="card-title">
                         <a href="/yojo/yori/<%=@yori.id%>"><%=@yori.name%></a>
-                        <p>by. <%= User.find(@yori.user_id).username %></p>
+                        <a href="/yojo/kitchen/<%= @user.id %>"><p>by. <%= @user.username %></p></a>
                       </h4>
                       <p class="card-text"><%=Post.find_by(yori_id: @yori.id).main%></p>
                     </div>
@@ -117,7 +118,7 @@
     <% end %>
     
     <% if @yoris != nil and @yoris.length > 0 %>
-      <div class="page-center">
+      <div class="page-center" style="position: relative; right: 2rem">
         <ul id="page-list" class="pagination">
           <li class="page-item"><a class="page-link" <% if @current_page > 0 %> href="<%=@current_page - 1%>?
           <% if @type == 2 %>
@@ -154,7 +155,9 @@ id=<%=params[:id]%>
       map.forEach(function(value, key) {
           array.push(value);
       });
-        
+      
+      window.scroll(0, $(".search-wrapper").offset().top);
+      
       $.ajax({
           url : "/yojo/combine/"+page,
           type : "get",

@@ -12,12 +12,18 @@
 .title {
     position: relative;
     left: -6%;
-    p{
+    
+    a:hover {
+        text-decoration: none;
+    }
+    
+    p {
         display:inline;
         font-size: 2em;
         font-family: godoMaum;
         color: grey;
     }
+    margin-bottom: 1rem;
 }
 
 .title-post {
@@ -32,6 +38,9 @@
     position: relative;
     margin: auto;
     text-align: center;
+    a:hover {
+        text-decoration: none;
+    }
 }
 
 .yori {

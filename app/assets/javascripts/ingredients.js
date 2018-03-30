@@ -39,7 +39,7 @@ app.SearchIngredients.prototype = {
         console.log(item);
         
         if (!map.has(item.name)) {
-            $('#filters').append('<span onclick="removeFilter(this)">'+item.name+" X"+'</span>');
+            $('#filters').append('<span onclick="removeFilter(this)">'+item.name+'</span>');
             map.set(item.name, item.id);
         }
         
@@ -133,8 +133,10 @@ app.YoriIngredients.prototype = {
                         <option>g</option> \
                         <option>ml</option> \
                         <option>개</option> \
-                        <option>스푼</option> \
-                        <option>조금</option> \
+                        <option>큰술</option> \
+                        <option>작은술</option> \
+                        <option>컵</option> \
+                        <option>꼬집</option> \
                     </select> \
                 </div> \
                 <button class="roundbtn" onclick="removeRow(this)">빼기</button> \

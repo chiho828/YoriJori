@@ -23,7 +23,8 @@ Rails.application.routes.draw do
   get '/yojo/addIngredients' => 'yojo#addIngredients'
   
   # yoribook
-  get '/yojo/yori_book/:user_id/:page_number' => 'yojo#yori_book'
+  get '/yojo/yori_book/:user_id' => 'yojo#yori_book'
+  get '/yojo/booktab' => 'yojo#booktab'
   
   get 'users/:user_id' => 'users#show'
   
@@ -34,6 +35,10 @@ Rails.application.routes.draw do
   # scrap
   get '/yojo/scrap' => 'yojo#scrap'
   get '/yojo/unscrap' => 'yojo#unscrap'
+  
+  # follow
+  get '/yojo/follow' => 'yojo#follow'
+  get '/yojo/unfollow' => 'yojo#unfollow'
   
   # comments
   get '/yojo/yori/:yori_id/comments/create' => 'comments#create'

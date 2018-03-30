@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329093727) do
+ActiveRecord::Schema.define(version: 20180329205319) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "post_id"
@@ -20,10 +20,12 @@ ActiveRecord::Schema.define(version: 20180329093727) do
   end
 
   create_table "follows", force: :cascade do |t|
-    t.integer "follower"
-    t.integer "followed"
+    t.integer "follower_id"
+    t.integer "followee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["followee_id"], name: "index_follows_on_followee_id"
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
 
   create_table "ingredients", force: :cascade do |t|

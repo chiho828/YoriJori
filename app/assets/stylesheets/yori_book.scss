@@ -66,13 +66,13 @@ input {
 }
 
 .recipe-picture-wrapper {
-    height: 80%;
+    height: 75%;
     background-position: top, left;
     background-color: gray; 
 }
 
 .recipe-name-wrapper {
-    height: 20%;
+    height: 25%;
     border: 1px solid black;
     background-position: bottom, left; 
 }
@@ -125,9 +125,9 @@ button {
 .book-tab button,    
 .navi-tab button {
     display: block;
-    padding: 5px 5px;
-    margin-bottom: 30px;
-    width: 80px;
+    padding: 10px 10px;
+    margin-bottom: 6vh;
+    width: 85px;
     height: 50px;
     border: none;
     outline: none;
@@ -139,16 +139,17 @@ button {
 
     
 .navi-tab button {
-    border-radius: 10px 0px 0px 10px; 
+    border-radius: 10px 10px 0px 0px; 
     background-color: rgba(200,200,200, 1);
+    transform: rotate(-90deg);
 }
 
 .book-tab button {
-    border-radius: 0px 10px 10px 0px; 
+    border-radius: 10px 10px 0px 0px; 
     background-color: tomato;
-    bottom: 2rem;
+    transform: rotate(90deg);
+    bottom: 20px;
 }
-     
 
 .recipe-upload {
     position: relative;

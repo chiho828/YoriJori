@@ -2,8 +2,9 @@
     <% @count = 0 %>
     <% @posts.each do |post| %>
         <% @yori = Yori.find(post.yori_id) %>
+        <% @user = User.find(@yori.user_id) %>
         <% if (@count % 4) == 0 %>
-          <div class="row" style="width: 98%; margin-top: 1em; margin-left: 1em">
+          <div class="row" style="width: 98%; margin-top: 1em">
         <% end %>
             <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
               <div class="card h-100">
@@ -11,7 +12,7 @@
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="/yojo/yori/<%=@yori.id%>"><%=@yori.name%></a>
-                    <p>by. <%= User.find(@yori.user_id).username %></p>
+                    <a href="/yojo/kitchen/<%= @user.id %>"><p>by. <%= @user.username %></p></a>
                   </h4>
                   <p class="card-text"><%=Post.find_by(yori_id: @yori.id).main%></p>
                 </div>
@@ -28,12 +29,13 @@
 <% end %>
 
 <% if @yoris != nil and @yoris.length > 0 %>
-  <div class="page-center">
+  <div class="page-center" style="position: relative; right: 2rem">
     <ul id="page-list" class="pagination">
       <li class="page-item"><a class="page-link" <% if @current_page > 0 %>
       onclick="combine(<%=@current_page - 1%>)"<% end %>>prev</a></li>
     <% for i in 0...@max_page %>
-      <li class="page-item"><a <% if i == @current_page%>id="current-page"<%end%> class="page-link" onclick="combine(<%=i%>)"><%=i + 1%></a></li>
+      <li class="page-item"><a <% if i == @current_page%>id="current-page"<%end%> class="page-link"
+      onclick="combine(<%=i%>)"><%=i + 1%></a></li>
     <% end %>
       <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %>
       onclick="combine(<%=@current_page + 1%>)"<% end %>>next</a></li>

@@ -1,0 +1,20 @@
+<% @posts.each do |post| %>
+  <% @user = User.find(Yori.find(post.id).user_id) %>
+  <div class="recipe-wrapper">
+    <div class="recipe-left">
+      <div class="recipe-picture-wrapper">
+      </div>
+      <div class="recipe-name-wrapper">
+        <h4 class="card-title">
+          <a href="/yojo/yori/<%=post.yori_id%>"><%=post.title%></a>
+          <a href="/yojo/kitchen/<%= @user.id %>"><p>by. <%= @user.username %></p></a>
+        </h4>
+      </div>
+    </div>
+    <div class="recipe-right">
+      <p>매인재료: <%=post.main%></p>
+      <p>선택재료: <%=post.optional%></p>
+      <p>양념: <%=post.seasoning%></p>
+    </div>
+  </div>
+<% end %>

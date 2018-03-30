@@ -3,7 +3,7 @@
   <a href<% if user_signed_in? %>='/yojo/kitchen/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>my키친</p></a><br>
   
-  <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>/0'<% else %> onclick="guestWarning()" <% end %>
+  <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>my요리북</p></a><br>
   <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="나만의 레시피를 올려보아요"><img class="icon" src="/assets/edit.png"><p>레시피 올리기</p></a><br>
@@ -76,8 +76,10 @@
                             <option <% if @recipe.unit == "g" %> selected <% end %> >g</option>
                             <option <% if @recipe.unit == "ml" %> selected <% end %>>ml</option>
                             <option <% if @recipe.unit == "개" %> selected <% end %>>개</option>
-                            <option <% if @recipe.unit == "스푼" %> selected <% end %>>스푼</option>
-                            <option <% if @recipe.unit == "조금" %> selected <% end %>>조금</option>
+                            <option <% if @recipe.unit == "큰술" %> selected <% end %>>큰술</option>
+                            <option <% if @recipe.unit == "작은술" %> selected <% end %>>작은술</option>
+                            <option <% if @recipe.unit == "컵" %> selected <% end %>>컵</option>
+                            <option <% if @recipe.unit == "꼬집" %> selected <% end %>>꼬집</option>
                         </select>
                     </div>
                     <button class="roundbtn" onclick="removeRow(this)">빼기</button>

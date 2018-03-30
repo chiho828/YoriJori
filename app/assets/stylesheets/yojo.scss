@@ -179,6 +179,7 @@ body {
 
 #ingredient_results {
     text-align: left;
+    position: absolute;
     
     .ui-widget-content {
         background: #fff;
@@ -243,17 +244,29 @@ body {
     
 }
 
+.card-title {
+    p {
+        font-size: 1.4rem;
+        font-family: godoMaum;
+        color: gray;
+    }
+}
+
 .masthead {
     min-height: 92.5vh;
     display: table;
     height: auto;
     padding-top: 8rem;
     padding-bottom: 8rem;
-    background-image: url('/assets/cover.jpg');
-    background-position: center center;
+    //background-image: url('/assets/cover.jpg');
+    background-image: url('/assets/yojo-cover.png');
+    //background-image: url('/assets/yojo-cover.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-
+    background-position: center center;
+    //background-size: 110% 120%;
+    //background-position: 54% 70%;
+    
     a:hover {
         color: black;
         text-decoration: none;
@@ -264,6 +277,7 @@ body {
 #logo {
     color: tomato;
     font-weight: bold;
+    text-shadow: 0 0 5px lightgray;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 
@@ -300,7 +314,7 @@ body {
     text-decoration: none;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.2);
     text-align: center;
-    line-height: .5;
+    line-height: .4;
     display: inline-block;
     white-space: nowrap;
     vertical-align: middle;
@@ -308,7 +322,7 @@ body {
     border: .5px solid transparent;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     text-transform: uppercase;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1rem;
     font-size: .9rem;
     font-weight: 700;
 }
@@ -361,7 +375,7 @@ body {
 }
 
 #navbar {
-    background-color: rgba(180, 180, 180, .8)
+    background-color: rgba(200, 200, 200, .8)
 }
 
 .fixed-top {
@@ -427,11 +441,10 @@ body {
         color: tomato;
     }
     font-family: godo;
-    text-decoration: none;
-        a:hover {
-            text-decoration: none;
-            color: black;
-        }
+    a:hover {
+        text-decoration: none;
+        color: black;
+    }
 }
 
 .card-body {

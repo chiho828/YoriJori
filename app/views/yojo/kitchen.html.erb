@@ -7,68 +7,33 @@
                         <script>
                             map.clear();
                         </script>
-                        <% if @current_kitchen != nil %>
-                            <ul id="kitchen_list">
-                            <% @current_kitchen.ingredients.each do |i| %>
-                                <% @ingredient = Ingredient.find(i) %>
-                                <li onclick="removeFilter(this)"><%=@ingredient.name%></li>
-                                <script>
-                                    map.set("<%=@ingredient.name%>", <%=@ingredient.id%>);
-                                </script>
+                        <!-- if current_user.id == @kitchen_user.id %>-->
+                            <% if @kitchen != nil %>
+                                <ul id="kitchen_list" style="list-style-type: none; padding: 0px">
+                                <% @kitchen.ingredients.each do |i| %>
+                                    <% @ingredient = Ingredient.find(i) %>
+                                    <li onclick="removeFilter(this)"><%=@ingredient.name%></li>
+                                    <script>
+                                        map.set("<%=@ingredient.name%>", <%=@ingredient.id%>);
+                                    </script>
+                                <% end %>
+                                </ul>
                             <% end %>
-                            </ul>
-                        <% end %>
+                            <div id="fridge-search" style="position:absolute; left: 9.2vw; bottom: 1rem">
+                                <input id="ingredient_search" class="bar" type="text" autofocus>
+                            </div>
+                        <!-- end %>-->
+                            <br>
                         <span class="fridge-door-left"></span>
                         <span class="fridge-door-right"></span>
                     </div>
                     <div class="fridge-bottom">
-                        <% if @kitchen_user.id == current_user.id %>
-                            <input id="ingredient_search" class="bar" type="text" autofocus>
-                            <button id="update_button" type="button" onclick="addIngredients()">업데이트</button>
-                        <% end %>
-                        <br>
-                        <br>
-                        <button id="open_fridge">냉장고 열기</button>
-                        <button id="close_fridge">냉장고 닫기</button>
-                        
                         <div id="ingredient_results"></div>
-                        
-                        <script>
-                            $("#open_fridge").click(function() {
-                                $(".fridge-wrapper").addClass("fridge-opened");
-                                $("#kitchen_list").css('display', 'inline-block');
-                                $("#ingredient_search").css('display', 'inline-block');
-                                $("#update_button").css('display', 'inline-block');
-                                $("#open_fridge").css('display', 'none');
-                                $("#close_fridge").css('display', 'inline-block');
-                                
-                            });
-                            
-                            $("#close_fridge").click(function() {
-                                $(".fridge-wrapper").removeClass("fridge-opened");
-                                $("#kitchen_list").css('display', 'none');
-                                $("#ingredient_search").css('display', 'none');
-                                $("#update_button").css('display', 'none');
-                                $("#close_fridge").css('display', 'none');
-                                $("#open_fridge").css('display', 'inline-block');
-                            });
-                            
-                            new app.KitchenIngredients;
-                            
-                            function addIngredients() {
-                                console.log(map);
-                                var array = [];
-                                map.forEach(function(value, key) {
-                                    array.push(value);
-                                });
-                                
-                                $.ajax({
-                                    url : "/yojo/addIngredients",
-                                    type : "get",
-                                    data : { list: array }
-                                });
-                            }
-                        </script>
+                        <br>
+                        <br>
+                        <button id="open_fridge" class="roundbtn">냉장고 열기</button>
+                        <button id="close_fridge" class="roundbtn">냉장고 닫기</button>
+
                         <span class="fridge-handle-bottom"></span>
                     </div>
                 <% end %>
@@ -79,11 +44,18 @@
                 <div class="shelf-upper font">
                     <ul>
                         <li>
-                            <% if @kitchen_user.id == current_user.id %>
-                                <a href="/users/edit"><img class="icon" src="/assets/profile.png" /><p>프로필 수정</p></a>
-                            <% else %>
-                                <a><img class="icon" src="/assets/profile.png" /><p>프로필</p></a>
-                            <% end %>
+                        <% if @kitchen_user.id == current_user.id %>
+                            <a href="/users/edit"><img class="icon" src="/assets/profile.png" /><p>프로필 수정</p></a>
+                        <% else %>
+                            <a href onclick="follow()"><img class="icon" src="/assets/profile.png" />
+                                <p id="follow">
+                                    <% if @follows.length == 0 %>
+                                        팔로우 하기
+                                    <% else %>
+                                        팔로우 취소
+                                    <% end %>
+                                </p></a>
+                        <% end %>
                         </li>
                         <li>
                           <% if user_signed_in? %>
@@ -103,13 +75,40 @@
                 </div>
                 
                 <div class="shelf-lower">
+                    <!--<a class="trigger_popup_fricc">Click here to show the popup</a>-->
+                    <!--<div class="hover_bkgr_fricc">-->
+                    <!--    <span class="helper"></span>-->
+                    <!--    <div>-->
+                    <!--        <div class="popupCloseButton">X</div>-->
+                    <!--        <p>Add any HTML content<br />inside the popup box!</p>-->
+                    <!--    </div>-->
+                    <!--</div>-->
                     
+                    <!--<script>-->
+                    <!--    $(".trigger_popup_fricc").click(function(){-->
+                    <!--       $('.hover_bkgr_fricc').show();-->
+                    <!--    });-->
+                    <!--    $('.hover_bkgr_fricc').click(function(){-->
+                    <!--        $('.hover_bkgr_fricc').hide();-->
+                    <!--    });-->
+                    <!--    $('.popupCloseButton').click(function(){-->
+                    <!--        $('.hover_bkgr_fricc').hide();-->
+                    <!--    });                    -->
+                    <!--</script>-->
+                    
+                    <div class="center">
+                        <div id="likes" class="jar"><img class="icon" src="/assets/jar.png"><p>좋아요 <%=@likes%></p></div>
+                        <div id="likes" class="jar"><img class="icon" src="/assets/jar.png"><p>레시피 <%=@posts.length%></p></div>
+                        <div id="followers" class="jar"><img class="icon" src="/assets/jar.png"><p>팔로워 <%=@followers.length%></p>
+                        </div>
+                        <div id="followee" class="jar"><img class="icon" src="/assets/jar.png"><p>팔로잉 <%=@followees.length%></p></div>
+                    </div>
                 </div>
                 
                 <div class="shelf-bottom">
                     <ul>
                         <li class="shelf-yoribook">
-                            <a href="/yojo/yori_book/<%=@kitchen_user.id%>/0"><span><%=@kitchen_user.username%>님의 요리북</span></a>
+                            <a href="/yojo/yori_book/<%=@kitchen_user.id%>"><span><%=@kitchen_user.username%>님 요리북</span></a>
                         </li>
                         <li class="shelf-postyori">
                             <a href="/yojo/new_yori"><span>레시피 올리기</span></a>
@@ -126,6 +125,7 @@
                     <% if @yoris != nil %>
                         <% @count = 0 %>
                         <% @yoris.each do |yori| %>
+                        <% @user = User.find(yori.user_id) %>
                             <% if @count % 3 == 0 %>
                                 <div class="carousel-item <%if @count == 0%>active<%end%>">
                                     <div class="row" style="height: 100%">
@@ -137,6 +137,7 @@
                                     <div class="card-body1">
                                         <h4 class="card-title">
                                             <a href="/yojo/yori/<%=yori.id%>"><%=yori.name%></a>
+                                            <a href="/yojo/kitchen/<%= @user.id %>"><p>by. <%= @user.username %></p></a>
                                         </h4>
                                         <p class="card-text"><%=Post.find_by(yori_id: yori.id).main%></p>
                                     </div>
@@ -171,3 +172,72 @@
         </div>
     </div
 </div>
+
+<script>
+    new app.KitchenIngredients;
+    
+    $("#open_fridge").click(function() {
+        $(".fridge-wrapper").addClass("fridge-opened");
+        $("#kitchen_list").css('display', 'inline-block');
+        $("#ingredient_search").css('display', 'inline-block');
+        $("#update_button").css('display', 'inline-block');
+        $("#open_fridge").css('display', 'none');
+        $("#close_fridge").css('display', 'inline-block');
+        
+    });
+    
+    $("#close_fridge").click(function() {
+        $(".fridge-wrapper").removeClass("fridge-opened");
+        // $("#kitchen_list").css('display', 'none');
+        // $("#ingredient_search").css('display', 'none');
+        // $("#update_button").css('display', 'none');
+        $("#close_fridge").css('display', 'none');
+        $("#open_fridge").css('display', 'inline-block');
+        setTimeout(function(){
+            <% if current_user.id == @kitchen_user.id %>
+                addIngredients();
+            <% end %>
+        }, 800);
+    });
+    
+    function addIngredients() {
+        console.log(map);
+        var array = [];
+        
+        map.forEach(function(value, key) {
+            array.push(value);
+        });
+        
+        $.ajax({
+            url : "/yojo/addIngredients",
+            type : "get",
+            data : { list: array }
+        });
+    }
+    
+    function follow() {
+        <% if user_signed_in? and current_user.id != @kitchen_user.id %>
+            <% if @follows.length == 0 %>
+                $.ajax({
+                    url : "/yojo/follow",
+                    type : "get",
+                    data : {
+                        follower_id: <%=current_user.id%>,
+                        followee_id: <%=@kitchen_user.id%>
+                    }
+                });
+                // $("#follow")[0].innerHTML = "팔로우 취소";
+            <% else %>
+                $.ajax({
+                    url : "/yojo/unfollow",
+                    type : "get",
+                    data : {
+                        follow_id: <%=@follows.first.id%>,
+                        kitchen_user_id: <%=@kitchen_user.id%>
+                    }
+                });
+                // $("#follow")[0].innerHTML = "팔로우 하기";
+            <% end %>
+        <% end %>
+    }
+</script>

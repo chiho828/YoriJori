@@ -2,28 +2,30 @@
 
 <div class="main-wrapper yoribook">
   <div class="navi-tab">
-    <a href="/#search"><button style="right: 20px">요리조합</button></a>
-    <a href="/yojo/kitchen/<%=current_user.id%>"><button style="right: 15px">my키친</button></a>
-    <a href="/yojo/new_yori"><button style="width: 100px; right: 20px">레시피 올리기</button></a>
-  </div>
-  <div class="book-tab">
-      <button style="left: 2px">책 레시피</button>
-      <button style="left: 5px">스크랩</button>
-      <button style="left: 8px">팔로윙</button>
-      <button style="left: 12px"">전체보기</button>
+    <a href="/#search"><button style="right: 5px">요리조합</button></a>
+    <a href="/yojo/kitchen/<%=current_user.id%>"><button style="right: 0px">my키친</button></a>
+    <a href="/yojo/new_yori"><button style="width: 105px; right: 4px; top: 10px">레시피 올리기</button></a>
   </div>
   
+  <% if @user.id == current_user.id %>
+    <div class="book-tab">
+        <button style="left: -5px" onclick="tabClicked(1, 0)">내 레시피</button>
+        <button style="left: 0px" onclick="tabClicked(2, 0)">스크랩</button>
+        <button style="left: 3px" onclick="tabClicked(3, 0)">팔로잉</button>
+        <!--<button style="left: 20px" onclick="tabClicked(4, 0)">전체보기</button>-->
+    </div>
+  <% end %>
+  
   <div class="cover-wrapper">
-    <!-- Dynamically generate Recipes -->
     <% @posts.each do |post| %>
-      <% @yori = Yori.find(post.yori_id) %>
       <div class="recipe-wrapper">
         <div class="recipe-left">
           <div class="recipe-picture-wrapper">
           </div>
           <div class="recipe-name-wrapper">
             <h4 class="card-title">
-              <a href="/yojo/yori/<%=post.yori_id%>"><%=Yori.find(post.yori_id).name%></a>
+              <a href="/yojo/yori/<%=post.yori_id%>"><%=post.title%></a>
+              <a href="/yojo/kitchen/<%= @user.id %>"><p>by. <%= @user.username %></p></a>
             </h4>
           </div>
         </div>
@@ -36,19 +38,34 @@
     <% end %>
   </div>
 </div>
-    
 
-<% if @posts.length > 0 %>
-  <!-- Tab Pagination -->
-  <div class="page-center">
+<div class="page-center">
+  <% if @posts.length > 0 %>
     <ul id="page-list" class="pagination">
       <li class="page-item"><a class="page-link" <% if @current_page > 0 %>
-      href="<%=@current_page - 1%>"<%end%>>prev</a></li>
+      onclick="tabClicked(<%=1%>, <%=@current_page-1%>)"<%end%>>prev</a></li>
     <% for i in 0...@max_page %>
-      <li class="page-item"><a <%if i == @current_page%>id="current-page"<%end%>class="page-link" href="<%=i%>"><%=i + 1%></a></li>
+      <li class="page-item"><a <%if i == @current_page%>id="current-page"<%end%> class="page-link"
+      onclick="tabClicked(<%=1%>, <%=i%>)"><%=i+1%></a></li>
     <% end %>
       <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %>
-      href="<%=@current_page + 1%>"<%end%>>next</a></li>
+      onclick="tabClicked(<%=1%>, <%=@current_page+1%>)"<%end%>>next</a></li>
     </ul>
-  </div>
-<% end %>
+    <a href="/yojo/kitchen/<%=@user.id%>" style="position: absolute; left: 5rem;"><p><%=@user.username%>님 키친으로 돌아가기</p></a>
+  <% end %>
+</div>
+
+
+<script>
+  function tabClicked(type, page) {
+    $.ajax({
+        url : "/yojo/booktab",
+        type : "get",
+        data : {
+          tab: type,
+          page_number: page,
+          user_id: <%=@user.id%>,
+        }
+    });
+  }
+</script>
