@@ -34,8 +34,9 @@
     height: calc(50% - 16px);
     margin-top: 8px;
     margin-bottom: 8px;
-    border: 1px solid black;
+    border: 1px solid gray;
     background-color: white;
+    border-radius: .5em;
     display: flex;
     padding: 5px; 
 }
@@ -53,12 +54,22 @@ input {
 .recipe-right {
     padding: 19px 2px 19px 20px; 
     font-size: 1.5em;
+    overflow: hidden;
         
-        .recipe-right p {
-            margin-top: 15%;
+        p {
+            // margin-top: 15%;
             text-align: left;
+            font-family: godo;
+            font-size: .7em;
             background-position: bottom, right;
+             span {
+                font-family: godoMaum;
+                font-size: 1.2em;
+                color: gray;
+            }
         }
+        
+       
             
             .recipe-right p:first-of-type {
                 margin-top: 0; 
@@ -68,13 +79,19 @@ input {
 .recipe-picture-wrapper {
     height: 75%;
     background-position: top, left;
-    background-color: gray; 
+    border: 1px solid gray;
+    background-color: white; 
 }
 
 .recipe-name-wrapper {
     height: 25%;
     border: 1px solid black;
     background-position: bottom, left; 
+}
+
+#demo_book {
+    width: 100%;
+    height: 100%;
 }
 
 .bar {

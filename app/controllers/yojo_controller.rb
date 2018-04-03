@@ -25,15 +25,18 @@ class YojoController < ApplicationController
             format.json { @ingredients = Ingredient.search(params[:term]) }
         end
         
-         if @yoris != nil
+        if @yoris != nil
             @items_page = 20
             @current_page = params[:page_number].to_i
             
             @max_items = @yoris.length
             @max_page = (Float(@max_items) / @items_page).ceil
            
-            @posts = Post.where("yori_id": @yoris.ids).limit(@items_page).offset(@current_page*@items_page)
+            @posts = Post.where("yori_id": @yoris.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
         end
+        
+        @rec_likes = Like.joins(:post).group("post_id").order("COUNT(*) DESC, posts.created_at DESC").limit(4)
+        @rec_dates = Post.order("created_at DESC").limit(4)
     end
     
     def combine
@@ -55,8 +58,11 @@ class YojoController < ApplicationController
             @max_items = @yoris.length
             @max_page = (Float(@max_items) / @items_page).ceil
            
-            @posts = Post.where("yori_id": @yoris.ids).limit(@items_page).offset(@current_page*@items_page)
+            @posts = Post.where("yori_id": @yoris.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
         end
+        
+        @rec_likes = Like.joins(:post).group("post_id").order("COUNT(*) DESC, posts.created_at DESC").limit(4)
+        @rec_dates = Post.order("created_at DESC").limit(4)
     end
     
     def switch
@@ -126,6 +132,10 @@ class YojoController < ApplicationController
             @scraps = Scrap.where('user_id = ? AND post_id = ?', current_user.id, @post.id)
         end
         @comments = Comment.where(post_id: @post.id)
+        # @commenter = User.find(@comment.user_id)
+        
+        @post_likes = Like.where('post_id = ?', @post.id)
+        @post_scraps = Scrap.where('post_id = ?', @post.id)
     end
     
     def edit_yori
@@ -170,13 +180,19 @@ class YojoController < ApplicationController
             @recipe.save
         end
         
+        logger.debug params[:image].to_s
+       
+        
         @post = @yori.post
+         logger.debug @post.image
+         logger.debug "test"
         @post.title = params[:title]
         @post.subtitle = params[:subtitle]
         @post.main = params[:main]
         @post.optional = params[:optional]
         @post.seasoning = params[:seasoning]
         @post.steps = params[:steps]
+        @post.image = params[:image]
         @post.save
         
         render :js => "window.location = '/yojo/yori/#{@yori.id}'"
@@ -200,14 +216,6 @@ class YojoController < ApplicationController
                 @kitchen.user_id = current_user.id
                 @kitchen.save
             end
-            
-            # @recommended = 9
-            # @basket = @kitchen.ingredients
-            # if @basket.length == 0
-            #     @basket = [0]
-            # end
-            # @comp = Yori.joins(:recipes).where('recipes.main = "t" AND ingredient_id NOT IN (?)', @basket).group("yori_id")
-            # @yoris = Yori.where.not(id: @comp.ids).limit(@recommended)
         end
         
         @recommended = 9
@@ -217,7 +225,7 @@ class YojoController < ApplicationController
                 @basket = [0]
             end
             @comp = Yori.joins(:recipes).where('recipes.main = "t" AND ingredient_id NOT IN (?)', @basket).group("yori_id")
-            @yoris = Yori.where.not(id: @comp.ids).limit(@recommended)
+            @yoris = Yori.where.not(id: @comp.ids).order("created_at DESC").limit(@recommended)
         end
         
         @follows = []
@@ -247,7 +255,7 @@ class YojoController < ApplicationController
         @current_page = 0
         @user = User.find(params[:user_id])
         
-        @posts = Post.where(id: @user.posts.ids).limit(@items_page).offset(@current_page*@items_page)
+        @posts = Post.where(id: @user.posts.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
         @max_page = (Float(@user.yoris.length) / @items_page).ceil
     end
     
@@ -258,7 +266,7 @@ class YojoController < ApplicationController
         @user = User.find(params[:user_id])
         
         if @tab == 1
-            @posts = Post.where(id: @user.posts.ids).limit(@items_page).offset(@current_page*@items_page)
+            @posts = Post.where(id: @user.posts.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
             @max_page = (Float(@user.yoris.length) / @items_page).ceil
         end
         
@@ -269,12 +277,12 @@ class YojoController < ApplicationController
                 @scrap_posts.push(s.post_id)
             end
             
-            @posts = Post.where(id: @scrap_posts).limit(@items_page).offset(@current_page*@items_page)
+            @posts = Post.where(id: @scrap_posts).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
             @max_page = (Float(@scraps.length) / @items_page).ceil
         end
         
         if @tab == 3
-            @posts = Post.joins(:yori).where("yoris.user_id": @user.followees.ids).limit(@items_page).offset(@current_page*@items_page)
+            @posts = Post.joins(:yori).where("yoris.user_id": @user.followees.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
             @total_posts = Post.joins(:yori).where("yoris.user_id": @user.followees.ids)
             @max_page = (Float(@total_posts.length) / @items_page).ceil
         end
@@ -284,32 +292,60 @@ class YojoController < ApplicationController
         end
     end
     
+    # POST/DELETE
     def like
-        @like = Like.new
-        @like.user_id = params[:user_id]
-        @like.post_id = params[:post_id]
-        @like.save
-        # render :js => "window.location = '/yojo/yori/#{params[:post_id]}'"
+        @user = User.find(params[:user_id])
+        @post = Post.find(params[:post_id])
+        
+        @likes = []
+        if user_signed_in?
+            @likes = Like.where('user_id = ? AND post_id = ?', current_user.id, @post.id)
+        end
+        
+        if @likes.length == 0
+            @like = Like.new
+            @like.user_id = @user.id
+            @like.post_id = @post.id
+            @like.save
+            @liked = true
+        else
+            @likes[0].destroy
+            @liked = false
+        end
+            
+        @post_likes = Like.where('post_id = ?', @post.id)
+        
+        respond_to do |format|
+            format.js
+        end
     end
     
-    @DELETE
-    def unlike
-        Like.destroy(params[:like_id])
-        # render :js => "window.location = '/yojo/yori/#{params[:post_id]}'"
-    end
-    
+    # POST/DELETE
     def scrap
-        @scrap = Scrap.new
-        @scrap.user_id = params[:user_id]
-        @scrap.post_id = params[:post_id]
-        @scrap.save
-        # render :js => "window.location = '/yojo/yori/#{params[:post_id]}'"
-    end
-    
-    # DELETE
-    def unscrap
-        Scrap.destroy(params[:scrap_id])
-        # render :js => "window.location = '/yojo/yori/#{params[:post_id]}'"
+        @user = User.find(params[:user_id])
+        @post = Post.find(params[:post_id])
+        
+        @scraps = []
+        if user_signed_in?
+            @scraps = Scrap.where('user_id = ? AND post_id = ?', current_user.id, @post.id)
+        end
+        
+        if @scraps.length == 0
+            @scrap = Scrap.new
+            @scrap.user_id = @user.id
+            @scrap.post_id = @post.id
+            @scrap.save
+            @scrapped = true
+        else
+            @scraps[0].destroy
+            @scrapped = false
+        end
+            
+        @post_scraps = Scrap.where('post_id = ?', @post.id)      
+        
+        respond_to do |format|
+            format.js
+        end
     end
     
     def follow

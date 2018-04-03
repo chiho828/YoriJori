@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
+  resources :galleries
+  resources :paintings
+  
   root 'yojo#index'
   get '/:page_number' => 'yojo#index'
   
@@ -47,7 +50,7 @@ Rails.application.routes.draw do
   
   # Testing post
   get '/posts/new' => 'posts#new'
-  get '/posts/create' => 'posts#create'
+  post '/posts/create' => 'posts#create'
   get '/posts/index' => 'posts#index'
   get '/posts/show/:yori_id' => 'posts#show'
   post '/posts/destroy/:yori_id' => 'posts#destroy'
@@ -57,6 +60,7 @@ Rails.application.routes.draw do
   # Testing comments
   get '/posts/show/:yori_id/comments/create' => 'comments#create'
   post '/posts/show/:yori_id/comments/destroy/:comment_id' => 'comments#destroy'
+  
   
   # IDEAL ROUTES
   # get '/posts' => 'posts#index'

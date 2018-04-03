@@ -1,10 +1,10 @@
 <!-- Sidebar -->
 <div class="sidenav">
   <a href<% if user_signed_in? %>='/yojo/kitchen/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>my키친</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>마이 키친</p></a><br>
   
   <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>my요리북</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>내 요리북</p></a><br>
   <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="나만의 레시피를 올려보아요"><img class="icon" src="/assets/edit.png"><p>레시피 올리기</p></a><br>
 </div>
@@ -22,18 +22,83 @@
         <br>
         
         <% if @post.subtitle != "" %> 
-            <span><%= @post.subtitle %></span>
+            <p class=sub><%= @post.subtitle %></p>
         <% else %>
             <br>
         <% end %>
         
-        <p style="position: absolute; right: 18vw; bottom: -1rem">좋아요: <%=@post.likes.length%> 개,</p>
-        <p style="position: absolute; right: 10vw; bottom: -1rem">스크랩: <%=@post.scraps.length%> 개</p>
+        <span id="like-wrapper">
+            <a onclick=<% if user_signed_in? %>"like()"<% else %>"guestWarning()"<% end %>>
+                <% if @likes.length == 0 %>
+                    <img src='/assets/tomato.png' onmouseover="this.src='/assets/tomato-hover.png'" onmouseout="this.src='/assets/tomato.png'" />
+                <% else %>
+                    <img src='/assets/tomato-color.png' onmouseover="this.src='/assets/tomato-hover.png'" onmouseout="this.src='/assets/tomato-color.png'" />
+                <% end %>
+            </a>
+            <a id="likes" data-toggle="modal" data-target="#like_modal">
+                좋아요 <%=@post.likes.length%>
+            </a>
+        </span>
+        
+        <span id="scrap-wrapper">
+            <a onclick=<% if user_signed_in? %>"scrap()"<% else %>"guestWarning()"<% end %>>
+                <% if @scraps.length == 0 %>
+                    <img src='/assets/scoop.png' onmouseover="this.src='/assets/scoop-hover.png'" onmouseout="this.src='/assets/scoop.png'" />
+                <% else %>
+                    <img src='/assets/scoop-color.png' onmouseover="this.src='/assets/scoop-hover.png'" onmouseout="this.src='/assets/scoop-color.png'" />
+                <% end %>
+            </a>
+            <a id="scraps" data-toggle="modal" data-target="#scrap_modal">
+                스크랩 <%=@post.scraps.length%>
+            </a>
+        </span>
+    </div>
+    
+    <div class="modal fade" id="like_modal" role="dialog" style="position:absolute">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 style="position: absolute;">좋아요</h4>
+            </div>
+            <div class="modal-body">                            
+                <% if @post_likes.length > 0 %>
+                    <ul>
+                    <% @post_likes.each do |like| %>
+                        <li><a href="/yojo/kitchen/<%=like.user_id%>" target> <%= User.find(like.user_id).username %></a></li>
+                    <% end %>
+                    </ul>
+                <% end %>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+
+    <div class="modal fade" id="scrap_modal" role="dialog" style="position:absolute">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 style="position: absolute;">스크랩</h4>
+            </div>
+            <div class="modal-body">                            
+                <% if @post_scraps.length > 0 %>
+                    <ul>
+                    <% @post_scraps.each do |scrap| %>
+                        <li><a href="/yojo/kitchen/<%=scrap.user_id%>" target> <%= User.find(scrap.user_id).username %></a></li>
+                    <% end %>
+                    </ul>
+                <% end %>
+            </div>
+          </div>
+        </div>
     </div>
     
     <div class="yori">
         <div class="yori-top">
             <div class="image">
+                <img id="demo" src=<%= @post.image %>>
             </div>
             
             <div class="ingredient">
@@ -72,77 +137,57 @@
             <% end %>
         <% end %>
         
-        <% if not user_signed_in? or current_user.id != @user.id %> 
-            <!--<button id="like" onclick=<% if user_signed_in? %>"like()"<% else %>"guestWarning()"<% end %>>-->
-                <a href id="like" class="roundbtn" onclick=<% if user_signed_in? %>"like()"<% else %>"guestWarning()"<% end %>>
-                <% if @likes.length == 0 %>
-                    좋아요
-                <% else %>
-                    좋아요 취소
-                <% end %>
-                </a>
-            <!--</button>-->
-            <!--<button id="scrap" class="roundbtn" onclick=<% if user_signed_in? %>"scrap()"<% else %>"guestWarning()"<% end %>>-->
-                <a href id="scrap" class="roundbtn" onclick=<% if user_signed_in? %>"scrap()"<% else %>"guestWarning()"<% end %>>
-                <% if @scraps.length == 0 %>
-                    스크랩
-                <% else %>
-                    스크랩 취소
-                <% end %>
-                </a>
-            <!--</button>-->
+        <a class="roundbtn" href onclick="back()">뒤로</a>
+        
+        <hr>
+        <h4 style="margin: 2rem">댓글을 남겨주세요</h4>
+        <form action='/yojo/yori/<%= @yori.id %>/comments/create'>
+            <input type='text' class="bar" name='input_comment'>
+            <input class="roundbtn" type=submit value="댓글달기">
+        </form>
+        
+        <hr>
+        <% if user_signed_in? %>
+            <% @comments.each do |comment| %>
+                <p>
+                    <a id="comment" href="/yojo/kitchen/<%=comment.user_id%>"> <%= comment.username %></a> - <%= comment.content %>
+                        <% if current_user.id == comment.user_id %>
+                            <a id="comment" href="/yojo/yori/<%= @yori.id %>/comments/destroy/<%= comment.id %>" data-confirm="진짜로 삭제하시겠어요?" data-method="post">  x</a>
+                        <% end %>                
+                
+                </p>
+            <% end %>
+            </p>
         <% end %>
         
-        <a class="roundbtn" href onclick="back()">뒤로</a>
+        <script>
+            function like() {
+                <% if user_signed_in? %>
+                    $.ajax({
+                        url : "/yojo/like",
+                        type : "get",
+                        data : { 
+                            user_id: <%=current_user.id%>,
+                            post_id: <%=@post.id%>
+                        }
+                    });
+                <% end %>
+            }
+            
+            function scrap() {
+                <% if user_signed_in? %>
+                    $.ajax({
+                        url : "/yojo/scrap",
+                        type : "get",
+                        data : {
+                            user_id: <%=current_user.id%>,
+                            post_id: <%=@post.id%>
+                        }
+                    });
+                <% end %>
+            }
+        </script>
+        
      </div>
 </div>
 
-<script>
-    function like() {
-        <% if user_signed_in? %>
-            <% if @likes.length == 0 %>
-                $.ajax({
-                    url : "/yojo/like",
-                    type : "get",
-                    data : { 
-                        user_id: <%=current_user.id%>,
-                        post_id: <%=@post.id%>
-                    }
-                });
-            <% else %>
-                $.ajax({
-                    url : "/yojo/unlike",
-                    type : "get",
-                    data : { 
-                        like_id: <%=@likes.first.id%>,
-                        post_id: <%=@post.id%>
-                    }
-                });
-            <% end %>
-        <% end %>
-    }
-    
-    function scrap() {
-        <% if user_signed_in? and current_user.id != @user.id %>
-            <% if @scraps.length == 0 %>
-                $.ajax({
-                    url : "/yojo/scrap",
-                    type : "get",
-                    data : {
-                        user_id: <%=current_user.id%>,
-                        post_id: <%=@post.id%>
-                    }
-                });
-            <% else %>
-                $.ajax({
-                    url : "/yojo/unscrap",
-                    type : "get",
-                    data : { 
-                        scrap_id: <%=@scraps.first.id%>,
-                        post_id: <%=@post.id%>
-                    }
-                });
-            <% end %>
-        <% end %>
-    }
-</script>

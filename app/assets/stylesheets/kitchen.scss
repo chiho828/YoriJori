@@ -1,19 +1,21 @@
 .kitchen-background-wrapper {
-   
+        background-image: url(/assets/kitchen-tile.png);
+        background-size: 100% 100%;
 }    
 
 $profileWrapperMargin: 20px;
 
 .profile-wrapper {
     position: fixed;
-    top: 50px;
+    top: 50px; 
     left: $profileWrapperMargin;
+    background-color: transparent;
 }
 
 .main-wrapper {
     margin: auto;
     width: 90%;
-    height: 100vh;
+    height: 100%;
     display: flex;
 }
 
@@ -43,7 +45,7 @@ $profileWrapperMargin: 20px;
 
 .shelf-wrapper {
     & > div {
-        background-color: white;
+        background-color: transparent;
         position: relative;
     }    
 }
@@ -121,13 +123,14 @@ $shelfHeight: 10px;
     
     img {
         position: relative;
-        top: 5vh;
+        top: 3.3vh;
     }
     
     p {
         position: relative;
         top: 5vh;
         z-index:1;
+        font-size: .7em;
     }
     
     li {
@@ -147,7 +150,7 @@ $shelfHeight: 10px;
                 top: 80%;
                 color: black;
                 background-color: rgba(255,255,255,.7);
-                font-size: 1.7em;
+                font-size: 1.6em;
                 font-family: godoMaum;
             }
         }
@@ -163,62 +166,54 @@ $shelfHeight: 10px;
     }
 }
 
-/* Popup box BEGIN */
-.hover_bkgr_fricc{
-    background:rgba(0,0,0,.4);
-    cursor:pointer;
-    display:none;
-    height:100%;
-    position:fixed;
-    text-align:center;
-    top:0;
-    width:100%;
-    z-index:10000;
-}
-.hover_bkgr_fricc .helper{
-    display:inline-block;
-    height:100%;
-    vertical-align:middle;
-}
-.hover_bkgr_fricc > div {
-    background-color: #fff;
-    box-shadow: 10px 10px 60px #555;
-    display: inline-block;
-    height: auto;
-    max-width: 551px;
-    min-height: 100px;
-    vertical-align: middle;
-    width: 60%;
+#profile,
+#follow {
     position: relative;
-    border-radius: 8px;
-    padding: 15px 5%;
+    bottom: 0.5rem;
 }
-.popupCloseButton {
-    background-color: #fff;
-    border: 3px solid #999;
-    border-radius: 50px;
+#follower_jar:hover,
+#followee_jar:hover,
+#like_jar:hover{
+    color: tomato;
     cursor: pointer;
-    display: inline-block;
-    font-family: arial;
-    font-weight: bold;
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    font-size: 25px;
-    line-height: 30px;
-    width: 30px;
-    height: 30px;
+}
+
+.modal-content {
     text-align: center;
 }
-.popupCloseButton:hover {
-    background-color: #ccc;
+
+.modal-header {
+    font-family: godo;
+    text-align: center;
+    color: tomato;
 }
-.trigger_popup_fricc {
-    cursor: pointer;
-    font-size: 20px;
-    margin: 20px;
-    display: inline-block;
-    font-weight: bold;
+
+.modal-body {
+    a {
+        color: black;
+    }
+    
+    a:hover {
+        color: tomato;
+    }
+    
+    a, a:hover {
+        text-decoration: none;
+    }
+    
+    ul {
+        padding-left: 1rem;
+    }
+    
+    h4 {
+        font-family: godoMaum;
+    }
+    
+    li {
+        list-style-type: none;
+        padding: 0px;
+        font-family: godo;
+    }
 }
 
 .shelf-bottom {
@@ -242,7 +237,7 @@ $shelfHeight: 10px;
         list-style: none;
         
         a {
-            background-size: 60%;
+            background-size: 50%;
             background-position: bottom;
             position: absolute;
             bottom: 0;
@@ -252,7 +247,7 @@ $shelfHeight: 10px;
                 top: 80%;
                 color: black;
                 background-color: rgba(255,255,255,.7);
-                font-size: 1.7em;
+                font-size: 1.6em;
                 font-family: godoMaum;
             }
         }
@@ -303,6 +298,7 @@ $shelfHeight: 10px;
     text-align: center;
     border: 1px solid black;
     padding: 10px;
+    background-color: white;
 }
 
 input {
@@ -354,8 +350,8 @@ button {
 }
 
 .icon {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
 }
 
 .fridge-bottom {
@@ -372,13 +368,33 @@ button {
     }
     .carousel-inner {
         border: 1px solid black;
-    }
-    
+        background-color: white;
+            }
     .carousel-item {
         padding: 10px;
     }
-    
 }
+
+.carousel-message-1 {
+    position: absolute;
+    top: 36%;
+    left: 32%;
+    font-size: 1.3em;
+    font-family: godo;
+    color: gray;
+    background-color: rgba(255,255,255,.8);
+}
+
+.carousel-message-2 {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    font-size: 1.3em;
+    font-family: godo;
+    color: gray;
+    background-color: rgba(255,255,255,.8);
+}
+
 
 #carousel {
     .carousel-control-prev,

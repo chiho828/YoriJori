@@ -2,8 +2,8 @@
 
 <div class="main-wrapper yoribook">
   <div class="navi-tab">
-    <a href="/#search"><button style="right: 5px">요리조합</button></a>
-    <a href="/yojo/kitchen/<%=current_user.id%>"><button style="right: 0px">my키친</button></a>
+    <a href="/#johab"><button style="right: 5px">요리조합</button></a>
+    <a href="/yojo/kitchen/<%=current_user.id%>"><button style="right: 0px">마이 키친</button></a>
     <a href="/yojo/new_yori"><button style="width: 105px; right: 4px; top: 10px">레시피 올리기</button></a>
   </div>
   
@@ -21,6 +21,9 @@
       <div class="recipe-wrapper">
         <div class="recipe-left">
           <div class="recipe-picture-wrapper">
+            <a href="/yojo/yori/<%=post.yori_id%>">
+              <img id="demo_book" src=<%= post.image %>>
+            </a>
           </div>
           <div class="recipe-name-wrapper">
             <h4 class="card-title">
@@ -30,9 +33,9 @@
           </div>
         </div>
         <div class="recipe-right">
-          <p>매인재료: <%=post.main%></p>
-          <p>선택재료: <%=post.optional%></p>
-          <p>양념: <%=post.seasoning%></p>
+          <p>매인 재료: <span><%=post.main%></span></p>
+          <p>선택 재료: <span><%=post.optional%></span></p>
+          <p>양념: <span><%=post.seasoning%></span></p>
         </div>
       </div>
     <% end %>
@@ -51,11 +54,11 @@
       <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %>
       onclick="tabClicked(<%=1%>, <%=@current_page+1%>)"<%end%>>next</a></li>
     </ul>
-    <a href="/yojo/kitchen/<%=@user.id%>" style="position: absolute; left: 5rem;"><p><%=@user.username%>님 키친으로 돌아가기</p></a>
+    
   <% end %>
 </div>
 
-
+        
 <script>
   function tabClicked(type, page) {
     $.ajax({

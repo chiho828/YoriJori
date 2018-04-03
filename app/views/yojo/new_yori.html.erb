@@ -26,7 +26,7 @@
         </div>
         
         <div class="ingredient-post mt-4">
-            <p>
+            <p id="bar-text">
                 재료: <input id="ingredient_search" class="bar" type="text" placeholder="재료 검색...">
                 <div id="ingredient_results"></div>
             </p>
@@ -59,11 +59,11 @@
             <div id="1">
                 <div class="step_num">STEP 1</div>
                 [사진] <textarea id="step1" class="bar" rows="5" cols="50" placeholder='레시피 조리 과정을 입력해 주세요.'></textarea>
+                <button class="roundbtn" onclick="addMiddleStep(this)">추가</button>
             </div>
-            <br>
         </div>
         
-        <button onclick="addStep()" class="roundbtn">STEP 추가</button>
+        <!--<button onclick="addStep()" class="roundbtn">STEP 추가</button>-->
         <br>
         <br>
         <br>

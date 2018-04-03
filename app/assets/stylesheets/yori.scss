@@ -2,7 +2,7 @@
 .yori-wrapper,
 .yori {
 
-    span {
+    .sub {
         font-family: godoMaum;
         color: tomato;
         font-size: 2em;
@@ -74,13 +74,18 @@
 }
 
 .image {
-    width: 50%;
     padding: 30px;
     background-position: top, left;
-    background-color: gray;
-    min-height: 400px;
-    min-width: 400px;
+    border: 1px solid white;
+    // background-color: gray;
+    width: 400px;
+    height: 300px;
+    border-radius: 1em;
+            #demo {
+            max-height: 100%;
+        }
 }
+
 
 .ingredient
 .image {
@@ -139,4 +144,42 @@
     color: red;
     font-family: godo;
     font-size: .7em;
+}
+
+
+#like-wrapper,
+#scrap-wrapper {
+    color: black;
+    font-family: godo;
+    font-size: .9em;
+    text-decoration: none;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+    img {
+        width: 60px;
+        height: 60px;
+        margin-right: -.8em;
+    }
+}
+    
+#like-wrapper:hover,
+#scrap-wrapper:hover {
+    color:tomato;
+    text-decoration: none;
+}
+
+#like-wrapper {
+    right: 15rem;
+}
+
+#scrap-wrapper {
+    right: 8rem;
+}
+
+#comment {
+    text-decoration: none;
+    color: gray;
+    font-family: godoMaum;
+    font-size: 1.5em;
 }

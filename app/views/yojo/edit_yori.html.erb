@@ -22,6 +22,7 @@
                 <p>설명글: <input id="subtitle" class="bar bar-input" value="<%=@post.subtitle%>" type="text" ></p>
                 <p id="subtitle-alert"></p>
                 <br>
+                <p>사진 링크: <input id="image" class="bar bar-input" value="<%=@post.image%>" type="text"></p>
             </div>
         </div>
         
@@ -96,6 +97,7 @@
                 <div id="<%=i%>">
                     <div class="step_num">STEP <%=i%></div>
                     [사진] <textarea id="step<%=i%>" class="bar" rows="5" cols="50"></textarea>
+                    <button class="roundbtn" onclick="addMiddleStep(this)">추가</button>
                     <%if i > 1%><button class="roundbtn" onclick="removeStep(this)">삭제</button><%end%>
                 </div>
                 <script>
@@ -121,6 +123,7 @@
     function updateYori() {
         var title = $('#title').val();
         var subtitle = $('#subtitle').val()
+        var image = $('#image').val()
         var main_ingredient = "", optional_ingredient = "", seasoning = "";
         var steps = [];
         var ingredients = [], types = [], quantities = [], units = [];
@@ -204,6 +207,7 @@
             console.log(seasoning);
             console.log(steps);
             console.log(ingredients);
+            console.log(image);
            
             $.ajax({
                 url : "/yojo/update_yori/<%=@post.yori_id%>",
@@ -211,6 +215,7 @@
                 data : {user: <%=current_user.id%>,
                         title: title,
                         subtitle: subtitle,
+                        image: image,
                         main: main_ingredient,
                         optional: optional_ingredient,
                         seasoning: seasoning,

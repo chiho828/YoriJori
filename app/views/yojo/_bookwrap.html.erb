@@ -3,6 +3,9 @@
   <div class="recipe-wrapper">
     <div class="recipe-left">
       <div class="recipe-picture-wrapper">
+        <a href="/yojo/yori/<%=post.yori_id%>">
+          <img id="demo_book" src=<%= post.image %>>
+        </a>
       </div>
       <div class="recipe-name-wrapper">
         <h4 class="card-title">
@@ -12,9 +15,9 @@
       </div>
     </div>
     <div class="recipe-right">
-      <p>매인재료: <%=post.main%></p>
-      <p>선택재료: <%=post.optional%></p>
-      <p>양념: <%=post.seasoning%></p>
+        <p>매인 재료: <span><%=post.main%></span></p>
+        <p>선택 재료: <span><%=post.optional%></span></p>
+        <p>양념: <span><%=post.seasoning%></span></p>
     </div>
   </div>
 <% end %>

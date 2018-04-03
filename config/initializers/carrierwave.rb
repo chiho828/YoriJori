@@ -1,3 +1,5 @@
+require 'carrierwave/orm/activerecord'
+
 CarrierWave.configure do |config|
     config.fog_provider = 'fog/aws'
     config.fog_credentials = {
@@ -9,4 +11,3 @@ CarrierWave.configure do |config|
     }
     config.fog_directory = 'yorijori'
 end
-# require 'carrierwave/orm/activerecord'

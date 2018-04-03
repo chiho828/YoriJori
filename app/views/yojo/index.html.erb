@@ -11,142 +11,193 @@
 <!-- Sidebar -->
 <div class="sidenav">
   <a href<% if user_signed_in? %>='/yojo/kitchen/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>my키친</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>마이 키친</p></a><br>
   
   <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>my요리북</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>내 요리북</p></a><br>
   <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="나만의 레시피를 올려보아요"><img class="icon" src="/assets/edit.png"><p>레시피 올리기</p></a><br>
 </div>
 
-<!-- Search Page-->
-<div class="search-wrapper">
-  <div class="types">
-    <!--<label>-->
-      <input type="radio" name="search type" onclick="switchSearch(this)" value=1 
-      <% if @type == 1 %>
-        checked
-      <% end %>
-      > 재료 조합하기
-    <!--  <span class="button"></span>-->
-    <!--  <span class="check"></span>-->
-    <!--  <p>재료 조합하기</p>-->
-    <!--</label>-->
-    <!--<label>-->
-      <input type="radio" name="search type" onclick="switchSearch(this)" value=2
-      <% if @type == 2 %>
-        checked
-      <% end %>
-      > 요리 검색하기
-    <!--  <span class="button"></span>-->
-    <!--  <span class="check"></span>-->
-    <!--  <p>요리 검색하기기</p>-->
-    <!--</label>-->
-    <!--<label>-->
-      <input type="radio" name="search type" onclick="switchSearch(this)" value=3
-      <% if @type == 3 %>
-        checked
-      <% end %>
-      > 아이디로 검색하기
-    <!--  <span class="button"></span>-->
-    <!--  <span class="check"></span>-->
-    <!--  <p>아이디로 검색하기</p>-->
-    <!--</label>-->
-  </div>
-  <br>
-  
-  <form action="/0" id="search" class="font" >
-      <% if @type == 1 %>
-          재료:
-          <input id="ingredient_search" class="bar" type="text">
-          <button class="roundbtn" type="button" onclick="combine(0)">조합</button>
-          
-          <div id="ingredient_results"></div>
-          
-          <script>
-            map.clear();
-            new app.SearchIngredients;
+<div class="index-main" style="padding: 2rem">
+  <!-- Search Page-->
+  <div class="search-wrapper" id="johab">
+    <div class="types">
+      <!--<label>-->
+        <input type="radio" name="search type" onclick="switchSearch(this)" value=1 
+        <% if @type == 1 %>
+          checked
+        <% end %>
+        > 재료 조합하기
+      <!--  <span class="button"></span>-->
+      <!--  <span class="check"></span>-->
+      <!--  <p>재료 조합하기</p>-->
+      <!--</label>-->
+      <!--<label>-->
+        <input type="radio" name="search type" onclick="switchSearch(this)" value=2
+        <% if @type == 2 %>
+          checked
+        <% end %>
+        > 요리 검색하기
+      <!--  <span class="button"></span>-->
+      <!--  <span class="check"></span>-->
+      <!--  <p>요리 검색하기기</p>-->
+      <!--</label>-->
+      <!--<label>-->
+        <input type="radio" name="search type" onclick="switchSearch(this)" value=3
+        <% if @type == 3 %>
+          checked
+        <% end %>
+        > 아이디로 검색하기
+      <!--  <span class="button"></span>-->
+      <!--  <span class="check"></span>-->
+      <!--  <p>아이디로 검색하기</p>-->
+      <!--</label>-->
+    </div>
+    <br>
+    
+    <form action="/0" id="search" class="font" >
+        <% if @type == 1 %>
+            재료:
+            <input id="ingredient_search" class="bar" type="text">
+            <button class="roundbtn" type="button" onclick="combine(0)">조합</button>
             
-            $("#ingredient_search").keydown(function(event) {
-               if (event.keyCode == 13) {
-                   event.preventDefault();
-               }
-            });
-          </script>
-      <% elsif @type == 2 %>
-          요리:
-          <input class="bar" type="text" name="yori" autocomplete="off" autofocus>
-          <input class="roundbtn" type="submit" value="검색">
-      <% else %>
-          아이디:
-          <input class="bar" type="text" name="id" autocomplete="off" autofocus>
-          <input class="bt roundbtn" type="submit" value="검색">
-      <% end %>
-  </form>
-  <div id="filters"></div>
-</div>
-
-<div id="results">
-    <% if @posts != nil %>
-        <% @count = 0 %>
-        <% @posts.each do |post| %>
-            <% @yori = Yori.find(post.yori_id) %>
-            <% @user = User.find(@yori.user_id) %>
-            <% if (@count % 4) == 0 %>
-              <div class="row" style="width: 98%; margin-top: 1em">
-            <% end %>
-                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                  <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                    <div class="card-body">
-                      <h4 class="card-title">
-                        <a href="/yojo/yori/<%=@yori.id%>"><%=@yori.name%></a>
-                        <a href="/yojo/kitchen/<%= @user.id %>"><p>by. <%= @user.username %></p></a>
-                      </h4>
-                      <p class="card-text"><%=Post.find_by(yori_id: @yori.id).main%></p>
+            <div id="ingredient_results"></div>
+            
+            <script>
+              map.clear();
+              new app.SearchIngredients;
+              
+              $("#ingredient_search").keydown(function(event) {
+                 if (event.keyCode == 13) {
+                     event.preventDefault();
+                 }
+              });
+            </script>
+        <% elsif @type == 2 %>
+            요리:
+            <input class="bar" type="text" name="yori" autocomplete="off" autofocus>
+            <input class="roundbtn" type="submit" value="검색">
+        <% else %>
+            아이디:
+            <input class="bar" type="text" name="id" autocomplete="off" autofocus>
+            <input class="bt roundbtn" type="submit" value="검색">
+        <% end %>
+    </form>
+    <div id="filters"></div>
+  </div>
+  
+  <div id="results">
+      <% if @posts != nil %>
+          <% @count = 0 %>
+          <% @posts.each do |post| %>
+              <% @yori = Yori.find(post.yori_id) %>
+              <% @user = User.find(@yori.user_id) %>
+              <% if (@count % 4) == 0 %>
+                <div class="row" style="margin-top: 1em">
+              <% end %>
+                  <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                      <a href="/yojo/yori/<%=@yori.id%>"><img class="card-img-top" src=<%= post.image %>></a>
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <a href="/yojo/yori/<%=@yori.id%>"><%=@yori.name%></a>
+                          <a href="/yojo/kitchen/<%= @user.id %>"><p>by. <%= @user.username %></p></a>
+                        </h4>
+                        <p class="card-text"><%=Post.find_by(yori_id: @yori.id).main%></p>
+                      </div>
                     </div>
                   </div>
+              <% if @count % 4 == 3 %>
                 </div>
-            <% if @count % 4 == 3 %>
-              </div>
+              <% end %>
+              <% @count += 1 %> 
+          <% end %>
+          <% if @count % 4 != 0 %>
+            </div>
+          <% end %>
+      <% end %>
+      
+      <% if @yoris != nil and @yoris.length > 0 %>
+          <ul id="page-list" class="pagination">
+            <li class="page-item"><a class="page-link" <% if @current_page > 0 %> href="<%=@current_page - 1%>?
+            <% if @type == 2 %>
+  yori=<%=params[:yori]%>
+            <% elsif @type == 3 %>
+  id=<%=params[:id]%>
             <% end %>
-            <% @count += 1 %> 
-        <% end %>
-        <% if @count % 4 != 0 %>
-          </div>
-        <% end %>
-    <% end %>
-    
-    <% if @yoris != nil and @yoris.length > 0 %>
-      <div class="page-center" style="position: relative; right: 2rem">
-        <ul id="page-list" class="pagination">
-          <li class="page-item"><a class="page-link" <% if @current_page > 0 %> href="<%=@current_page - 1%>?
-          <% if @type == 2 %>
-yori=<%=params[:yori]%>
-          <% elsif @type == 3 %>
-id=<%=params[:id]%>
+  "<%end%>>prev</a></li>
+          <% for i in 0...@max_page %>
+            <li class="page-item"><a <% if i == @current_page%>id="current-page"<%end%> class="page-link" href="<%=i%>?
+            <% if  @type == 2 %>
+  yori=<%=params[:yori]%>
+            <% elsif @type == 3 %>
+  id=<%=params[:id]%>
+            <% end %>
+  "><%=i + 1%></a></li>
           <% end %>
-"<%end%>>prev</a></li>
-        <% for i in 0...@max_page %>
-          <li class="page-item"><a <% if i == @current_page%>id="current-page"<%end%> class="page-link" href="<%=i%>?
-          <% if  @type == 2 %>
-yori=<%=params[:yori]%>
-          <% elsif @type == 3 %>
-id=<%=params[:id]%>
+            <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %> href="<%=@current_page + 1%>?
+            <% if @type == 2 %>
+  yori=<%=params[:yori]%>
+            <% elsif @type == 3 %>
+  id=<%=params[:id]%>
+            <% end %>
+  "<%end%>>next</a></li>
+          </ul>
+      <% end %>
+      
+      <!--추천 by 좋아요-->
+      <p><인기 레시피></p>
+      <% if @rec_likes != nil and @rec_likes.length > 0%>
+        <div class="row" style="margin-top: 1em">
+          <% @rec_likes.each do |rec| %>
+            <% @rec_post = Post.find(rec.post_id) %>
+            <% @rec_yori = Yori.find(@rec_post.id) %>
+            <% @rec_user = User.find(@rec_yori.user_id) %>
+            
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+              <div class="card h-100">
+                <a href="/yojo/yori/<%=@rec_yori.id%>"><img class="card-img-top" src=<%= @rec_post.image %> alt=""></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="/yojo/yori/<%=@rec_yori.id%>"><%=@rec_yori.name%></a>
+                    <a href="/yojo/kitchen/<%= @rec_user.id %>"><p>by. <%= @rec_user.username %></p></a>
+                  </h4>
+                  <p class="card-text"><%=Post.find(@rec_post.id).main%></p>
+                </div>
+              </div>
+            </div>
           <% end %>
-"><%=i + 1%></a></li>
-        <% end %>
-          <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %> href="<%=@current_page + 1%>?
-          <% if @type == 2 %>
-yori=<%=params[:yori]%>
-          <% elsif @type == 3 %>
-id=<%=params[:id]%>
+        </div>
+      <% end %>
+      <br>
+      
+      <!--추천 by 날짜 -->
+      <p><최신 레시피></p>
+      <% if @rec_dates != nil and @rec_dates.length > 0%>
+        <div class="row" style="margin-top: 1em">
+          <% @rec_dates.each do |post| %>
+            <% @rec_yori = Yori.find(post.id) %>
+            <% @rec_user = User.find(@rec_yori.user_id) %>
+            
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+              <div class="card h-100">
+                <a href="/yojo/yori/<%=@rec_yori.id%>"><img class="card-img-top" src=<%= post.image %>></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="/yojo/yori/<%=@rec_yori.id%>"><%=@rec_yori.name%></a>
+                    <a href="/yojo/kitchen/<%= @rec_user.id %>"><p>by. <%= @rec_user.username %></p></a>
+                  </h4>
+                  <p class="card-text"><%=Post.find(post.id).main%></p>
+                </div>
+              </div>
+            </div>
           <% end %>
-"<%end%>>next</a></li>
-        </ul>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+  </div>  
 </div>
+
 
 <script>
     function combine(page) {
@@ -214,3 +265,4 @@ var scrollOffset = -118;
         };
     $(".map").on("click", onMapClickHandler);
 </script>
+

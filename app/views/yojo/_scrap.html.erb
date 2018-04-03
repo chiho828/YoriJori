@@ -1,0 +1,10 @@
+<a onclick=<% if user_signed_in? %>"scrap()"<% else %>"guestWarning()"<% end %>>
+    <% if not @scrapped %>
+        <img src='/assets/scoop.png' onmouseover="this.src='/assets/scoop-hover.png'" onmouseout="this.src='/assets/scoop.png'" />
+    <% else %>
+        <img src='/assets/scoop-color.png' onmouseover="this.src='/assets/scoop-hover.png'" onmouseout="this.src='/assets/scoop-color.png'" />
+    <% end %>
+</a>
+<a id="scraps" data-toggle="modal" data-target="#scrap_modal">
+    스크랩 <%=@post.scraps.length%>
+</a>

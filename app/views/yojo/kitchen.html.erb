@@ -4,26 +4,39 @@
             <div class="fridge-wrapper">
                 <% if user_signed_in? %>
                     <div id="fridge" class="fridge-top">
-                        <script>
-                            map.clear();
-                        </script>
-                        <!-- if current_user.id == @kitchen_user.id %>-->
+                        <div class="fridge-top-inner">
+                            <script>
+                                map.clear();
+                            </script>
                             <% if @kitchen != nil %>
-                                <ul id="kitchen_list" style="list-style-type: none; padding: 0px">
+                                <ul id="kitchen_list" style="list-style-type: none; padding: 0px;">
                                 <% @kitchen.ingredients.each do |i| %>
                                     <% @ingredient = Ingredient.find(i) %>
-                                    <li onclick="removeFilter(this)"><%=@ingredient.name%></li>
-                                    <script>
-                                        map.set("<%=@ingredient.name%>", <%=@ingredient.id%>);
-                                    </script>
+                                    <% if @ingredient != nil %>
+                                        <li id="kitchen_list_li" <% if current_user.id == @kitchen_user.id %>
+                                            onclick="removeFilter(this)"><%=@ingredient.name%> X</li>
+                                        <% else %>><%=@ingredient.name%><% end %></li>
+                                        
+                                        <% if current_user.id == @kitchen_user.id %>
+                                            <script>
+                                                map.set("<%=@ingredient.name%> X", <%=@ingredient.id%>);
+                                            </script>
+                                        <% end %>
+                                    <% end %>
                                 <% end %>
                                 </ul>
+                                <% else %>
+                                <span>아래 검색창을 이용해 재료를 넣어주세요</span>
                             <% end %>
+                        </div>
+                        
+                        <% if current_user.id == @kitchen_user.id %>
                             <div id="fridge-search" style="position:absolute; left: 9.2vw; bottom: 1rem">
-                                <input id="ingredient_search" class="bar" type="text" autofocus>
+                                <input id="ingredient_search" class="bar" placeholder="재료 검색" type="text" autofocus>
                             </div>
-                        <!-- end %>-->
                             <br>
+                        <% end %>
+                        
                         <span class="fridge-door-left"></span>
                         <span class="fridge-door-right"></span>
                     </div>
@@ -31,11 +44,17 @@
                         <div id="ingredient_results"></div>
                         <br>
                         <br>
-                        <button id="open_fridge" class="roundbtn">냉장고 열기</button>
-                        <button id="close_fridge" class="roundbtn">냉장고 닫기</button>
-
+                        
+                        <button id="open_fridge" class="roundbtn" data-toggle="tooltip" data-placement="top" title="재료를 추가합니다">냉장고 열기</button>
+                        <button id="close_fridge" class="roundbtn" data-toggle="tooltip" data-placement="top" title="재료를 저장합니다">냉장고 닫기</button>
+                            <script>
+                                $(document).ready(function () {
+                                    $('[data-toggle="tooltip"]').tooltip();
+                                });
+                            </script>
+                        
                         <span class="fridge-handle-bottom"></span>
-                    </div>
+                    </div>  
                 <% end %>
             </div>
         </div>
@@ -45,7 +64,7 @@
                     <ul>
                         <li>
                         <% if @kitchen_user.id == current_user.id %>
-                            <a href="/users/edit"><img class="icon" src="/assets/profile.png" /><p>프로필 수정</p></a>
+                            <a href="/users/edit"><img class="icon" src="/assets/profile.png" /><p id="profile">프로필 수정</p></a>
                         <% else %>
                             <a href onclick="follow()"><img class="icon" src="/assets/profile.png" />
                                 <p id="follow">
@@ -74,34 +93,81 @@
                     </ul>
                 </div>
                 
-                <div class="shelf-lower">
-                    <!--<a class="trigger_popup_fricc">Click here to show the popup</a>-->
-                    <!--<div class="hover_bkgr_fricc">-->
-                    <!--    <span class="helper"></span>-->
-                    <!--    <div>-->
-                    <!--        <div class="popupCloseButton">X</div>-->
-                    <!--        <p>Add any HTML content<br />inside the popup box!</p>-->
-                    <!--    </div>-->
-                    <!--</div>-->
-                    
-                    <!--<script>-->
-                    <!--    $(".trigger_popup_fricc").click(function(){-->
-                    <!--       $('.hover_bkgr_fricc').show();-->
-                    <!--    });-->
-                    <!--    $('.hover_bkgr_fricc').click(function(){-->
-                    <!--        $('.hover_bkgr_fricc').hide();-->
-                    <!--    });-->
-                    <!--    $('.popupCloseButton').click(function(){-->
-                    <!--        $('.hover_bkgr_fricc').hide();-->
-                    <!--    });                    -->
-                    <!--</script>-->
-                    
-                    <div class="center">
-                        <div id="likes" class="jar"><img class="icon" src="/assets/jar.png"><p>좋아요 <%=@likes%></p></div>
-                        <div id="likes" class="jar"><img class="icon" src="/assets/jar.png"><p>레시피 <%=@posts.length%></p></div>
-                        <div id="followers" class="jar"><img class="icon" src="/assets/jar.png"><p>팔로워 <%=@followers.length%></p>
+                <div class="modal fade" id="like_modal" role="dialog" style="position:absolute">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 style="position: absolute;">좋아요</h4>
                         </div>
-                        <div id="followee" class="jar"><img class="icon" src="/assets/jar.png"><p>팔로잉 <%=@followees.length%></p></div>
+                        <div class="modal-body">
+                            <% if @posts.length > 0 %>
+                                <ul>
+                                    <% @posts.each do |post| %>
+                                        <li><a href="/yojo/yori/<%=post.id%>" target><%=post.title%> <%=post.likes.length%></a></li>
+                                        
+                                    <% end %>
+                                </ul>
+                            <% end %>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                
+                <div class="modal fade" id="follower_modal" role="dialog" style="position:absolute">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 style="position: absolute; left: 1rem">팔로워</h4>
+                        </div>
+                        <div class="modal-body">
+                            <% if @followers.length > 0 %>
+                                <ul>
+                                    <% @followers.each do |follower| %>
+                                        <a href="/yojo/kitchen/<%=follower.id%>" target><li><%=follower.username%></li></a>
+                                    <% end %>
+                                </ul>
+                            <% end %>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                
+                <div class="modal fade" id="following_modal" role="dialog" style="position:absolute">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 style="position: absolute; left: 1rem">팔로잉</h4>
+                        </div>
+                        <div class="modal-body">
+                            <% if @followees.length > 0 %>
+                                <ul>
+                                    <% @followees.each do |followee| %>
+                                        <a href="/yojo/kitchen/<%=followee.id%>" target><li><%=followee.username%></li></a>
+                                    <% end %>
+                                </ul>
+                            <% end %>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                
+                <div class="shelf-lower">
+                    <div class="center">
+                        <a class="jar">
+                            <div id="recipes"><img class="icon" src="/assets/pot.png"><p>레시피 <%=@posts.length%></p></div>
+                        </a>
+                        <a class="jar" id="like_jar" data-toggle="modal" data-target="#like_modal">
+                            <div id="likes"><img class="icon" src="/assets/jar.png"><p>좋아요 <%=@likes%></p></div>
+                        </a>
+                        <a class="jar" id="follower_jar" data-toggle="modal" data-target="#follower_modal">
+                            <div id="follower"><img class="icon" src="/assets/plate.png"><p>팔로워 <%=@followers.length%></p></div>
+                        </a>
+                        <a class="jar" id="followee_jar" data-toggle="modal" data-target="#following_modal">
+                            <div id="following"><img class="icon" src="/assets/bowl.png"><p>팔로잉 <%=@followees.length%></p></div>
+                        </a>
                     </div>
                 </div>
                 
@@ -114,7 +180,7 @@
                             <a href="/yojo/new_yori"><span>레시피 올리기</span></a>
                         </li>
                         <li class="shelf-yorijohap">
-                            <a href="/#search"><span>요리 조합</span></a>
+                            <a href="/#johab"><span>요리 조합</span></a>
                         </li>
                     </ul>
                 </div>
@@ -122,18 +188,19 @@
             
             <div id="carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                    <% if @yoris != nil %>
+                    <% if @yoris != nil and @yoris.length > 0 %>
                         <% @count = 0 %>
                         <% @yoris.each do |yori| %>
-                        <% @user = User.find(yori.user_id) %>
+                            <% @user = User.find(yori.user_id) %>
+                            <% @post = Post.find(yori.id) %>
                             <% if @count % 3 == 0 %>
                                 <div class="carousel-item <%if @count == 0%>active<%end%>">
                                     <div class="row" style="height: 100%">
                             <% end %>
-                            
                             <div class="col-md-4 col-sm-6 portfolio-item">
                                 <div class="card h-100">
-                                    <a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                    <!--<a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>-->
+                                    <a href="/yojo/yori/<%=yori.id%>"><img class="card-img-top" src=<%= @post.image %> alt=""></a>
                                     <div class="card-body1">
                                         <h4 class="card-title">
                                             <a href="/yojo/yori/<%=yori.id%>"><%=yori.name%></a>
@@ -166,16 +233,21 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         <% end %>
+                    <% else %>
+                        <img src="/assets/bottom-shelf.png" style="width:100%;height:100%;opacity:0.7">
+                        <span class="carousel-message-1" align="center">다양한 메뉴 추천을 위해</span>
+                        <span class="carousel-message-2" align="center">많은 재료를 냉장고에 채워주세요!</span>
                     <% end %>
                 </div>
             </div>
         </div>
-    </div
+    </div>
 </div>
 
 <script>
-    new app.KitchenIngredients;
-    
+    <% if current_user.id == @kitchen_user.id %>
+        new app.KitchenIngredients;    
+    <% end %>
     $("#open_fridge").click(function() {
         $(".fridge-wrapper").addClass("fridge-opened");
         $("#kitchen_list").css('display', 'inline-block');

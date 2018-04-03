@@ -6,14 +6,15 @@ body,
 .yori-wrapper, 
 .card-body,
 .recipe-left,
-.yori {
+.yori,
+.fridge-top {
     font-family: godo;
 }
 
 .book-tab,
 .navi-tab,
 .card-text,
-.recipe-right, {
+.fridge-top-inner {
     font-family: godoMaum;
 }
 
@@ -29,6 +30,7 @@ body {
 
 #page-list {
     display: inline-flex;
+    margin: 2rem;
 }
 
 #current-page {
@@ -97,21 +99,16 @@ body {
     }
 }
 
-#username {
-    position: absolute;
-    left: 1000px;
-}
-
 .ui-helper-hidden-accessible { display:none; }
 
 .search-wrapper {
     text-align: center;
-    max-width: 35em;
-    margin: auto;
+    width: 88%;
     padding: 2em;
+    float: left;
+    margin-top: 1rem;
     
     .types {
-        margin-top: 3rem;
         font-size: .9em;
         font-family: godo;
         
@@ -175,11 +172,10 @@ body {
     }
 }
 
-
-
 #ingredient_results {
     text-align: left;
     position: absolute;
+    z-index: 1;
     
     .ui-widget-content {
         background: #fff;
@@ -234,7 +230,7 @@ body {
     position: relative;
     margin-top: 3rem;
     text-align: center;
-    overflow: auto;
+    overflow: hidden;
     
     p {
         font-size: 1.4rem;
@@ -253,19 +249,21 @@ body {
 }
 
 .masthead {
-    min-height: 92.5vh;
+    position: relative;
+    top: -56px;
+    min-height: 100vh;
     display: table;
     height: auto;
     padding-top: 8rem;
     padding-bottom: 8rem;
     //background-image: url('/assets/cover.jpg');
-    background-image: url('/assets/yojo-cover.png');
-    //background-image: url('/assets/yojo-cover.jpg');
+    background-image: url('/assets/yojo-cover-circle.jpg');
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    //background-size: 110% 120%;
-    //background-position: 54% 70%;
+    //background-size: cover;
+    //background-position: center center;
+    background-size: 110% 110%;
+    background-position: 40% 20%;
+    margin-bottom: -56px;
     
     a:hover {
         color: black;
@@ -273,11 +271,16 @@ body {
     }
 }
 
+// .circle {
+//     position:absolute;
+    
+// }
+
 
 #logo {
     color: tomato;
     font-weight: bold;
-    text-shadow: 0 0 5px lightgray;
+    // text-shadow: 0 0 5px lightgray;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 
@@ -461,9 +464,7 @@ body {
 }
 
 .card-img-top {
-    width: 100%;
-    border-top-left-radius: calc(.25rem - 1px);
-    border-top-right-radius: calc(.25rem - 1px);
+    height: 25vh;
 }
 
 .card {
@@ -482,6 +483,8 @@ body {
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
     box-shadow: 0 3px 3px 0 rgba(0,0,0,.1);
+    overflow: hidden;
+
 }
 
 a {
