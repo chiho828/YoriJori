@@ -1,12 +1,12 @@
 <!-- Sidebar -->
 <div class="sidenav">
   <a href<% if user_signed_in? %>='/yojo/kitchen/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>my키친</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="My Kitchen"><img class="icon" src="/assets/fridge.png"><p> My Kitchen</p></a><br>
   
   <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>my요리북</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="my recipe & scrap"><img class="icon" src="/assets/book.png"><p>Yori book</p></a><br>
   <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="나만의 레시피를 올려보아요"><img class="icon" src="/assets/edit.png"><p>레시피 올리기</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="Upload your own recipe"><img class="icon" src="/assets/edit.png"><p>Upload Recipe</p></a><br>
 </div>
 
 <div class="yori-wrapper">
@@ -16,19 +16,19 @@
             <br>
                
             <div class="title-post">
-                <p>요리명: <input id="title" class="bar bar-input" value="<%=@post.title%>" type="text" ></p>
+                <p>Yori Name: <input id="title" class="bar bar-input" value="<%=@post.title%>" type="text" ></p>
                 <p id="title-alert" ></p>
                 <br>
-                <p>설명글: <input id="subtitle" class="bar bar-input" value="<%=@post.subtitle%>" type="text" ></p>
+                <p>Description: <input id="subtitle" class="bar bar-input" value="<%=@post.subtitle%>" type="text" ></p>
                 <p id="subtitle-alert"></p>
                 <br>
-                <p>사진 링크: <input id="image" class="bar bar-input" value="<%=@post.image%>" type="text"></p>
+                <p>image link: <input id="image" class="bar bar-input" value="<%=@post.image%>" type="text"></p>
             </div>
         </div>
         
         <div class="ingredient-post mt-4">
             <p>
-                재료: <input id="ingredient_search" class="bar" type="text" placeholder="재료 검색...">
+                Ingredient: <input id="ingredient_search" class="bar" type="text" placeholder="Type ingredient">
                 <div id="ingredient_results"></div>
             </p>
             <br>
@@ -41,16 +41,16 @@
             <p id="main-alert"></p> <p id="quantity-alert"></p>
             <div class="row" style="display: inline-flex; width: 90%; margin-bottom: 1rem">
                 <div class="col-lg-3 col-md-4 col-sm-6">
-                  <b>필수</b>
+                  <b>Main</b>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -5vw">
-                  <b>양념</b>
+                  <b>Seasoning</b>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -2vw">
-                  <b>재료</b>
+                  <b>Ingredient</b>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -2vw">
-                  <b>계량</b>
+                  <b>Measure</b>
                 </div>
             </div>
             
@@ -74,46 +74,43 @@
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <input class="quantity" type="text" size="6" value="<%= @recipe.quantity %>">
                         <select class="unit">
+                            <option <% if @recipe.unit == "" %> selected <% end %> ></option>
                             <option <% if @recipe.unit == "g" %> selected <% end %> >g</option>
                             <option <% if @recipe.unit == "ml" %> selected <% end %>>ml</option>
-                            <option <% if @recipe.unit == "개" %> selected <% end %>>개</option>
-                            <option <% if @recipe.unit == "큰술" %> selected <% end %>>큰술</option>
-                            <option <% if @recipe.unit == "작은술" %> selected <% end %>>작은술</option>
-                            <option <% if @recipe.unit == "컵" %> selected <% end %>>컵</option>
-                            <option <% if @recipe.unit == "꼬집" %> selected <% end %>>꼬집</option>
+                            <option <% if @recipe.unit == "spoon(s)" %> selected <% end %>>spoon(s)</option>
+                            <option <% if @recipe.unit == "table spoon(s)" %> selected <% end %>>table spoon(s)</option>
+                            <option <% if @recipe.unit == "cup(s)" %> selected <% end %>>cup(s)</option>
+                            <option <% if @recipe.unit == "pinch(es)" %> selected <% end %>>pinch(es)</option>
                         </select>
                     </div>
-                    <button class="roundbtn" onclick="removeRow(this)">빼기</button>
+                    <button class="roundbtn" onclick="removeRow(this)">remove</button>
                 </div>
                 <% end %>
             </div>
         </div>
         <br>
         
-        <p style="text-align: left; margin-left: 5rem">조리법:</p>
         <p id="step-alert"></p>
         <div id="steps">
             <% for i in 1..@post.steps.length %>
                 <div id="<%=i%>">
                     <div class="step_num">STEP <%=i%></div>
-                    [사진] <textarea id="step<%=i%>" class="bar" rows="5" cols="50"></textarea>
-                    <button class="roundbtn" onclick="addMiddleStep(this)">추가</button>
-                    <%if i > 1%><button class="roundbtn" onclick="removeStep(this)">삭제</button><%end%>
+                    [image] <textarea id="step<%=i%>" class="bar" rows="5" cols="50"></textarea>
+                    <button class="roundbtn" onclick="addMiddleStep(this)">Add</button>
+                    <%if i > 1%><button class="roundbtn" onclick="removeStep(this)">Delete</button><%end%>
                 </div>
                 <script>
                     $("#step<%=i%>").val("<%=@post.steps[i-1]%>");
                 </script>
-                <br>
             <% end %>
         </div>
         
-        <button class="roundbtn" onclick="addStep()">STEP 추가</button>
         <br>
         <br>
         <br>
         
-        <button class="roundbtn" onclick="updateYori()">수정</button>
-        <button class="roundbtn" onclick="back()">취소</button>
+        <button class="roundbtn" onclick="updateYori()">Edit</button>
+        <button class="roundbtn" onclick="back()">Cancel</button>
     </div>
 </div>
 
@@ -176,28 +173,30 @@
         
         if (title == "" || main_ingredient == "" || empty_quantity || empty_step) {
             if (title == "") {
-                $("#title-alert")[0].innerHTML = "*레시피 제목을 추가해주세요*";
+                $("#title-alert")[0].innerHTML = "*Please add your recipe name.*";
             } else {
                 $("#title-alert")[0].innerHTML = "";
             }
             
             if (main_ingredient == "") {
-                $("#main-alert")[0].innerHTML = "*필수 재료를 추가해주세요*"
+                $("#main-alert")[0].innerHTML = "*Please add a main ingredient*"
             } else {
                 $("#main-alert")[0].innerHTML = "";
             }
             
             if (empty_step) {
-                $("#step-alert")[0].innerHTML = "*조리 과정을 추가해주세요*"
+                $("#step-alert")[0].innerHTML = "*Please add a step.*"
             } else {
                 $("#step-alert")[0].innerHTML = "";
             }
            
             if (empty_quantity) {
-                $("#quantity-alert")[0].innerHTML = "*계량을 추가해주세요*"
+                $("#quantity-alert")[0].innerHTML = "*Please add a measure.*"
             } else {
                 $("#quantity-alert")[0].innerHTML = "";
             }
+            
+            window.scrollTo(0, 0);
         }
         else {
             console.log(title);

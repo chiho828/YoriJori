@@ -129,16 +129,16 @@ app.YoriIngredients.prototype = {
                 <div class="col-lg-3 col-md-4 col-sm-6"> \
                     <input class="quantity" type="text" size="6"> \
                     <select class="unit"> \
+                        <option></option> \
                         <option>g</option> \
                         <option>ml</option> \
-                        <option>개</option> \
-                        <option>큰술</option> \
-                        <option>작은술</option> \
-                        <option>컵</option> \
-                        <option>꼬집</option> \
+                        <option>spoon(s)</option> \
+                        <option>table spoon(s)</option> \
+                        <option>cup(s)</option> \
+                        <option>pinch(es)</option> \
                     </select> \
                 </div> \
-                <button class="roundbtn" onclick="removeRow(this)">빼기</button> \
+                <button class="roundbtn" onclick="removeRow(this)">remove</button> \
             </div>');
             map.set(item.name, item.id);
         }

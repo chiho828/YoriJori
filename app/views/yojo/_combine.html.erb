@@ -42,7 +42,7 @@
 <% end %>
 
 <!--추천 by 좋아요-->
-<p><인기 레시피></p>
+<p>&lt;Popular recipes></p>
 <% if @rec_likes != nil and @rec_likes.length > 0%>
   <div class="row" style="margin-top: 1em">
     <% @rec_likes.each do |rec| %>
@@ -68,7 +68,7 @@
 <br>
 
 <!--추천 by 날짜 -->
-<p><최신 레시피></p>
+<p>&lt;New Recipes></p>
 <% if @rec_dates != nil and @rec_dates.length > 0%>
   <div class="row" style="margin-top: 1em">
     <% @rec_dates.each do |post| %>

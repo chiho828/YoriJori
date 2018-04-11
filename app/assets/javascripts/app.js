@@ -6,7 +6,7 @@ var map = new Map();
 //
 
 function guestWarning() {
-    alert("로그인 후 이용해주세요!");
+    alert("Please log in to use this feature!");
 }
 
 function removeFilter(span) {
@@ -45,9 +45,9 @@ function addMiddleStep(button) {
 
     var template = document.createElement('template');
     var html = '<div id='+index+'><div class="step_num">STEP '+index+'</div> \
-                    [사진] <textarea class="bar" id="step'+index+'" rows="5" cols="50"></textarea> \
-                    <button class="roundbtn" onclick="addMiddleStep(this)">추가</button> \
-                    <button class="roundbtn" onclick="removeStep(this)">삭제</button> \
+                    [image] <textarea class="bar" id="step'+index+'" rows="5" cols="50"></textarea> \
+                    <button class="roundbtn" onclick="addMiddleStep(this)">add</button> \
+                    <button class="roundbtn" onclick="removeStep(this)">remove</button> \
                     </div>'.trim();
     template.innerHTML = html;
     

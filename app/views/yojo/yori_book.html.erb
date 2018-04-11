@@ -2,17 +2,16 @@
 
 <div class="main-wrapper yoribook">
   <div class="navi-tab">
-    <a href="/#johab"><button style="right: 5px">요리조합</button></a>
-    <a href="/yojo/kitchen/<%=current_user.id%>"><button style="right: 0px">마이 키친</button></a>
-    <a href="/yojo/new_yori"><button style="width: 105px; right: 4px; top: 10px">레시피 올리기</button></a>
+    <a href="/#johab"><button style="right: 12px">Find Recipe</button></a>
+    <a href="/yojo/kitchen/<%=current_user.id%>"><button style="right: 5px">My Kitchen</button></a>
+    <a href="/yojo/new_yori"><button style="width: 115px; right: 7px; top: 8px">Upload Recipe</button></a>
   </div>
   
   <% if @user.id == current_user.id %>
     <div class="book-tab">
-        <button style="left: -5px" onclick="tabClicked(1, 0)">내 레시피</button>
-        <button style="left: 0px" onclick="tabClicked(2, 0)">스크랩</button>
-        <button style="left: 3px" onclick="tabClicked(3, 0)">팔로잉</button>
-        <!--<button style="left: 20px" onclick="tabClicked(4, 0)">전체보기</button>-->
+        <button style="left: 0px" onclick="tabClicked(1, 0)">My Recipes</button>
+        <button style="left: 5px" onclick="tabClicked(2, 0)">Clips</button>
+        <button style="left: 10px" onclick="tabClicked(3, 0)">Following</button>
     </div>
   <% end %>
   
@@ -33,15 +32,16 @@
           </div>
         </div>
         <div class="recipe-right">
-          <p>매인 재료: <span><%=post.main%></span></p>
-          <p>선택 재료: <span><%=post.optional%></span></p>
-          <p>양념: <span><%=post.seasoning%></span></p>
+          <p>Main: <span><%=post.main%></span></p>
+          <p>Optional: <span><%=post.optional%></span></p>
+          <p>Seasoning: <span><%=post.seasoning%></span></p>
         </div>
       </div>
     <% end %>
   </div>
 </div>
 
+<a href="/yojo/kitchen/<%=@user.id%>" style="position: absolute; left: 5rem;"><p>Back to <%=@user.username%>'s Kitchen</p></a>
 <div class="page-center">
   <% if @posts.length > 0 %>
     <ul id="page-list" class="pagination">
@@ -54,11 +54,9 @@
       <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %>
       onclick="tabClicked(<%=1%>, <%=@current_page+1%>)"<%end%>>next</a></li>
     </ul>
-    
   <% end %>
 </div>
 
-        
 <script>
   function tabClicked(type, page) {
     $.ajax({

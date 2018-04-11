@@ -25,14 +25,12 @@
                                     <% end %>
                                 <% end %>
                                 </ul>
-                                <% else %>
-                                <span>아래 검색창을 이용해 재료를 넣어주세요</span>
                             <% end %>
                         </div>
                         
                         <% if current_user.id == @kitchen_user.id %>
                             <div id="fridge-search" style="position:absolute; left: 9.2vw; bottom: 1rem">
-                                <input id="ingredient_search" class="bar" placeholder="재료 검색" type="text" autofocus>
+                                <input id="ingredient_search" class="bar" placeholder="Search ingredient" type="text" autofocus>
                             </div>
                             <br>
                         <% end %>
@@ -45,8 +43,8 @@
                         <br>
                         <br>
                         
-                        <button id="open_fridge" class="roundbtn" data-toggle="tooltip" data-placement="top" title="재료를 추가합니다">냉장고 열기</button>
-                        <button id="close_fridge" class="roundbtn" data-toggle="tooltip" data-placement="top" title="재료를 저장합니다">냉장고 닫기</button>
+                        <button id="open_fridge" class="roundbtn" data-toggle="tooltip" data-placement="top" title="Add ingredient">Open fridge</button>
+                        <button id="close_fridge" class="roundbtn" data-toggle="tooltip" data-placement="top" title="Save ingredient">Close fridge</button>
                             <script>
                                 $(document).ready(function () {
                                     $('[data-toggle="tooltip"]').tooltip();
@@ -64,14 +62,14 @@
                     <ul>
                         <li>
                         <% if @kitchen_user.id == current_user.id %>
-                            <a href="/users/edit"><img class="icon" src="/assets/profile.png" /><p id="profile">프로필 수정</p></a>
+                            <a href="/users/edit"><img class="icon" src="/assets/profile.png" /><p id="profile">Edit Profile</p></a>
                         <% else %>
                             <a href onclick="follow()"><img class="icon" src="/assets/profile.png" />
                                 <p id="follow">
                                     <% if @follows.length == 0 %>
-                                        팔로우 하기
+                                        Follow
                                     <% else %>
-                                        팔로우 취소
+                                        Unfollow
                                     <% end %>
                                 </p></a>
                         <% end %>
@@ -79,9 +77,9 @@
                         <li>
                           <% if user_signed_in? %>
                             <span>
-                                아이디:
+                                User:
                                 <p><%= @kitchen_user.username %></p>
-                                이메일:
+                                Email:
                                 <p><%= @kitchen_user.email %></p>
                             </span>
                           <% else %>
@@ -98,7 +96,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <h4 style="position: absolute;">좋아요</h4>
+                          <h4 style="position: absolute;">Likes</h4>
                         </div>
                         <div class="modal-body">
                             <% if @posts.length > 0 %>
@@ -119,7 +117,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <h4 style="position: absolute; left: 1rem">팔로워</h4>
+                          <h4 style="position: absolute; left: 1rem">Follower</h4>
                         </div>
                         <div class="modal-body">
                             <% if @followers.length > 0 %>
@@ -139,7 +137,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <h4 style="position: absolute; left: 1rem">팔로잉</h4>
+                          <h4 style="position: absolute; left: 1rem">Following</h4>
                         </div>
                         <div class="modal-body">
                             <% if @followees.length > 0 %>
@@ -157,16 +155,16 @@
                 <div class="shelf-lower">
                     <div class="center">
                         <a class="jar">
-                            <div id="recipes"><img class="icon" src="/assets/pot.png"><p>레시피 <%=@posts.length%></p></div>
+                            <div id="recipes"><img class="icon" src="/assets/pot.png"><p><%=@posts.length%> Recipes</p></div>
                         </a>
                         <a class="jar" id="like_jar" data-toggle="modal" data-target="#like_modal">
-                            <div id="likes"><img class="icon" src="/assets/jar.png"><p>좋아요 <%=@likes%></p></div>
+                            <div id="likes"><img class="icon" src="/assets/jar.png"><p><%=@likes%> Likes</p></div>
                         </a>
                         <a class="jar" id="follower_jar" data-toggle="modal" data-target="#follower_modal">
-                            <div id="follower"><img class="icon" src="/assets/plate.png"><p>팔로워 <%=@followers.length%></p></div>
+                            <div id="follower"><img class="icon" src="/assets/plate.png"><p><%=@followers.length%> Follower</p></div>
                         </a>
                         <a class="jar" id="followee_jar" data-toggle="modal" data-target="#following_modal">
-                            <div id="following"><img class="icon" src="/assets/bowl.png"><p>팔로잉 <%=@followees.length%></p></div>
+                            <div id="following"><img class="icon" src="/assets/bowl.png"><p><%=@followees.length%> Following</p></div>
                         </a>
                     </div>
                 </div>
@@ -174,13 +172,13 @@
                 <div class="shelf-bottom">
                     <ul>
                         <li class="shelf-yoribook">
-                            <a href="/yojo/yori_book/<%=@kitchen_user.id%>"><span><%=@kitchen_user.username%>님 요리북</span></a>
+                            <a href="/yojo/yori_book/<%=@kitchen_user.id%>"><span><%=@kitchen_user.username%>'s YoriBook</span></a>
                         </li>
                         <li class="shelf-postyori">
-                            <a href="/yojo/new_yori"><span>레시피 올리기</span></a>
+                            <a href="/yojo/new_yori"><span>Upload Recipe</span></a>
                         </li>
                         <li class="shelf-yorijohap">
-                            <a href="/#johab"><span>요리 조합</span></a>
+                            <a href="/#johab"><span>Find Recipes</span></a>
                         </li>
                     </ul>
                 </div>
@@ -235,8 +233,8 @@
                         <% end %>
                     <% else %>
                         <img src="/assets/bottom-shelf.png" style="width:100%;height:100%;opacity:0.7">
-                        <span class="carousel-message-1" align="center">다양한 메뉴 추천을 위해</span>
-                        <span class="carousel-message-2" align="center">많은 재료를 냉장고에 채워주세요!</span>
+                        <span class="carousel-message-1" align="center">PLEASE FILL IN THE FRIDGE</span>
+                        <span class="carousel-message-2" align="center">TO GET RECIPE RECOMMENDATIONS</span>
                     <% end %>
                 </div>
             </div>

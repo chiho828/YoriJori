@@ -9,5 +9,4 @@
       <li class="page-item"><a class="page-link" <% if @current_page+1 < @max_page %>
       onclick="tabClicked(<%=@tab%>, <%=@current_page+1%>)"<%end%>>next</a></li>
     </ul>
-    <a href="/yojo/kitchen/<%=@user.id%>" style="position: absolute; left: 5rem;"><p><%=@user.username%>님 키친으로 돌아가기</p></a>
 <% end %>

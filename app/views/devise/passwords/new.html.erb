@@ -1,18 +1,17 @@
 <div class="text-center sign">
-<h2>비밀번호 찾기</h2>
+<h2>Forgot Passowrd?</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs sign-wrap">
       <%= f.label :username, class: 'sr-only', required: true%>
-      <%= f.text_field :login, required: false, autofocus: true, class: 'form-control',  placeholder: '아이디' %>
+      <%= f.text_field :login, required: false, autofocus: true, class: 'form-control',  placeholder: 'User ID' %>
   </div>
 
-    <p>아이디를 입력해 주시면 임시주소가 가입하신 이메일로 발송됩니다. 임시주소로 들어오신 뒤
-새로운 비밀번호를 입력하세요</p>
+    <p> Please enter your User ID and we will send you instruction via email </p>
   <div class="form-actions">
-    <%= f.button :submit, "임시주소 받기" %>
+    <%= f.button :submit, "Get Instruction" %>
   </div><br>
 <% end %>
 

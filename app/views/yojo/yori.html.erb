@@ -1,18 +1,16 @@
 <!-- Sidebar -->
 <div class="sidenav">
   <a href<% if user_signed_in? %>='/yojo/kitchen/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="마이키친 페이지"><img class="icon" src="/assets/fridge.png"><p>마이 키친</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="your kitchen page"><img class="icon" src="/assets/fridge.png"><p>My Kitchen</p></a><br>
   
   <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="내 요리 & 스크랩한 레시피"><img class="icon" src="/assets/book.png"><p>내 요리북</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="My recipe & scrap recipe"><img class="icon" src="/assets/book.png"><p>My YoriBook</p></a><br>
   <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="나만의 레시피를 올려보아요"><img class="icon" src="/assets/edit.png"><p>레시피 올리기</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="post your own recipe"><img class="icon" src="/assets/edit.png"><p>Upload Recipe</p></a><br>
 </div>
      
 <div class="yori-wrapper">
     <div class="title">
-        <!--<a href="/yojo/kitchen/<%=@user.id%>" style="position: absolute; right: 10vw; top: 0"><p><%=@user.username%>님 키친 가기</p></a>-->
-        <!--<a href="/yojo/yori_book/<%=@user.id%>/0" style="position: absolute; right: 10vw; top: 30px"><p><%=@user.username%>님 요리북 가기</p></a>-->
         <h1 class="mt-5"><%= @yori.name %></h1>
         <% if user_signed_in? %>
             <a href="/yojo/kitchen/<%=@user.id%>"><p> by. <%= @user.username %></p></a>
@@ -36,7 +34,7 @@
                 <% end %>
             </a>
             <a id="likes" data-toggle="modal" data-target="#like_modal">
-                좋아요 <%=@post.likes.length%>
+                <%=@post.likes.length%> likes
             </a>
         </span>
         
@@ -49,7 +47,7 @@
                 <% end %>
             </a>
             <a id="scraps" data-toggle="modal" data-target="#scrap_modal">
-                스크랩 <%=@post.scraps.length%>
+                <%=@post.scraps.length%> clips
             </a>
         </span>
     </div>
@@ -59,7 +57,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 style="position: absolute;">좋아요</h4>
+              <h4 style="position: absolute;">Likes</h4>
             </div>
             <div class="modal-body">                            
                 <% if @post_likes.length > 0 %>
@@ -80,7 +78,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 style="position: absolute;">스크랩</h4>
+              <h4 style="position: absolute;">Clips</h4>
             </div>
             <div class="modal-body">                            
                 <% if @post_scraps.length > 0 %>
@@ -103,17 +101,17 @@
             
             <div class="ingredient">
                 <% if @post.main != "" %>
-                    <h4>메인 재료</h4>
+                    <h4>Main</h4>
                     <p><%= @post.main %></p>
                 <% end %>
                 
                 <% if @post.optional != "" %>
-                    <h4>선택 재료</h4> 
+                    <h4>Optional</h4> 
                     <p><%= @post.optional %></p>
                 <% end %>
                 
                 <% if @post.seasoning != "" %>
-                    <h4>소스</h4> 
+                    <h4>Seasoning</h4> 
                     <p><%= @post.seasoning %></p>
                 <% end %>
             </div>
@@ -132,18 +130,18 @@
         
         <% if user_signed_in? %>
             <% if current_user.id == @yori.user_id %>
-                <a class="roundbtn" href="/yojo/edit_yori/<%= @yori.id %>">수정</a>
-                <a class="roundbtn" href="/yojo/destroy_yori/<%= @yori.id %>" data-confirm="진짜로 삭제하시겠어요?" data-method="post">삭제</a>
+                <a class="roundbtn" href="/yojo/edit_yori/<%= @yori.id %>">edit</a>
+                <a class="roundbtn" href="/yojo/destroy_yori/<%= @yori.id %>" data-confirm="Delete this post?" data-method="post">delete</a>
             <% end %>
         <% end %>
         
-        <a class="roundbtn" href onclick="back()">뒤로</a>
+        <a class="roundbtn" href onclick="back()">back</a>
         
         <hr>
-        <h4 style="margin: 2rem">댓글을 남겨주세요</h4>
+        <h4 style="margin: 2rem">Comments</h4>
         <form action='/yojo/yori/<%= @yori.id %>/comments/create'>
             <input type='text' class="bar" name='input_comment'>
-            <input class="roundbtn" type=submit value="댓글달기">
+            <input class="roundbtn" type=submit value="comment">
         </form>
         
         <hr>
@@ -152,7 +150,7 @@
                 <p>
                     <a id="comment" href="/yojo/kitchen/<%=comment.user_id%>"> <%= comment.username %></a> - <%= comment.content %>
                         <% if current_user.id == comment.user_id %>
-                            <a id="comment" href="/yojo/yori/<%= @yori.id %>/comments/destroy/<%= comment.id %>" data-confirm="진짜로 삭제하시겠어요?" data-method="post">  x</a>
+                            <a id="comment" href="/yojo/yori/<%= @yori.id %>/comments/destroy/<%= comment.id %>" data-confirm="Delete this comment?" data-method="post">  x</a>
                         <% end %>                
                 
                 </p>

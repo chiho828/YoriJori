@@ -1,16 +1,16 @@
 <div class="text-center sign">
-  <h2>로그인</h2>
+  <h2>Log In</h2>
   
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   
     <div class="form-inputs sign-wrap">
-      <%= f.text_field :login, autofocus: true, class: 'form-control',  placeholder: '아이디를 입력하세요' %>
+      <%= f.text_field :login, autofocus: true, class: 'form-control',  placeholder: 'User ID' %>
       <br>
-      <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: '비밀번호를 입력하세요', as: :boolean if devise_mapping.rememberable? %>
+      <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password', as: :boolean if devise_mapping.rememberable? %>
     </div>
   
     <div class="form-actions">
-      <%= f.button :submit, "로그인" %>
+      <%= f.button :submit, "Log In" %>
     </div>
     
   <% end %>

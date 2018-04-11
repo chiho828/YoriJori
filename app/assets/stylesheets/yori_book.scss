@@ -110,17 +110,6 @@ button {
     margin-left: 1em; 
 }
 
-.book-tab {
-    position: absolute;
-    bottom: 0vh;
-    right: -45px;
-    
-    button:hover {
-        text-decoration: none;
-        color: white;
-    }
-}
-
 .navi-tab {
     position: absolute;
     top: 10vh;
@@ -134,6 +123,17 @@ button {
     }
 }
 
+.book-tab {
+    position: absolute;
+    bottom: 0vh;
+    right: -45px;
+    
+    button:hover {
+        text-decoration: none;
+        color: white;
+    }
+}
+
 .book-tab,
 .navi-tab {
     font-size: 24px;
@@ -143,8 +143,8 @@ button {
 .navi-tab button {
     display: block;
     padding: 10px 10px;
-    margin-bottom: 6vh;
-    width: 85px;
+    margin-bottom: 8vh;
+    width: 100px;
     height: 50px;
     border: none;
     outline: none;
@@ -154,7 +154,6 @@ button {
     position: relative;
 }
 
-    
 .navi-tab button {
     border-radius: 10px 10px 0px 0px; 
     background-color: rgba(200,200,200, 1);
@@ -165,7 +164,6 @@ button {
     border-radius: 10px 10px 0px 0px; 
     background-color: tomato;
     transform: rotate(90deg);
-    bottom: 20px;
 }
 
 .recipe-upload {
@@ -174,6 +172,9 @@ button {
     width: 105px;
 }
 
+.page-center {
+    text-align: center;
+}
 
 .pagination a {
     color: black;
