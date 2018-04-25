@@ -14,61 +14,31 @@ Rails.application.routes.draw do
   
   # yori CRUD
   get '/yojo/new_yori' => 'yojo#new_yori'
-  get '/yojo/post_yori' => 'yojo#post_yori'
+  post '/yojo/post_yori' => 'yojo#post_yori'
   get '/yojo/yori/:yori_id' => 'yojo#yori'
   get '/yojo/edit_yori/:yori_id' => 'yojo#edit_yori'
-  get '/yojo/update_yori/:yori_id' => 'yojo#update_yori'
-  
-  post '/yojo/destroy_yori/:yori_id' => 'yojo#destroy_yori'
+  put '/yojo/update_yori/:yori_id' => 'yojo#update_yori'
+  delete '/yojo/destroy_yori/:yori_id' => 'yojo#destroy_yori'
   
   # kitchen
   get '/yojo/kitchen/:user_id' => 'yojo#kitchen'
-  get '/yojo/addIngredients' => 'yojo#addIngredients'
+  put '/yojo/addIngredients' => 'yojo#addIngredients'
   
   # yoribook
   get '/yojo/yori_book/:user_id' => 'yojo#yori_book'
   get '/yojo/booktab' => 'yojo#booktab'
   
-  get 'users/:user_id' => 'users#show'
-  
   # like
-  get '/yojo/like' => 'yojo#like'
-  get '/yojo/unlike' => 'yojo#unlike'
+  post '/yojo/like' => 'yojo#like'
   
   # scrap
-  get '/yojo/scrap' => 'yojo#scrap'
-  get '/yojo/unscrap' => 'yojo#unscrap'
+  post '/yojo/scrap' => 'yojo#scrap'
   
   # follow
-  get '/yojo/follow' => 'yojo#follow'
-  get '/yojo/unfollow' => 'yojo#unfollow'
+  post '/yojo/follow' => 'yojo#follow'
+  delete '/yojo/unfollow' => 'yojo#unfollow'
   
   # comments
-  get '/yojo/yori/:yori_id/comments/create' => 'comments#create'
-  post '/yojo/yori/:yori_id/comments/destroy/:comment_id' => 'comments#destroy'
-  
-  
-  # Testing post
-  get '/posts/new' => 'posts#new'
-  post '/posts/create' => 'posts#create'
-  get '/posts/index' => 'posts#index'
-  get '/posts/show/:yori_id' => 'posts#show'
-  post '/posts/destroy/:yori_id' => 'posts#destroy'
-  get '/posts/edit/:yori_id' => 'posts#edit'
-  get '/posts/update/:yori_id' => 'posts#update'
-  
-  # Testing comments
-  get '/posts/show/:yori_id/comments/create' => 'comments#create'
-  post '/posts/show/:yori_id/comments/destroy/:comment_id' => 'comments#destroy'
-  
-  
-  # IDEAL ROUTES
-  # get '/posts' => 'posts#index'
-  # post '/posts' => 'posts#create'
-  # get '/posts/new' => 'posts#new'
-  # get '/posts/:id/edit' => 'posts#edit', as: "edit_post"
-  # get '/posts/:id' => 'posts#show', as: "post"
-  # put '/posts/:id' => 'posts#update'
-  # patch '/posts/:id' => 'posts#update'
-  # delete '/posts/:id' => 'posts#destroy'
+  post '/yojo/yori/:yori_id/comments/create' => 'comments#create'
+  delete '/yojo/yori/:yori_id/comments/destroy/:comment_id' => 'comments#destroy'
 end

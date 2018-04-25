@@ -22,7 +22,7 @@
                 <p>Description: <input id="subtitle" class="bar bar-input" value="<%=@post.subtitle%>" type="text" ></p>
                 <p id="subtitle-alert"></p>
                 <br>
-                <p>image link: <input id="image" class="bar bar-input" value="<%=@post.image%>" type="text"></p>
+                <p>Image Link: <input id="image" class="bar bar-input" value="<%=@post.image%>" type="text"></p>
             </div>
         </div>
         
@@ -38,7 +38,7 @@
                 new app.YoriIngredients;
             </script>
             
-            <p id="main-alert"></p> <p id="quantity-alert"></p>
+            <p id="main-alert"></p> <p id="quantity-alert"></p> <p id="unit-alert"></p>
             <div class="row" style="display: inline-flex; width: 90%; margin-bottom: 1rem">
                 <div class="col-lg-3 col-md-4 col-sm-6">
                   <b>Main</b>
@@ -80,6 +80,7 @@
                             <option <% if @recipe.unit == "spoon(s)" %> selected <% end %>>spoon(s)</option>
                             <option <% if @recipe.unit == "table spoon(s)" %> selected <% end %>>table spoon(s)</option>
                             <option <% if @recipe.unit == "cup(s)" %> selected <% end %>>cup(s)</option>
+                            <option <% if @recipe.unit == "piece(s)" %> selected <% end %>>piece(s)</option>
                             <option <% if @recipe.unit == "pinch(es)" %> selected <% end %>>pinch(es)</option>
                         </select>
                     </div>
@@ -119,8 +120,8 @@
     
     function updateYori() {
         var title = $('#title').val();
-        var subtitle = $('#subtitle').val()
-        var image = $('#image').val()
+        var subtitle = $('#subtitle').val();
+        var image = $('#image').val();
         var main_ingredient = "", optional_ingredient = "", seasoning = "";
         var steps = [];
         var ingredients = [], types = [], quantities = [], units = [];
@@ -210,7 +211,7 @@
            
             $.ajax({
                 url : "/yojo/update_yori/<%=@post.yori_id%>",
-                type : "get",
+                type : "put",
                 data : {user: <%=current_user.id%>,
                         title: title,
                         subtitle: subtitle,

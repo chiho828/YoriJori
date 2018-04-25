@@ -78,7 +78,7 @@ app.KitchenIngredients.prototype = {
         
         var filter_name = item.name+" X";
         if (!map.has(filter_name)) {
-            $('#kitchen_list').append('<li onclick="removeFilter(this)">'+filter_name+'</li>');
+            $('#kitchen_list').append('<li id="kitchen_list_li" onclick="removeFilter(this)">'+filter_name+'</li>');
             map.set(filter_name, item.id);
         }
         console.log(map);
@@ -135,6 +135,7 @@ app.YoriIngredients.prototype = {
                         <option>spoon(s)</option> \
                         <option>table spoon(s)</option> \
                         <option>cup(s)</option> \
+                        <option>piece(s)</option> \
                         <option>pinch(es)</option> \
                     </select> \
                 </div> \

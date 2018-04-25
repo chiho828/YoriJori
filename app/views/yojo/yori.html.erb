@@ -131,7 +131,7 @@
         <% if user_signed_in? %>
             <% if current_user.id == @yori.user_id %>
                 <a class="roundbtn" href="/yojo/edit_yori/<%= @yori.id %>">edit</a>
-                <a class="roundbtn" href="/yojo/destroy_yori/<%= @yori.id %>" data-confirm="Delete this post?" data-method="post">delete</a>
+                <a class="roundbtn" href="/yojo/destroy_yori/<%= @yori.id %>" data-confirm="Delete this post?" data-method="delete" rel="nofollow">delete</a>
             <% end %>
         <% end %>
         
@@ -139,22 +139,18 @@
         
         <hr>
         <h4 style="margin: 2rem">Comments</h4>
-        <form action='/yojo/yori/<%= @yori.id %>/comments/create'>
-            <input type='text' class="bar" name='input_comment'>
-            <input class="roundbtn" type=submit value="comment">
-        </form>
+        <%= form_with url: "/yojo/yori/#{@yori.id}/comments/create" do |f| %>
+            <%= f.text_field(:input_comment, class:"bar") %>
+            <%= f.submit("comment", class:"roundbtn") %>
+        <% end %>
         
         <hr>
-        <% if user_signed_in? %>
-            <% @comments.each do |comment| %>
-                <p>
-                    <a id="comment" href="/yojo/kitchen/<%=comment.user_id%>"> <%= comment.username %></a> - <%= comment.content %>
-                        <% if current_user.id == comment.user_id %>
-                            <a id="comment" href="/yojo/yori/<%= @yori.id %>/comments/destroy/<%= comment.id %>" data-confirm="Delete this comment?" data-method="post">  x</a>
-                        <% end %>                
-                
-                </p>
-            <% end %>
+        <% @comments.each do |comment| %>
+            <p>
+                <a id="comment" href="/yojo/kitchen/<%=comment.user_id%>"> <%= comment.username %></a> - <%= comment.content %>
+                <% if current_user.id == comment.user_id %>
+                    <a id="comment" href="/yojo/yori/<%= @yori.id %>/comments/destroy/<%= comment.id %>" data-confirm="Delete this comment?" data-method="delete" rel="nofollow">  x</a>
+                <% end %>                
             </p>
         <% end %>
         
@@ -163,7 +159,7 @@
                 <% if user_signed_in? %>
                     $.ajax({
                         url : "/yojo/like",
-                        type : "get",
+                        type : "post",
                         data : { 
                             user_id: <%=current_user.id%>,
                             post_id: <%=@post.id%>
@@ -176,7 +172,7 @@
                 <% if user_signed_in? %>
                     $.ajax({
                         url : "/yojo/scrap",
-                        type : "get",
+                        type : "post",
                         data : {
                             user_id: <%=current_user.id%>,
                             post_id: <%=@post.id%>

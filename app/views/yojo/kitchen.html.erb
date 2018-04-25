@@ -25,11 +25,12 @@
                                     <% end %>
                                 <% end %>
                                 </ul>
+                                <button id="clear_fridge" class="roundbtn" onclick="clearFridge()">clear</button>
                             <% end %>
                         </div>
                         
                         <% if current_user.id == @kitchen_user.id %>
-                            <div id="fridge-search" style="position:absolute; left: 9.2vw; bottom: 1rem">
+                            <div id="fridge-search" style="margin: auto; margin-top: 1rem">
                                 <input id="ingredient_search" class="bar" placeholder="Search ingredient" type="text" autofocus>
                             </div>
                             <br>
@@ -51,7 +52,7 @@
                                 });
                             </script>
                         
-                        <span class="fridge-handle-bottom"></span>
+                        <!--<span class="fridge-handle-bottom"></span>-->
                     </div>  
                 <% end %>
             </div>
@@ -62,26 +63,27 @@
                     <ul>
                         <li>
                         <% if @kitchen_user.id == current_user.id %>
-                            <a href="/users/edit"><img class="icon" src="/assets/profile.png" /><p id="profile">Edit Profile</p></a>
+                            <a class="profile_items" href="/users/edit"><img class="icon" src="/assets/profile.png" /><span id="profile" style="display:block">Edit Profile</span></a>
                         <% else %>
-                            <a href onclick="follow()"><img class="icon" src="/assets/profile.png" />
-                                <p id="follow">
+                            <a class="profile_items" href onclick="follow()"><img class="icon" src="/assets/profile.png" />
+                                <span id="follow" style="display:block">
                                     <% if @follows.length == 0 %>
                                         Follow
                                     <% else %>
                                         Unfollow
                                     <% end %>
-                                </p></a>
+                                </span>
+                            </a>
                         <% end %>
                         </li>
                         <li>
                           <% if user_signed_in? %>
-                            <span>
+                            <div class="profile_items">
                                 User:
                                 <p><%= @kitchen_user.username %></p>
                                 Email:
                                 <p><%= @kitchen_user.email %></p>
-                            </span>
+                            </div>
                           <% else %>
                             <li>please sign In 
                             </li>
@@ -102,8 +104,9 @@
                             <% if @posts.length > 0 %>
                                 <ul>
                                     <% @posts.each do |post| %>
-                                        <li><a href="/yojo/yori/<%=post.id%>" target><%=post.title%> <%=post.likes.length%></a></li>
-                                        
+                                        <% if post.likes.length > 0 %>
+                                            <li><a href="/yojo/yori/<%=post.id%>" target><%=post.title%> <%=post.likes.length%></a></li>
+                                        <% end %>
                                     <% end %>
                                 </ul>
                             <% end %>
@@ -153,20 +156,20 @@
                 </div>
                 
                 <div class="shelf-lower">
-                    <div class="center">
-                        <a class="jar">
-                            <div id="recipes"><img class="icon" src="/assets/pot.png"><p><%=@posts.length%> Recipes</p></div>
-                        </a>
-                        <a class="jar" id="like_jar" data-toggle="modal" data-target="#like_modal">
-                            <div id="likes"><img class="icon" src="/assets/jar.png"><p><%=@likes%> Likes</p></div>
-                        </a>
-                        <a class="jar" id="follower_jar" data-toggle="modal" data-target="#follower_modal">
-                            <div id="follower"><img class="icon" src="/assets/plate.png"><p><%=@followers.length%> Follower</p></div>
-                        </a>
-                        <a class="jar" id="followee_jar" data-toggle="modal" data-target="#following_modal">
-                            <div id="following"><img class="icon" src="/assets/bowl.png"><p><%=@followees.length%> Following</p></div>
-                        </a>
-                    </div>
+                    <ul>
+                        <li class="jar">
+                            <img class="icon" src="/assets/pot.png"><span><%=@posts.length%> Recipes</span>
+                        </li>
+                        <li class="jar" id="like_jar" data-toggle="modal" data-target="#like_modal">
+                            <img class="icon" src="/assets/jar.png"><span><%=@likes%> Likes</span>
+                        </li>
+                        <li class="jar" id="follower_jar" data-toggle="modal" data-target="#follower_modal">
+                            <img class="icon" src="/assets/plate.png"><span><%=@followers.length%> Followers</span>
+                        </li>
+                        <li class="jar" id="followee_jar" data-toggle="modal" data-target="#following_modal">
+                            <img class="icon" src="/assets/bowl.png"><span><%=@followees.length%> Following</span>
+                        </li>
+                    </ul>
                 </div>
                 
                 <div class="shelf-bottom">
@@ -270,6 +273,10 @@
         }, 800);
     });
     
+    function clearFridge() {
+        $("#kitchen_list").empty();
+        map.clear();
+    }
     function addIngredients() {
         console.log(map);
         var array = [];
@@ -280,7 +287,7 @@
         
         $.ajax({
             url : "/yojo/addIngredients",
-            type : "get",
+            type : "put",
             data : { list: array }
         });
     }
@@ -290,7 +297,7 @@
             <% if @follows.length == 0 %>
                 $.ajax({
                     url : "/yojo/follow",
-                    type : "get",
+                    type : "post",
                     data : {
                         follower_id: <%=current_user.id%>,
                         followee_id: <%=@kitchen_user.id%>
@@ -300,7 +307,7 @@
             <% else %>
                 $.ajax({
                     url : "/yojo/unfollow",
-                    type : "get",
+                    type : "delete",
                     data : {
                         follow_id: <%=@follows.first.id%>,
                         kitchen_user_id: <%=@kitchen_user.id%>

@@ -18,14 +18,21 @@ body,
     font-family: godoMaum;
 }
 
-
-
 body {
     padding-top: 56px;
 
     .sign {
         margin-top: 20px;
     }
+}
+
+#profile_link {
+    color: grey;
+}
+
+#profile_link:hover {
+    color: tomato;
+    text-decoration: none;
 }
 
 #page-list {

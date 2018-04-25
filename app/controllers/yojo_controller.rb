@@ -114,6 +114,7 @@ class YojoController < ApplicationController
         @post.optional = params[:optional]
         @post.seasoning = params[:seasoning]
         @post.steps = params[:steps]
+        @post.image = params[:image]
         @post.save
         
         logger.debug "test"
@@ -360,11 +361,6 @@ class YojoController < ApplicationController
     def unfollow
         Follow.destroy(params[:follow_id])
         # render :js => "window.location = '/yojo/kitchen/#{params[:kitchen_user_id]}'"
-    end
-    
-     # USER
-    def show
-        @user = User.find(params[:user_id])
     end
     
     private

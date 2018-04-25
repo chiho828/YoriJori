@@ -58,6 +58,15 @@ $shelfHeight: 10px;
     height: 30%;
     padding-bottom: $shelfHeight;
     
+    ul {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+    
     &:before {
         content: '';
         position: absolute;
@@ -72,15 +81,6 @@ $shelfHeight: 10px;
 
 .shelf-upper {
     margin-left: auto;
-    ul {
-        margin: 0;
-        padding: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: flex-start;
-    }
     
     li {
         height: 100%;
@@ -100,6 +100,13 @@ $shelfHeight: 10px;
     }
 }
 
+.profile_items {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 .shelf-lower {
     background-position: bottom;
     bottom: 0;
@@ -107,37 +114,13 @@ $shelfHeight: 10px;
     color: black;
     font-size: 1.7em;
     font-family: godoMaum;
-}
-
-.center {
-    display: flex;
-    width: 30vw;
-    height: 10vh;
-    text-align: center;
-}
-
-.jar {
-    text-align: center;
-    position: relative;
-    margin: auto;
-    
-    img {
-        position: relative;
-        top: 3.3vh;
-    }
-    
-    p {
-        position: relative;
-        top: 5vh;
-        z-index:1;
-        font-size: .7em;
-    }
     
     li {
         height: 100%;
         width: 35%;
         position: relative;
         list-style: none;
+        
         a {
             background-size: 60%;
             background-position: bottom;
@@ -154,15 +137,27 @@ $shelfHeight: 10px;
                 font-family: godoMaum;
             }
         }
-        &.jar-recipe a{
-            background-image: url(/assets/jar.png);
-        }
-        &.jar-following a{
-            background-image: url(/assets/jar.png);
-        }
-        &.jar-follower a{
-            background-image: url(/assets/jar.png);
-        }
+    }
+}
+
+.jar {
+    text-align: center;
+    
+    img, span {
+        margin: auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+    
+    img {
+        bottom: 0;
+    }
+    
+    span {
+        z-index:1;
+        font-size: .7em;
+        bottom: -32px;
     }
 }
 
