@@ -43,6 +43,12 @@
     <br>
     
     <form action="/0" id="search" class="font" >
+        <select id="search_date" name="search_date">
+          <option <%if @date != nil and @date == "today"%> selected <%end%>> today </option>
+          <option <%if @date != nil and @date == "last week"%> selected <%end%>> last week </option>
+          <option <%if @date != nil and @date == "last month"%> selected <%end%>> last month </option>
+          <option <%if @date == nil || @date == "all"%> selected <%end%>> all </option>
+        </select>
         <% if @type == 1 %>
             Ingredient:
             <input id="ingredient_search" class="bar" type="text">
@@ -62,11 +68,11 @@
             </script>
         <% elsif @type == 2 %>
             Yori:
-            <input class="bar" type="text" name="yori" autocomplete="off" autofocus>
+            <input class="bar" type="text" name="yori" <%if @yori != nil and @yori != ""%> value=<%=@yori%> <%end%> autocomplete="off" autofocus>
             <input class="roundbtn" type="submit" value="Search">
         <% else %>
             User:
-            <input class="bar" type="text" name="id" autocomplete="off" autofocus>
+            <input class="bar" type="text" name="id" <%if @id != nil and @id != ""%> value=<%=@id%> <%end%> autocomplete="off" autofocus>
             <input class="bt roundbtn" type="submit" value="Search">
         <% end %>
     </form>
@@ -142,7 +148,7 @@
             
             <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
               <div class="card h-100">
-                <a href="/yojo/yori/<%=@rec_yori.id%>"><img class="card-img-top" src=<%= @rec_post.image %> alt=""></a>
+                <a href="/yojo/yori/<%=@rec_yori.id%>"><img class="card-img-top" src=<%= @rec_post.image %>></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="/yojo/yori/<%=@rec_yori.id%>"><%=@rec_yori.name%></a>
@@ -192,6 +198,9 @@
           array.push(value);
       });
       
+      var date = $("#search_date")[0].value;
+      console.log(date);
+      
       window.scroll(0, $(".search-wrapper").offset().top);
       
       $.ajax({
@@ -199,7 +208,8 @@
           type : "get",
           data : {
             data_value: array,
-            page_number: page
+            page_number: page,
+            search_date: date
           }
       });
     }

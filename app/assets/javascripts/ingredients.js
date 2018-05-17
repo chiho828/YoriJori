@@ -137,6 +137,7 @@ app.YoriIngredients.prototype = {
                         <option>cup(s)</option> \
                         <option>piece(s)</option> \
                         <option>pinch(es)</option> \
+                        <option>handful(s)</option> \
                     </select> \
                 </div> \
                 <button class="roundbtn" onclick="removeRow(this)">remove</button> \

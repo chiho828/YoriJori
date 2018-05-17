@@ -170,6 +170,16 @@ body {
     }
 }
 
+#search {
+    position: relative;
+}
+
+#search_date {
+    position: absolute;
+    left: 1rem;
+    bottom: 0;
+}
+
 #ingredient_results {
     text-align: left;
     position: absolute;

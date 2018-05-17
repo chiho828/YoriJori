@@ -1,3 +1,10 @@
+<select id="search_date" name="search_date">
+  <option <%if @date != nil and @date == "today"%> selected <%end%>> today </option>
+  <option <%if @date != nil and @date == "last week"%> selected <%end%>> last week </option>
+  <option <%if @date != nil and @date == "last month"%> selected <%end%>> last month </option>
+  <option <%if @date == nil || @date == "all"%> selected <%end%>> all </option>
+</select>
+
 <% if @type == "1" %>
     Ingredient: 
     <input id="ingredient_search" class="bar" type="text" autofocus>

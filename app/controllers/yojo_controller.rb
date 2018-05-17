@@ -12,12 +12,30 @@ class YojoController < ApplicationController
         elsif @id != nil
             @type = 3
         end
-            
+           
+        @date = params[:search_date]
+        @beginning = nil
+        if @date == "오늘"
+            @beginning = Time.zone.now
+        elsif @date == "이번주"
+            @beginning = 1.week.ago
+        elsif @date == "이번달"
+            @beginning = 1.month.ago
+        end
+        
         if @type == 2 and @yori != ""
-            @yoris = Yori.where('name LIKE ?', "%#{@yori}%")
+            if @beginning == nil
+                @yoris = Yori.where('name LIKE ?', "%#{@yori}%")
+            else
+                @yoris = Yori.where('name LIKE ?', "%#{@yori}%").where(created_at: @beginning.beginning_of_day..Time.zone.now.end_of_day)
+            end
         elsif @type == 3 and @id != ""
             @user = User.where("username LIKE ?", "%#{@id}%")
-            @yoris = Yori.where('user_id = ?', @user.ids)
+            if @beginning == nil
+                @yoris = Yori.where('user_id IN (?)', @user.ids)
+            else
+                @yoris = Yori.where('user_id IN (?)', @user.ids).where(created_at: @beginning.beginning_of_day..Time.zone.now.end_of_day)
+            end
         end
         
         respond_to do |format|
@@ -41,11 +59,25 @@ class YojoController < ApplicationController
     
     def combine
         @basket = params[:data_value]
-        if @basket == nil
-            @basket = [0]
-        end
+        # if @basket == nil
+        #     @basket = [0]
+        # end
         @comp = Yori.joins(:recipes).where('recipes.main = "t" AND ingredient_id NOT IN (?)', @basket).group("yori_id")
-        @yoris = Yori.where.not(id: @comp.ids)
+        
+        @date = params[:search_date]
+        if @date == "all"
+            @yoris = Yori.where.not(id: @comp.ids)
+        else
+            @beginning = nil
+            if @date == "today"
+                @beginning = Time.zone.now
+            elsif @date == "last week"
+                @beginning = 1.week.ago
+            else
+                @beginning = 1.month.ago
+            end
+            @yoris = Yori.where.not(id: @comp.ids).where(created_at: @beginning.beginning_of_day..Time.zone.now.end_of_day)
+        end
     
         respond_to do |format|
             format.js
@@ -185,8 +217,6 @@ class YojoController < ApplicationController
        
         
         @post = @yori.post
-         logger.debug @post.image
-         logger.debug "test"
         @post.title = params[:title]
         @post.subtitle = params[:subtitle]
         @post.main = params[:main]
