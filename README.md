@@ -3,3 +3,4 @@ Yori Jori is a platform where a user can share his food recipe and search recipe
 Major codes that we worked on are in /app, models, views, and controllers directories.
 
 Check out the website at <a href="http://ec2-34-213-42-212.us-west-2.compute.amazonaws.com/">Yori Jori</a>!
+You can sign up and log in with your own account, or log in with id: visitor, pw: 000000 to try full features.
