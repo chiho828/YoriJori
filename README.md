@@ -1,24 +1,5 @@
-# README
+Yori Jori is a platform where a user can share his food recipe and search recipes by other users by the ingredients/food name/user name. "My Kitchen" has a refrigerator which can store ingredients and show recommended recipes on the drawer. This allows the user to synchronize his real fridge to the virtual one and quickly find what he can make with his current ingredients. Yori Jori also features "My YoriBook" which not only displays the recipes the user has posted, but also the recipes clipped by the user or uploaded by other users that the current user is following.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Major codes that we worked on are in /app, models, views, and controllers directories.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Check out the website at <a href="http://ec2-34-213-42-212.us-west-2.compute.amazonaws.com/">Yori Jori</a>!
