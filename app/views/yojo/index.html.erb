@@ -14,7 +14,7 @@
     data-toggle="tooltip" data-placement="right" title="Your kitchen page"><img class="icon" src="/assets/fridge.png"><p>My Kitchen</p></a><br>
   
   <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="My recipe & clipped recipe"><img class="icon" src="/assets/book.png"><p>My YoriBook</p></a><br>
+    data-toggle="tooltip" data-placement="right" title="My recipe & scooped recipe"><img class="icon" src="/assets/book.png"><p>My YoriBook</p></a><br>
   <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
     data-toggle="tooltip" data-placement="right" title="Post your own recipe"><img class="icon" src="/assets/edit.png"><p>Upload Recipe</p></a><br>
 </div>
