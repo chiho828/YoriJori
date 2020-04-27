@@ -53,7 +53,7 @@ class YojoController < ApplicationController
             @posts = Post.where("yori_id": @yoris.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
         end
         
-        @rec_likes = Like.joins(:post).group("post_id").order("COUNT(*) DESC, posts.created_at DESC").limit(4)
+        @rec_likes = Like.select("post_id").joins(:post).group("post_id").order("COUNT(*) DESC, posts.created_at DESC").limit(4)
         @rec_dates = Post.order("created_at DESC").limit(4)
     end
     
@@ -93,7 +93,7 @@ class YojoController < ApplicationController
             @posts = Post.where("yori_id": @yoris.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
         end
         
-        @rec_likes = Like.joins(:post).group("post_id").order("COUNT(*) DESC, posts.created_at DESC").limit(4)
+        @rec_likes = Like.select("post_id").joins(:post).group("post_id").order("COUNT(*) DESC, posts.created_at DESC").limit(4)
         @rec_dates = Post.order("created_at DESC").limit(4)
     end
     
