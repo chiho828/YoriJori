@@ -67,7 +67,7 @@ $shelfHeight: 10px;
         justify-content: flex-start;
     }
     
-    &:before {
+    &:after {
         content: '';
         position: absolute;
         background-color: tan;
@@ -115,6 +115,12 @@ $shelfHeight: 10px;
     font-size: 1.7em;
     font-family: godoMaum;
     
+    ul {
+        position: relative;
+        height: 80%;
+        bottom: -20%;
+    }
+
     li {
         height: 100%;
         width: 35%;
@@ -143,15 +149,11 @@ $shelfHeight: 10px;
 .jar {
     text-align: center;
     
-    img, span {
+    span {
         margin: auto;
         position: absolute;
         left: 0;
         right: 0;
-    }
-    
-    img {
-        bottom: 0;
     }
     
     span {
@@ -159,18 +161,32 @@ $shelfHeight: 10px;
         font-size: .7em;
         bottom: -32px;
     }
+
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    &:not(#recipe_jar):hover {
+        color: tomato;
+        cursor: pointer;
+    }
+}
+#recipe_jar {
+    background-image: url(/assets/pot.png);
+}
+#like_jar {
+    background-image: url(/assets/jar.png);
+}
+#follower_jar {
+    background-image: url(/assets/plate.png);
+}
+#followee_jar {
+    background-image: url(/assets/bowl.png);
 }
 
 #profile,
 #follow {
     position: relative;
     bottom: 0.5rem;
-}
-#follower_jar:hover,
-#followee_jar:hover,
-#like_jar:hover{
-    color: tomato;
-    cursor: pointer;
 }
 
 .modal-content {
@@ -345,8 +361,8 @@ button {
 }
 
 .icon {
-  width: 90px;
-  height: 90px;
+  width: 50%;
+  height: 50%;
 }
 
 .fridge-bottom {

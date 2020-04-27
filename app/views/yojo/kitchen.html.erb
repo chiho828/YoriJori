@@ -157,17 +157,17 @@
                 
                 <div class="shelf-lower">
                     <ul>
-                        <li class="jar">
-                            <img class="icon" src="/assets/pot.png"><span><%=@posts.length%> Recipes</span>
+                        <li class="jar" id="recipe_jar">
+                            <span><%=@posts.length%> Recipes</span>
                         </li>
                         <li class="jar" id="like_jar" data-toggle="modal" data-target="#like_modal">
-                            <img class="icon" src="/assets/jar.png"><span><%=@likes%> Likes</span>
+                            <span><%=@likes%> Likes</span>
                         </li>
                         <li class="jar" id="follower_jar" data-toggle="modal" data-target="#follower_modal">
-                            <img class="icon" src="/assets/plate.png"><span><%=@followers.length%> Followers</span>
+                            <span><%=@followers.length%> Followers</span>
                         </li>
                         <li class="jar" id="followee_jar" data-toggle="modal" data-target="#following_modal">
-                            <img class="icon" src="/assets/bowl.png"><span><%=@followees.length%> Following</span>
+                            <span><%=@followees.length%> Following</span>
                         </li>
                     </ul>
                 </div>
