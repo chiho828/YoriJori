@@ -149,8 +149,6 @@ class YojoController < ApplicationController
         @post.image = params[:image]
         @post.save
         
-        logger.debug "test"
-        logger.debug @yori.id
         render :js => "window.location = '/yojo/yori/#{@yori.id}'"
     end
     
@@ -212,9 +210,6 @@ class YojoController < ApplicationController
             @recipe.unit = @units[i]
             @recipe.save
         end
-        
-        logger.debug params[:image].to_s
-       
         
         @post = @yori.post
         @post.title = params[:title]
