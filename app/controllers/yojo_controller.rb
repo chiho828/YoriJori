@@ -281,8 +281,8 @@ class YojoController < ApplicationController
         @current_page = 0
         @user = User.find(params[:user_id])
         
-        @posts = Post.where(id: @user.posts.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
-        @max_page = (Float(@user.yoris.length) / @items_page).ceil
+        @posts = @user.posts.order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
+        @max_page = (Float(@user.yoris.count) / @items_page).ceil
     end
     
     def booktab
@@ -292,8 +292,8 @@ class YojoController < ApplicationController
         @user = User.find(params[:user_id])
         
         if @tab == 1
-            @posts = Post.where(id: @user.posts.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
-            @max_page = (Float(@user.yoris.length) / @items_page).ceil
+            @posts = @user.posts.order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
+            @max_page = (Float(@user.yoris.count) / @items_page).ceil
         end
         
         if @tab == 2
