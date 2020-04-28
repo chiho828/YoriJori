@@ -532,7 +532,7 @@ a {
   font-family: "godoMaum";
   font-weight: normal;
   font-style: normal;
-  src: url(/assets/godoMaum.ttf) format("truetype");
+  src: font-url('godoMaum.ttf') format("truetype");
 }
 .godoMaum * { font-family: 'GodoMaum', sans-serif; 
 }
