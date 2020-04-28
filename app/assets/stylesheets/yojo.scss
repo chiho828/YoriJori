@@ -377,6 +377,7 @@ body {
 
 .navbar-nav {
     flex-direction: initial !important;
+    float: right;
 }
 .navbar-collapse {
     -ms-flex-preferred-size: 100%;
@@ -433,6 +434,7 @@ body {
     letter-spacing: .1rem;
     display: block;
     padding: .5rem 1rem;
+    margin-right: 0.5rem
 }
 
 .mt-5, .my-5 {
