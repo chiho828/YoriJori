@@ -17,6 +17,7 @@
         </div>
 
         <input type="file" id="main-image">
+        <p id="image-alert"></p>
         
         <div class="ingredient-post mt-4">
             <p id="bar-text">
@@ -123,7 +124,13 @@
         });
         
         
-        if (title == "" || main_ingredient == "" || empty_quantity || empty_step) {
+        if (image == undefined || title == "" || main_ingredient == "" || empty_quantity || empty_step) {
+            if (image == undefined) {
+                $("#image-alert")[0].innerHTML = "*Please add the main image.*";
+            } else {
+                $("#image-alert")[0].innerHTML = "";
+            }
+            
             if (title == "") {
                 $("#title-alert")[0].innerHTML = "*Please add your recipe name.*";
             } else {

@@ -147,6 +147,7 @@
     width: 70%;
 }
 
+#image-alert,
 #title-alert,
 #main-alert,
 #ingredient-alert,
@@ -155,6 +156,10 @@
     color: red;
     font-family: godo;
     font-size: .7em;
+}
+
+#image-alert {
+    text-align: left;
 }
 
 #date-wrapper {
