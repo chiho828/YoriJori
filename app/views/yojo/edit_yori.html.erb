@@ -12,20 +12,20 @@
 <div class="yori-wrapper">
     <div class= "yori">
         <div class="yori-top">
-            <div class="image-post"></div>
-            <br>
-               
+            <div class="image-post">
+                <img id="demo" src=<%= url_for(@post.main_image) %>>
+            </div>
             <div class="title-post">
                 <p>Yori Name: <input id="title" class="bar bar-input" value="<%=@post.title%>" type="text" ></p>
                 <p id="title-alert" ></p>
                 <br>
                 <p>Description: <input id="subtitle" class="bar bar-input" value="<%=@post.subtitle%>" type="text" ></p>
                 <p id="subtitle-alert"></p>
-                <br>
-                <p>Image Link: <input id="image" class="bar bar-input" value="<%=@post.image%>" type="text"></p>
             </div>
         </div>
         
+        <input type="file" id="main-image">
+
         <div class="ingredient-post mt-4">
             <p>
                 Ingredient: <input id="ingredient_search" class="bar" type="text" placeholder="Type ingredient">
@@ -97,7 +97,7 @@
             <% for i in 1..@post.steps.length %>
                 <div id="<%=i%>">
                     <div class="step_num">STEP <%=i%></div>
-                    [image] <textarea id="step<%=i%>" class="bar" rows="5" cols="50"></textarea>
+                    <textarea id="step<%=i%>" class="bar" rows="5" cols="50"></textarea>
                     <button class="roundbtn" onclick="addMiddleStep(this)">Add</button>
                     <%if i > 1%><button class="roundbtn" onclick="removeStep(this)">Delete</button><%end%>
                 </div>
@@ -111,7 +111,7 @@
         <br>
         <br>
         
-        <button class="roundbtn" onclick="updateYori()">Edit</button>
+        <button class="roundbtn" onclick="updateYori()">Save</button>
         <button class="roundbtn" onclick="back()">Cancel</button>
     </div>
 </div>
@@ -122,7 +122,7 @@
     function updateYori() {
         var title = $('#title').val();
         var subtitle = $('#subtitle').val();
-        var image = $('#image').val();
+        var image = $('#main-image').prop('files')[0];
         var main_ingredient = "", optional_ingredient = "", seasoning = "";
         var steps = [];
         var ingredients = [], types = [], quantities = [], units = [];
@@ -158,7 +158,6 @@
         }
         
         var empty_quantity = false;
-        console.log(quantities);
         quantities.forEach(function(i) {
             if (i == "") {
                 empty_quantity = true;
@@ -166,7 +165,6 @@
         });
         
         var empty_step = false;
-        console.log(steps);
         steps.forEach(function(i) {
             if (i == "") {
                 empty_step = true;
@@ -201,31 +199,27 @@
             window.scrollTo(0, 0);
         }
         else {
-            console.log(title);
-            console.log(subtitle);
-            console.log(main_ingredient);
-            console.log(optional_ingredient);
-            console.log(seasoning);
-            console.log(steps);
-            console.log(ingredients);
-            console.log(image);
-           
+            const data = new FormData();
+            
+            if (image) data.append('image', image);
+            data.append('user', <%= current_user.id %>);
+            data.append('title', title);
+            data.append('subtitle', subtitle);
+            data.append('main', main_ingredient);
+            data.append('optional', optional_ingredient);
+            data.append('seasoning', seasoning);
+            data.append('steps', JSON.stringify(steps));
+            data.append('ingredients', ingredients);
+            data.append('types', types);
+            data.append('quantities', quantities);
+            data.append('units', units);
+
             $.ajax({
                 url : "/yojo/update_yori/<%=@post.yori_id%>",
                 type : "put",
-                data : {user: <%=current_user.id%>,
-                        title: title,
-                        subtitle: subtitle,
-                        image: image,
-                        main: main_ingredient,
-                        optional: optional_ingredient,
-                        seasoning: seasoning,
-                        steps: steps,
-                        ingredients: ingredients,
-                        types: types,
-                        quantities: quantities,
-                        units: units
-                }
+                data : data,
+                processData: false,
+                contentType: false
             });
         }
     }

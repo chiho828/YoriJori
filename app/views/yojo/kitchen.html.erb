@@ -201,7 +201,7 @@
                             <div class="col-md-4 col-sm-6 portfolio-item">
                                 <div class="card h-100">
                                     <!--<a href="/"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>-->
-                                    <a href="/yojo/yori/<%=yori.id%>"><img class="card-img-top" src=<%= @post.image %> alt=""></a>
+                                    <a href="/yojo/yori/<%=yori.id%>"><img class="card-img-top" src=<%= url_for(@post.main_image) %> alt=""></a>
                                     <div class="card-body1">
                                         <h4 class="card-title">
                                             <a href="/yojo/yori/<%=yori.id%>"><%=yori.name%></a>

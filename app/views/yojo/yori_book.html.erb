@@ -21,7 +21,7 @@
         <div class="recipe-left">
           <div class="recipe-picture-wrapper">
             <a href="/yojo/yori/<%=post.yori_id%>">
-              <img id="demo_book" src=<%= post.image %>>
+              <img id="demo_book" src=<%= url_for(post.main_image) %>>
             </a>
           </div>
           <div class="recipe-name-wrapper">
@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<a href="/yojo/kitchen/<%=@user.id%>" style="position: absolute; left: 5rem;"><p>Back to <%=@user.username%>'s Kitchen</p></a>
+<a href="/yojo/kitchen/<%=@user.id%>" style="position: absolute; left: 5rem;"><p>Go to <%=@user.username%>'s Kitchen</p></a>
 <div class="page-center">
   <% if @posts.length > 0 %>
     <ul id="page-list" class="pagination">

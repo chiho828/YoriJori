@@ -90,7 +90,7 @@
               <% end %>
                   <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
                     <div class="card h-100">
-                      <a href="/yojo/yori/<%=@yori.id%>"><img class="card-img-top" src=<%= post.image %>></a>
+                      <a href="/yojo/yori/<%=@yori.id%>"><img class="card-img-top" src=<%= url_for(post.main_image) %>></a>
                       <div class="card-body">
                         <h4 class="card-title">
                           <a href="/yojo/yori/<%=@yori.id%>"><%=@yori.name%></a>
@@ -148,7 +148,7 @@
             
             <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
               <div class="card h-100">
-                <a href="/yojo/yori/<%=@rec_yori.id%>"><img class="card-img-top" src=<%= @rec_post.image %>></a>
+                <a href="/yojo/yori/<%=@rec_yori.id%>"><img class="card-img-top" src=<%= url_for(@rec_post.main_image) %>></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="/yojo/yori/<%=@rec_yori.id%>"><%=@rec_yori.name%></a>
@@ -173,7 +173,7 @@
             
             <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
               <div class="card h-100">
-                <a href="/yojo/yori/<%=@rec_yori.id%>"><img class="card-img-top" src=<%= post.image %>></a>
+                <a href="/yojo/yori/<%=@rec_yori.id%>"><img class="card-img-top" src=<%= url_for(post.main_image) %>></a>
                 <div class="card-body">
                   <h4 class="card-title">
                     <a href="/yojo/yori/<%=@rec_yori.id%>"><%=@rec_yori.name%></a>

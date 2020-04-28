@@ -137,7 +137,7 @@ class YojoController < ApplicationController
             @recipe.unit = @units[i]
             @recipe.save
         end
-        
+
         @post = Post.new
         @post.yori_id = @yori.id
         @post.title = params[:title]
@@ -145,8 +145,8 @@ class YojoController < ApplicationController
         @post.main = params[:main]
         @post.optional = params[:optional]
         @post.seasoning = params[:seasoning]
-        @post.steps = params[:steps]
-        @post.image = params[:image]
+        @post.steps = JSON.parse(params[:steps])
+        @post.main_image.attach(params[:image])
         @post.save
         
         render :js => "window.location = '/yojo/yori/#{@yori.id}'"
@@ -217,8 +217,8 @@ class YojoController < ApplicationController
         @post.main = params[:main]
         @post.optional = params[:optional]
         @post.seasoning = params[:seasoning]
-        @post.steps = params[:steps]
-        @post.image = params[:image]
+        @post.steps = JSON.parse(params[:steps])
+        @post.main_image.attach(params[:image]) if params[:image].present?
         @post.save
         
         render :js => "window.location = '/yojo/yori/#{@yori.id}'"

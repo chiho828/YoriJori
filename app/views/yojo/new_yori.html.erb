@@ -21,10 +21,10 @@
                 <br>
                 <p>Description: <input id="subtitle" class="bar bar-input" placeholder="Describe your recipe in a line or two." type="text-box" ></p>
                 <p id="subtitle-alert"></p>
-                <br>
-                <p>Image Link: <input id="image" class="bar bar-input" placeholder="Enter image url for now." type="text"></p>
             </div>
         </div>
+
+        <input type="file" id="main-image">
         
         <div class="ingredient-post mt-4">
             <p id="bar-text">
@@ -58,7 +58,7 @@
         <div id="steps">
             <div id="1">
                 <div class="step_num">STEP 1</div>
-                [image] <textarea id="step1" class="bar" rows="5" cols="50" placeholder='Add steps to complete your recipe.'></textarea>
+                <textarea id="step1" class="bar" rows="5" cols="50" placeholder='Add steps to complete your recipe.'></textarea>
                 <button class="roundbtn" onclick="addMiddleStep(this)">add</button>
             </div>
         </div>
@@ -80,8 +80,8 @@
     
     function addYori() {
         var title = $('#title').val();
-        var subtitle = $('#subtitle').val()
-        var image = $('#image').val();
+        var subtitle = $('#subtitle').val();
+        var image = $('#main-image').prop('files')[0];
         var main_ingredient = "", optional_ingredient = "", seasoning = "";
         var steps = [];
         var ingredients = [], types = [], quantities = [], units = [];
@@ -117,7 +117,6 @@
         }
 
         var empty_quantity = false;
-        console.log(quantities);
         quantities.forEach(function(i) {
             if (i == "") {
                 empty_quantity = true;
@@ -125,7 +124,6 @@
         });
         
         var empty_step = false;
-        console.log(steps);
         steps.forEach(function(i) {
             if (i == "") {
                 empty_step = true;
@@ -161,31 +159,26 @@
             window.scrollTo(0, 0);
         }
         else {
-            console.log(title);
-            console.log(subtitle);
-            console.log(main_ingredient);
-            console.log(optional_ingredient);
-            console.log(seasoning);
-            console.log(steps);
-            console.log(ingredients);
-            console.log(image);
-            
+            const data = new FormData();
+            data.append('user', <%= current_user.id %>);
+            data.append('title', title);
+            data.append('subtitle', subtitle);
+            data.append('image', image);
+            data.append('main', main_ingredient);
+            data.append('optional', optional_ingredient);
+            data.append('seasoning', seasoning);
+            data.append('steps', JSON.stringify(steps));
+            data.append('ingredients', ingredients);
+            data.append('types', types);
+            data.append('quantities', quantities);
+            data.append('units', units);
+
             $.ajax({
                 url : "/yojo/post_yori",
                 type : "post",
-                data : {user: <%=current_user.id%>,
-                        title: title,
-                        subtitle: subtitle,
-                        image: image,
-                        main: main_ingredient,
-                        optional: optional_ingredient,
-                        seasoning: seasoning,
-                        steps: steps,
-                        ingredients: ingredients,
-                        types: types,
-                        quantities: quantities,
-                        units: units
-                }
+                data : data,
+                processData: false,
+                contentType: false
             });
         }
     }

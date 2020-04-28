@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-    # mount_uploader :image, ImageUploader
+    has_one_attached :main_image
     
     belongs_to :yori
     serialize :steps, Array

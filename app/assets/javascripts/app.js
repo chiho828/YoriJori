@@ -45,7 +45,7 @@ function addMiddleStep(button) {
 
     var template = document.createElement('template');
     var html = '<div id='+index+'><div class="step_num">STEP '+index+'</div> \
-                    [image] <textarea class="bar" id="step'+index+'" rows="5" cols="50"></textarea> \
+                    <textarea class="bar" id="step'+index+'" rows="5" cols="50"></textarea> \
                     <button class="roundbtn" onclick="addMiddleStep(this)">add</button> \
                     <button class="roundbtn" onclick="removeStep(this)">remove</button> \
                     </div>'.trim();
