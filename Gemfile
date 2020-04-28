@@ -11,6 +11,7 @@ end
 
 gem 'aws-sdk-s3'
 gem 'devise'
+gem 'simple_form'
 gem 'cancancan'
 gem 'rolify'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
