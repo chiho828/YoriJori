@@ -118,27 +118,26 @@ app.YoriIngredients.prototype = {
             $('#new_yori_ingredients').append('<div class="row" style="display: inline-flex; width: 90%" \
             id="'+item.name+'"> \
                 <div class="col-lg-3 col-md-4 col-sm-6"> \
-                    <input class="main_ingredient" type="checkbox"> \
-                </div> \
-                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -5vw"> \
-                    <input class="seasoning" type="checkbox"> \
-                </div> \
-                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -2vw"> \
                     <div class="ingredient_name">'+item.name+'</div> \
                 </div> \
                 <div class="col-lg-3 col-md-4 col-sm-6"> \
-                    <input class="quantity" type="text" size="6"> \
+                    <input class="quantity" type="text" size="4"> \
                     <select class="unit"> \
                         <option></option> \
                         <option>g</option> \
                         <option>ml</option> \
-                        <option>spoon(s)</option> \
-                        <option>table spoon(s)</option> \
-                        <option>cup(s)</option> \
-                        <option>piece(s)</option> \
-                        <option>pinch(es)</option> \
-                        <option>handful(s)</option> \
+                        <option>cups</option> \
+                        <option>spoons</option> \
+                        <option>tea spoons</option> \
+                        <option>pinches</option> \
+                        <option>slices</option> \
                     </select> \
+                </div> \
+                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -3vw"> \
+                    <input class="main_ingredient" type="checkbox"> \
+                </div> \
+                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -7vw"> \
+                    <input class="seasoning" type="checkbox"> \
                 </div> \
                 <button class="roundbtn" onclick="removeRow(this)">remove</button> \
             </div>');

@@ -29,16 +29,16 @@
             <p id="main-alert"></p> <p id="quantity-alert"></p> <p id="unit-alert"></p>
             <div class="row" style="display: inline-flex; width: 90%; margin-bottom: 1rem">
                 <div class="col-lg-3 col-md-4 col-sm-6">
-                  <b>Main</b>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -5vw">
-                  <b>Seasoning</b>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -2vw">
                   <b>Ingredient</b>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -2vw">
+                <div class="col-lg-3 col-md-4 col-sm-6">
                   <b>Measure</b>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -3vw">
+                  <b>Main</b>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -7vw">
+                  <b>Seasoning</b>
                 </div>
             </div>
             
@@ -81,12 +81,12 @@
         
         map.forEach(function(value, key) {
             var row = $('div[id="'+key+'"]').children().children();
-            var main = row[0].checked;
-            var season = row[1].checked;
-            var name = row[2].innerHTML;
+            var name = row[0].innerHTML;
             var quantity = $('div[id="'+key+'"]').children().children('.quantity').val();
             var unit = $('div[id="'+key+'"]').children().children('.unit').children('option:selected').text();
-            
+            var main = row[3].checked;
+            var season = row[4].checked;
+         
             if (main) {
                 main_ingredient += name+" ("+quantity+unit+"), ";
             }

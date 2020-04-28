@@ -33,16 +33,16 @@
             <p id="main-alert"></p> <p id="quantity-alert"></p> <p id="unit-alert"></p>
             <div class="row" style="display: inline-flex; width: 90%; margin-bottom: 1rem">
                 <div class="col-lg-3 col-md-4 col-sm-6">
-                  <b>Main</b>
+                    <b>Ingredient</b>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -5vw">
-                  <b>Seasoning</b>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <b>Measure</b>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -2vw">
-                  <b>Ingredient</b>
+                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -3vw">
+                    <b>Main</b>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -2vw">
-                  <b>Measure</b>
+                <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -7vw">
+                    <b>Seasoning</b>
                 </div>
             </div>
             
@@ -54,31 +54,31 @@
                     
                     <% @recipe = Recipe.find_by("ingredient_id = ? and yori_id = ?", i.id, @post.yori_id) %>
                     <div class="row" id="<%=i.name%>" style="display: inline-flex; width: 90%">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <input class="main_ingredient" type="checkbox" <% if @recipe.main %> checked <% end %>>
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="ingredient_name"><%=i.name%></div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <input class="quantity" type="text" size="6" value="<%= @recipe.quantity %>">
+                            <select class="unit">
+                                <option <% if @recipe.unit == "" %> selected <% end %> ></option>
+                                <option <% if @recipe.unit == "g" %> selected <% end %> >g</option>
+                                <option <% if @recipe.unit == "ml" %> selected <% end %>>ml</option>
+                                <option <% if @recipe.unit == "spoon(s)" %> selected <% end %>>spoon(s)</option>
+                                <option <% if @recipe.unit == "table spoon(s)" %> selected <% end %>>table spoon(s)</option>
+                                <option <% if @recipe.unit == "cup(s)" %> selected <% end %>>cup(s)</option>
+                                <option <% if @recipe.unit == "piece(s)" %> selected <% end %>>piece(s)</option>
+                                <option <% if @recipe.unit == "pinch(es)" %> selected <% end %>>pinch(es)</option>
+                                <option <% if @recipe.unit == "handful(s)" %> selected <% end %>>handful(s)</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -3vw">
+                            <input class="main_ingredient" type="checkbox" <% if @recipe.main %> checked <% end %>>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -7vw">
+                            <input class="seasoning" type="checkbox" <% if @recipe.seasoning %> checked <% end %>>
+                        </div>
+                        <button class="roundbtn" onclick="removeRow(this)">remove</button>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -5vw">
-                        <input class="seasoning" type="checkbox" <% if @recipe.seasoning %> checked <% end %>>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -2vw">
-                        <div class="ingredient_name"><%=i.name%></div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <input class="quantity" type="text" size="6" value="<%= @recipe.quantity %>">
-                        <select class="unit">
-                            <option <% if @recipe.unit == "" %> selected <% end %> ></option>
-                            <option <% if @recipe.unit == "g" %> selected <% end %> >g</option>
-                            <option <% if @recipe.unit == "ml" %> selected <% end %>>ml</option>
-                            <option <% if @recipe.unit == "spoon(s)" %> selected <% end %>>spoon(s)</option>
-                            <option <% if @recipe.unit == "table spoon(s)" %> selected <% end %>>table spoon(s)</option>
-                            <option <% if @recipe.unit == "cup(s)" %> selected <% end %>>cup(s)</option>
-                            <option <% if @recipe.unit == "piece(s)" %> selected <% end %>>piece(s)</option>
-                            <option <% if @recipe.unit == "pinch(es)" %> selected <% end %>>pinch(es)</option>
-                            <option <% if @recipe.unit == "handful(s)" %> selected <% end %>>handful(s)</option>
-                        </select>
-                    </div>
-                    <button class="roundbtn" onclick="removeRow(this)">remove</button>
-                </div>
                 <% end %>
             </div>
         </div>
@@ -121,12 +121,12 @@
         
         map.forEach(function(value, key) {
             var row = $('div[id="'+key+'"]').children().children();
-            var main = row[0].checked;
-            var season = row[1].checked;
-            var name = row[2].innerHTML;
+            var name = row[0].innerHTML;
             var quantity = $('div[id="'+key+'"]').children().children('.quantity').val();
             var unit = $('div[id="'+key+'"]').children().children('.unit').children('option:selected').text();
-            
+            var main = row[3].checked;
+            var season = row[4].checked;
+         
             if (main) {
                 main_ingredient += name+" ("+quantity+unit+"), ";
             }
