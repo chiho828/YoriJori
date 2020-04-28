@@ -375,9 +375,12 @@ body {
 //     /* letter-spacing: .1rem; */
 // }
 
+.navbar-nav {
+    flex-direction: initial !important;
+}
 .navbar-collapse {
     -ms-flex-preferred-size: 100%;
-    flex-basis: 100%;
+    flex-basis: initial !important;
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
