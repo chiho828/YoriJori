@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rspec'
-gem 'fog-aws' # 파일을 aws s3에 업로드 가능하게 해줌
 # gem 'mini_magick' # 이미지 크기조정
-gem 'carrierwave' #파일 업로드
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -16,7 +14,6 @@ gem 'rolify'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
