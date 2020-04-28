@@ -19,7 +19,7 @@
   <div class="form-inputs sign-wrap">
   
     <%= f.email_field :email, required: true, autofocus: true, class: "form-control" %><br>
-    <%= f.email_field :username, required: true, autofocus: true, class: "form-control" %><br>
+    <%= f.text_field :username, required: true, autofocus: true, class: "form-control" %><br>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
