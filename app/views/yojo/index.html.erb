@@ -9,15 +9,7 @@
 </header>
 
 <!-- Sidebar -->
-<div class="sidenav">
-  <a href<% if user_signed_in? %>='/yojo/kitchen/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="Your kitchen page"><img class="icon" src="<%= asset_path('fridge.png') %>"><p>My Kitchen</p></a><br>
-  
-  <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="My recipe & scooped recipe"><img class="icon" src="<%= asset_path('book.png') %>"><p>My YoriBook</p></a><br>
-  <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="Post your own recipe"><img class="icon" src="<%= asset_path('edit.png') %>"><p>Upload Recipe</p></a><br>
-</div>
+<%= render 'sidebar' %>
 
 <div class="index-main" style="padding: 2rem">
   <!-- Search Page-->

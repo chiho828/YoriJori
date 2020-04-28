@@ -1,13 +1,5 @@
 <!-- Sidebar -->
-<div class="sidenav">
-  <a href<% if user_signed_in? %>='/yojo/kitchen/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="your kitchen page"><img class="icon" src="/assets/fridge.png"><p>My Kitchen</p></a><br>
-  
-  <a href<% if user_signed_in? %>='/yojo/yori_book/<%=current_user.id%>'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="My recipe & scrap recipe"><img class="icon" src="/assets/book.png"><p>My YoriBook</p></a><br>
-  <a href<% if user_signed_in? %>='/yojo/new_yori'<% else %> onclick="guestWarning()" <% end %>
-    data-toggle="tooltip" data-placement="right" title="post your own recipe"><img class="icon" src="/assets/edit.png"><p>Upload Recipe</p></a><br>
-</div>
+<%= render 'sidebar' %>
      
 <div class="yori-wrapper">
     <div class="title">

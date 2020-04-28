@@ -506,17 +506,6 @@ a {
     }
 }
     
-.kitchen_icon {
-    background: url(/assets/fridge.png) no-repeat;
-    width: 80px;
-    height: 80px;
-    display: inline-block;
-
-    &:hover {
-        background: url(/assets/fridge_color.png) no-repeat;
-    }
-}
-
 .sign {
   margin-top: 40px;
   margin: auto;
