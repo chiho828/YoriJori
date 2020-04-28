@@ -1,6 +1,5 @@
-ruby "2.7.1"
-
 source 'https://rubygems.org'
+ruby "2.7.1"
 
 gem 'rspec'
 # gem 'mini_magick' # 이미지 크기조정
@@ -16,7 +15,7 @@ gem 'cancancan'
 gem 'rolify'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0'
-# Use sqlite3 as the database for Active Record
+# Use mysql as the database for Active Record
 gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
