@@ -4,7 +4,7 @@ local:
 
 amazon:
   service: S3
-  access_key_id: ""
-  secret_access_key: ""
-  bucket: ""
-  region: "" # e.g. 'us-east-1'
+  access_key_id:  <%= ENV["AWS_ACCESS_KEY_ID"] %>
+  secret_access_key:  <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
+  bucket: yori-jori
+  region: us-west-2 # e.g. 'us-east-1'
