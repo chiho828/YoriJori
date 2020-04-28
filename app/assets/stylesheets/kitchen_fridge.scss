@@ -32,7 +32,7 @@ $fridgeOpenTransition: 700ms;
 }
 
 .fridge-top-inner {
-    background-image: url(/assets/fridge-inside.png);
+    background: image-url('fridge-inside.png');
     background-size: 100% 100%;
     height: 80%;
     width: 90%;

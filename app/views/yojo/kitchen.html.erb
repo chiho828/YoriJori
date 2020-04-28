@@ -63,9 +63,9 @@
                     <ul>
                         <li>
                         <% if @kitchen_user.id == current_user.id %>
-                            <a class="profile_items" href="/users/edit"><img class="icon" src="/assets/profile.png" /><span id="profile" style="display:block">Edit Profile</span></a>
+                            <a class="profile_items" href="/users/edit"><img class="icon" src="<%= asset_path('profile.png') %>" /><span id="profile" style="display:block">Edit Profile</span></a>
                         <% else %>
-                            <a class="profile_items" href onclick="follow()"><img class="icon" src="/assets/profile.png" />
+                            <a class="profile_items" href onclick="follow()"><img class="icon" src="<%= asset_path('profile.png') %>" />
                                 <span id="follow" style="display:block">
                                     <% if @follows.length == 0 %>
                                         Follow
@@ -235,7 +235,7 @@
                             </a>
                         <% end %>
                     <% else %>
-                        <img src="/assets/bottom-shelf.png" style="width:100%;height:100%;opacity:0.7">
+                        <img src="<%= asset_path('bottom-shelf.png') %>" style="width:100%;height:100%;opacity:0.7">
                         <span class="carousel-message-1" align="center">PLEASE FILL IN THE FRIDGE</span>
                         <span class="carousel-message-2" align="center">TO GET RECIPE RECOMMENDATIONS</span>
                     <% end %>

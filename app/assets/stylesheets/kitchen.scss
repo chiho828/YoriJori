@@ -1,5 +1,5 @@
 .kitchen-background-wrapper {
-        background-image: url(/assets/kitchen-tile.png);
+        background: image-url('kitchen-tile.png');
         background-size: 100% 100%;
 }    
 
@@ -171,16 +171,16 @@ $shelfHeight: 10px;
     }
 }
 #recipe_jar {
-    background-image: url(/assets/pot.png);
+    background-image: image-url('pot.png');
 }
 #like_jar {
-    background-image: url(/assets/jar.png);
+    background-image: image-url('jar.png');
 }
 #follower_jar {
-    background-image: url(/assets/plate.png);
+    background-image: image-url('plate.png');
 }
 #followee_jar {
-    background-image: url(/assets/bowl.png);
+    background-image: image-url('bowl.png');
 }
 
 #profile,
@@ -264,15 +264,15 @@ $shelfHeight: 10px;
         }
         
         &.shelf-yoribook a{
-            background-image: url(/assets/book.png);
+            background-image: image-url('book.png');
         }
         
         &.shelf-postyori a{
-            background-image: url(/assets/edit.png);
+            background-image: image-url('edit.png');
         }
         
         &.shelf-yorijohap a{
-            background-image: url(/assets/utensil.png);
+            background-image: image-url('utensil.png');
         }
     }
     

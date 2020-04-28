@@ -23,29 +23,11 @@
         <% end %>
         
         <span id="like-wrapper">
-            <a onclick=<% if user_signed_in? %>"like()"<% else %>"guestWarning()"<% end %>>
-                <% if @likes.length == 0 %>
-                    <img src='/assets/tomato.png' onmouseover="this.src='/assets/tomato-hover.png'" onmouseout="this.src='/assets/tomato.png'" />
-                <% else %>
-                    <img src='/assets/tomato-color.png' onmouseover="this.src='/assets/tomato-hover.png'" onmouseout="this.src='/assets/tomato-color.png'" />
-                <% end %>
-            </a>
-            <a id="likes" data-toggle="modal" data-target="#like_modal">
-                <%=@post.likes.length%> likes
-            </a>
+            <%= render 'like' %>
         </span>
         
         <span id="scrap-wrapper">
-            <a onclick=<% if user_signed_in? %>"scrap()"<% else %>"guestWarning()"<% end %>>
-                <% if @scraps.length == 0 %>
-                    <img src='/assets/scoop.png' onmouseover="this.src='/assets/scoop-hover.png'" onmouseout="this.src='/assets/scoop.png'" />
-                <% else %>
-                    <img src='/assets/scoop-color.png' onmouseover="this.src='/assets/scoop-hover.png'" onmouseout="this.src='/assets/scoop-color.png'" />
-                <% end %>
-            </a>
-            <a id="scraps" data-toggle="modal" data-target="#scrap_modal">
-                <%=@post.scraps.length%> scoops
-            </a>
+            <%= render 'scrap' %>
         </span>
     </div>
     

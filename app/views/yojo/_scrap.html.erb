@@ -1,8 +1,8 @@
 <a onclick=<% if user_signed_in? %>"scrap()"<% else %>"guestWarning()"<% end %>>
     <% if not @scrapped %>
-        <img src='/assets/scoop.png' onmouseover="this.src='/assets/scoop-hover.png'" onmouseout="this.src='/assets/scoop.png'" />
+        <img src="<%= asset_path('scoop.png') %>" onmouseover='this.src="<%= asset_path('scoop-hover.png') %>"' onmouseout='this.src="<%= asset_path('scoop.png') %>"' />
     <% else %>
-        <img src='/assets/scoop-color.png' onmouseover="this.src='/assets/scoop-hover.png'" onmouseout="this.src='/assets/scoop-color.png'" />
+        <img src="<%= asset_path('scoop-color.png') %>" onmouseover='this.src="<%= asset_path('scoop-hover.png') %>"' onmouseout='this.src="<%= asset_path('scoop-color.png') %>"' />
     <% end %>
 </a>
 <a id="scraps" data-toggle="modal" data-target="#scrap_modal">
