@@ -86,7 +86,29 @@ input {
 .recipe-name-wrapper {
     height: 25%;
     border: 1px solid black;
-    background-position: bottom, left; 
+    background-position: bottom, left;
+    font-family: godo;
+    text-align: center;
+    
+    a:hover {
+        text-decoration: none;
+    }
+
+    .title {
+        color: tomato;
+        font-size: large;
+        left: 0;
+
+        &:hover {
+            color: black;
+        }
+    }
+    
+    .author {
+        font-size: 1.2rem;
+        font-family: godoMaum;
+        color: gray;
+    }
 }
 
 #demo_book {

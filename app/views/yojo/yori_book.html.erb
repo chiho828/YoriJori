@@ -16,28 +16,7 @@
   <% end %>
   
   <div class="cover-wrapper">
-    <% @posts.each do |post| %>
-      <div class="recipe-wrapper">
-        <div class="recipe-left">
-          <div class="recipe-picture-wrapper">
-            <a href="/yojo/yori/<%=post.yori_id%>">
-              <img id="demo_book" src=<%= url_for(post.main_image) %>>
-            </a>
-          </div>
-          <div class="recipe-name-wrapper">
-            <h4 class="card-title">
-              <a href="/yojo/yori/<%=post.yori_id%>"><%=post.title%></a>
-              <a href="/yojo/kitchen/<%= @user.id %>"><p>by. <%= @user.username %></p></a>
-            </h4>
-          </div>
-        </div>
-        <div class="recipe-right">
-          <p>Main: <span><%=post.main%></span></p>
-          <p>Optional: <span><%=post.optional%></span></p>
-          <p>Seasoning: <span><%=post.seasoning%></span></p>
-        </div>
-      </div>
-    <% end %>
+    <%= render('bookwrap') %>
   </div>
 </div>
 
