@@ -193,7 +193,7 @@
                         <% @count = 0 %>
                         <% @yoris.each do |yori| %>
                             <% @user = User.find(yori.user_id) %>
-                            <% @post = Post.find(yori.id) %>
+                            <% @post = yori.post %>
                             <% if @count % 3 == 0 %>
                                 <div class="carousel-item <%if @count == 0%>active<%end%>">
                                     <div class="row" style="height: 100%">
