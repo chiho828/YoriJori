@@ -1,4 +1,4 @@
-<a onclick=<% if user_signed_in? %>"scrap()"<% else %>"guestWarning()"<% end %>>
+<a id="scrap" onclick=<% if user_signed_in? %>"scrap()"<% else %>"guestWarning()"<% end %>>
     <% if not @scrapped %>
         <img src="<%= asset_path('scoop.png') %>" onmouseover='this.src="<%= asset_path('scoop-hover.png') %>"' onmouseout='this.src="<%= asset_path('scoop.png') %>"' />
     <% else %>

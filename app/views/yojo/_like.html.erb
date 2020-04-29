@@ -1,4 +1,4 @@
-<a onclick=<% if user_signed_in? %>"like()"<% else %>"guestWarning()"<% end %>>
+<a id="like" onclick=<% if user_signed_in? %>"like()"<% else %>"guestWarning()"<% end %>>
     <% if not @liked %>
         <img src="<%= asset_path('tomato.png') %>" onmouseover='this.src="<%= asset_path('tomato-hover.png') %>"' onmouseout='this.src="<%= asset_path('tomato.png') %>"' />
     <% else %>

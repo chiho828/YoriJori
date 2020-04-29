@@ -181,28 +181,40 @@
     font-family: godo;
     font-size: .9em;
     text-decoration: none;
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    right: 8vw;
+    float: right;
+    width: 130px;
+    height: 60px;
+
     cursor: pointer;
     img {
         width: 60px;
         height: 60px;
-        margin-right: -.8em;
     }
 }
-    
+
+#like, #scrap {
+    position: absolute;
+    left: 0;
+}
+
+#likes, #scraps {
+    position: absolute;
+    bottom: 1rem;
+}
+
+#likes {
+    right: 1.2rem;
+}
+#scraps {
+    right: 0px;
+}
+
 #likes:hover,
 #scraps:hover {
     color:tomato;
     text-decoration: none;
-}
-
-#like-wrapper {
-    right: 15rem;
-}
-
-#scrap-wrapper {
-    right: 8rem;
 }
 
 #comment {
