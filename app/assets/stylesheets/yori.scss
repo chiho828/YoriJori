@@ -175,15 +175,21 @@
     color: grey;
 }
 
+#like-wrapper {
+    right: 19%;
+}
+
+#scrap-wrapper {
+    right: 8%;
+}
+
 #like-wrapper,
 #scrap-wrapper {
     color: black;
     font-family: godo;
     font-size: .9em;
     text-decoration: none;
-    position: relative;
-    right: 8vw;
-    float: right;
+    position: absolute;
     width: 130px;
     height: 60px;
 
