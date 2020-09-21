@@ -104,8 +104,8 @@
                             <% if @posts.length > 0 %>
                                 <ul>
                                     <% @posts.each do |post| %>
-                                        <% if post.likes.length > 0 %>
-                                            <li><a href="/yojo/yori/<%=post.id%>" target><%=post.title%> <%=post.likes.length%></a></li>
+                                        <% if post.like_count > 0 %>
+                                            <li><a href="/yojo/yori/<%=post.id%>" target><%=post.title%> <%=post.like_count%></a></li>
                                         <% end %>
                                     <% end %>
                                 </ul>

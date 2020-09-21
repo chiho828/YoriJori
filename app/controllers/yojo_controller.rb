@@ -268,7 +268,7 @@ class YojoController < ApplicationController
         
         @likes = 0
         @posts.each do |post|
-            @likes += post.likes.length
+            @likes += post.like_count
         end
     end
     
@@ -336,16 +336,18 @@ class YojoController < ApplicationController
         if @likes.any?
             @likes[0].destroy
             @liked = false
+            @post.update_columns(likes: @post.like_count-1)
         else
             @like = Like.new
             @like.user_id = @user.id
             @like.post_id = @post.id
             @like.save
             @liked = true
+            @post.update_columns(likes: @post.like_count+1)
         end
             
         @post_likes = Like.where('post_id = ?', @post.id)
-        
+
         respond_to do |format|
             format.js
         end
