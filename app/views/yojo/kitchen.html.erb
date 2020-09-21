@@ -207,7 +207,6 @@
                                             <a href="/yojo/yori/<%=yori.id%>"><%=yori.name%></a>
                                             <a href="/yojo/kitchen/<%= @user.id %>"><p>by. <%= @user.username %></p></a>
                                         </h4>
-                                        <p class="card-text"><%=Post.find_by(yori_id: yori.id).main%></p>
                                     </div>
                                 </div>
                             </div>
