@@ -1,8 +1,8 @@
 <a id="like" onclick=<% if user_signed_in? %>"like()"<% else %>"guestWarning()"<% end %>>
-    <% if not @liked %>
-        <img src="<%= asset_path('tomato.png') %>" onmouseover='this.src="<%= asset_path('tomato-hover.png') %>"' onmouseout='this.src="<%= asset_path('tomato.png') %>"' />
-    <% else %>
+    <% if @liked %>
         <img src="<%= asset_path('tomato-color.png') %>" onmouseover='this.src="<%= asset_path('tomato-hover.png') %>"' onmouseout='this.src="<%= asset_path('tomato-color.png') %>"' />
+    <% else %>
+        <img src="<%= asset_path('tomato.png') %>" onmouseover='this.src="<%= asset_path('tomato-hover.png') %>"' onmouseout='this.src="<%= asset_path('tomato.png') %>"' />
     <% end %>
 </a>
 <a id="likes" data-toggle="modal" data-target="#like_modal">

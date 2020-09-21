@@ -162,6 +162,9 @@ class YojoController < ApplicationController
         if user_signed_in?
             @likes = Like.where('user_id = ? AND post_id = ?', current_user.id, @post.id)
             @scraps = Scrap.where('user_id = ? AND post_id = ?', current_user.id, @post.id)
+
+            @liked = @likes.any?
+            @scrapped = @scraps.any?
         end
         @comments = Comment.where(post_id: @post.id)
         # @commenter = User.find(@comment.user_id)
@@ -329,16 +332,16 @@ class YojoController < ApplicationController
         if user_signed_in?
             @likes = Like.where('user_id = ? AND post_id = ?', current_user.id, @post.id)
         end
-        
-        if @likes.length == 0
+
+        if @likes.any?
+            @likes[0].destroy
+            @liked = false
+        else
             @like = Like.new
             @like.user_id = @user.id
             @like.post_id = @post.id
             @like.save
             @liked = true
-        else
-            @likes[0].destroy
-            @liked = false
         end
             
         @post_likes = Like.where('post_id = ?', @post.id)
@@ -357,16 +360,16 @@ class YojoController < ApplicationController
         if user_signed_in?
             @scraps = Scrap.where('user_id = ? AND post_id = ?', current_user.id, @post.id)
         end
-        
-        if @scraps.length == 0
+            
+        if @scraps.any?
+            @scraps[0].destroy
+            @scrapped = false
+        else
             @scrap = Scrap.new
             @scrap.user_id = @user.id
             @scrap.post_id = @post.id
             @scrap.save
             @scrapped = true
-        else
-            @scraps[0].destroy
-            @scrapped = false
         end
             
         @post_scraps = Scrap.where('post_id = ?', @post.id)      
