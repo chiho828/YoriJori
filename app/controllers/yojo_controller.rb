@@ -62,7 +62,7 @@ class YojoController < ApplicationController
         # if @basket == nil
         #     @basket = [0]
         # end
-        @comp = Yori.joins(:recipes).where('recipes.main = "t" AND ingredient_id NOT IN (?)', @basket).group("yori_id")
+        @comp = Yori.joins(:recipes).where('recipes.main = true AND ingredient_id NOT IN (?)', @basket).group("yori_id")
         
         @date = params[:search_date]
         if @date == "all"
@@ -255,7 +255,7 @@ class YojoController < ApplicationController
             if @basket.length == 0
                 @basket = [0]
             end
-            @comp = Yori.joins(:recipes).where('recipes.main = "t" AND ingredient_id NOT IN (?)', @basket).group("yori_id")
+            @comp = Yori.joins(:recipes).where('recipes.main = true AND ingredient_id NOT IN (?)', @basket).group("yori_id")
             @yoris = Yori.where.not(id: @comp.ids).order("created_at DESC").limit(@recommended)
         end
         
