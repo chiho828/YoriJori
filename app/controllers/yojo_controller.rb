@@ -53,17 +53,15 @@ class YojoController < ApplicationController
             @posts = Post.where("yori_id": @yoris.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
         end
         
-        @rec_likes = Like.select("post_id").joins(:post).group("post_id").order("COUNT(*) DESC, posts.created_at DESC").limit(4)
+        @rec_likes = Post.order(like_count: :desc, created_at: :desc).limit(4)
         @rec_dates = Post.order("created_at DESC").limit(4)
     end
     
     def combine
         @basket = params[:data_value]
-        # if @basket == nil
-        #     @basket = [0]
-        # end
+
         @comp = Yori.joins(:recipes).where('recipes.main = true AND ingredient_id NOT IN (?)', @basket).group("yori_id")
-        
+      
         @date = params[:search_date]
         if @date == "all"
             @yoris = Yori.where.not(id: @comp.ids)
@@ -83,17 +81,14 @@ class YojoController < ApplicationController
             format.js
         end
         
-        if @yoris != nil
-            @items_page = 20
-            @current_page = params[:page_number].to_i
-            
-            @max_items = @yoris.length
-            @max_page = (Float(@max_items) / @items_page).ceil
-           
-            @posts = Post.where("yori_id": @yoris.ids).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
-        end
+        @items_page = 20
+        @current_page = params[:page_number].to_i
+
+        @max_items = @yoris.length
+        @max_page = (Float(@max_items) / @items_page).ceil
         
-        @rec_likes = Like.select("post_id").joins(:post).group("post_id").order("COUNT(*) DESC, posts.created_at DESC").limit(4)
+        @posts = Post.where(yori_id: @yoris).order("created_at DESC").limit(@items_page).offset(@current_page*@items_page)
+        @rec_likes = Post.order(like_count: :desc, created_at: :desc).limit(4)
         @rec_dates = Post.order("created_at DESC").limit(4)
     end
     
@@ -336,14 +331,14 @@ class YojoController < ApplicationController
         if @likes.any?
             @likes[0].destroy
             @liked = false
-            @post.update_columns(likes: @post.like_count-1)
+            @post.update_columns(like_count: @post.like_count-1)
         else
             @like = Like.new
             @like.user_id = @user.id
             @like.post_id = @post.id
             @like.save
             @liked = true
-            @post.update_columns(likes: @post.like_count+1)
+            @post.update_columns(like_count: @post.like_count+1)
         end
             
         @post_likes = Like.where('post_id = ?', @post.id)

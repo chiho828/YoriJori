@@ -1,34 +1,32 @@
-<% if @posts != nil %>
-    <% @count = 0 %>
-    <% @posts.each do |post| %>
-        <% @yori = Yori.find(post.yori_id) %>
-        <% @user = User.find(@yori.user_id) %>
-        <% if (@count % 4) == 0 %>
-          <div class="row" style="margin-top: 1em">
-        <% end %>
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-              <div class="card h-100">
-                <a href="/yojo/yori/<%=@yori.id%>"><img class="card-img-top" src=<%= url_for(post.main_image) %>></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="/yojo/yori/<%=@yori.id%>"><%=@yori.name%></a>
-                    <a href="/yojo/kitchen/<%= @user.id %>"><p>by. <%= @user.username %></p></a>
-                  </h4>
-                  <p class="card-text"><%=Post.find_by(yori_id: @yori.id).main%></p>
-                </div>
-              </div>
-            </div>
-        <% if @count % 4 == 3 %>
-          </div>
-        <% end %>
-        <% @count += 1 %> 
+<% count = 0 %>
+<% @posts.each do |post| %>
+    <% yori = post.yori %>
+    <% user = yori.user %>
+    <% if (count % 4) == 0 %>
+      <div class="row" style="margin-top: 1em">
     <% end %>
-    <% if @count % 4 != 0 %>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="/yojo/yori/<%= yori.id %>"><img class="card-img-top" src=<%= url_for(post.main_image) %>></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="/yojo/yori/<%= yori.id %>"><%= yori.name %></a>
+                <a href="/yojo/kitchen/<%= user.id %>"><p>by. <%= user.username %></p></a>
+              </h4>
+              <p class="card-text"><%= post.main %></p>
+            </div>
+          </div>
+        </div>
+    <% if count % 4 == 3 %>
       </div>
     <% end %>
+    <% count += 1 %> 
+<% end %>
+<% if count % 4 != 0 %>
+  </div>
 <% end %>
 
-<% if @yoris != nil and @yoris.length > 0 %>
+<% if @yoris.any? %>
     <ul id="page-list" class="pagination">
       <li class="page-item"><a class="page-link" <% if @current_page > 0 %>
       onclick="combine(<%=@current_page - 1%>)"<% end %>>prev</a></li>
@@ -43,22 +41,21 @@
 
 <!--추천 by 좋아요-->
 <p>&lt;Popular recipes></p>
-<% if @rec_likes != nil and @rec_likes.length > 0%>
+<% if @rec_likes.any? %>
   <div class="row" style="margin-top: 1em">
-    <% @rec_likes.each do |rec| %>
-      <% @rec_post = Post.find(rec.post_id) %>
-      <% @rec_yori = Yori.find(@rec_post.id) %>
-      <% @rec_user = User.find(@rec_yori.user_id) %>
+    <% @rec_likes.each do |post| %>
+      <% yori = post.yori %>
+      <% user = yori.user %>
       
       <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="#"><img class="card-img-top" src=<%= url_for(@rec_post.main_image) %>></a>
+          <a href="#"><img class="card-img-top" src=<%= url_for(post.main_image) %>></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="/yojo/yori/<%=@rec_yori.id%>"><%=@rec_yori.name%></a>
-              <a href="/yojo/kitchen/<%= @rec_user.id %>"><p>by. <%= @rec_user.username %></p></a>
+              <a href="/yojo/yori/<%= yori.id %>"><%= yori.name %></a>
+              <a href="/yojo/kitchen/<%= user.id %>"><p>by. <%= user.username %></p></a>
             </h4>
-            <p class="card-text"><%=Post.find(@rec_post.id).main%></p>
+            <p class="card-text"><%= post.main %></p>
           </div>
         </div>
       </div>
@@ -69,21 +66,21 @@
 
 <!--추천 by 날짜 -->
 <p>&lt;New Recipes></p>
-<% if @rec_dates != nil and @rec_dates.length > 0%>
+<% if @rec_dates.any? %>
   <div class="row" style="margin-top: 1em">
     <% @rec_dates.each do |post| %>
-      <% @rec_yori = Yori.find(post.id) %>
-      <% @rec_user = User.find(@rec_yori.user_id) %>
+      <% yori = post.yori %>
+      <% user = yori.user %>
       
       <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         <div class="card h-100">
           <a href="#"><img class="card-img-top" src=<%= url_for(post.main_image) %>></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="/yojo/yori/<%=@rec_yori.id%>"><%=@rec_yori.name%></a>
-              <a href="/yojo/kitchen/<%= @rec_user.id %>"><p>by. <%= @rec_user.username %></p></a>
+              <a href="/yojo/yori/<%= yori.id %>"><%= yori.name %></a>
+              <a href="/yojo/kitchen/<%= user.id %>"><p>by. <%= user.username %></p></a>
             </h4>
-            <p class="card-text"><%=Post.find(post.id).main%></p>
+            <p class="card-text"><%= post.main %></p>
           </div>
         </div>
       </div>
