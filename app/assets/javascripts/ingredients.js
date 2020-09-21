@@ -128,7 +128,7 @@ app.YoriIngredients.prototype = {
                         <option>ml</option> \
                         <option>cups</option> \
                         <option>spoons</option> \
-                        <option>tea spoons</option> \
+                        <option>table spoons</option> \
                         <option>pinches</option> \
                         <option>slices</option> \
                     </select> \

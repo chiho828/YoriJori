@@ -63,12 +63,11 @@
                                 <option <% if @recipe.unit == "" %> selected <% end %> ></option>
                                 <option <% if @recipe.unit == "g" %> selected <% end %> >g</option>
                                 <option <% if @recipe.unit == "ml" %> selected <% end %>>ml</option>
-                                <option <% if @recipe.unit == "spoon(s)" %> selected <% end %>>spoon(s)</option>
-                                <option <% if @recipe.unit == "table spoon(s)" %> selected <% end %>>table spoon(s)</option>
-                                <option <% if @recipe.unit == "cup(s)" %> selected <% end %>>cup(s)</option>
-                                <option <% if @recipe.unit == "piece(s)" %> selected <% end %>>piece(s)</option>
-                                <option <% if @recipe.unit == "pinch(es)" %> selected <% end %>>pinch(es)</option>
-                                <option <% if @recipe.unit == "handful(s)" %> selected <% end %>>handful(s)</option>
+                                <option <% if @recipe.unit == "cups" %> selected <% end %>>cups</option>
+                                <option <% if @recipe.unit == "spoons" %> selected <% end %>>spoons</option>
+                                <option <% if @recipe.unit == "table spoons" %> selected <% end %>>table spoons</option>
+                                <option <% if @recipe.unit == "pinches" %> selected <% end %>>pinches</option>
+                                <option <% if @recipe.unit == "slices" %> selected <% end %>>slices</option>
                             </select>
                         </div>
                         <div class="col-lg-3 col-md-4 col-sm-6" style="margin-left: -3vw">
@@ -201,10 +200,10 @@
             data.append('optional', optional_ingredient);
             data.append('seasoning', seasoning);
             data.append('steps', JSON.stringify(steps));
-            data.append('ingredients', ingredients);
-            data.append('types', types);
-            data.append('quantities', quantities);
-            data.append('units', units);
+            data.append('ingredients', JSON.stringify(ingredients));
+            data.append('types', JSON.stringify(types));
+            data.append('quantities', JSON.stringify(quantities));
+            data.append('units', JSON.stringify(units));
 
             $.ajax({
                 url : "/yojo/update_yori/<%=@post.yori_id%>",

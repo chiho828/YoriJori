@@ -123,7 +123,6 @@
             }
         });
         
-        
         if (image == undefined || title == "" || main_ingredient == "" || empty_quantity || empty_step) {
             if (image == undefined) {
                 $("#image-alert")[0].innerHTML = "*Please add the main image.*";
@@ -167,10 +166,10 @@
             data.append('optional', optional_ingredient);
             data.append('seasoning', seasoning);
             data.append('steps', JSON.stringify(steps));
-            data.append('ingredients', ingredients);
-            data.append('types', types);
-            data.append('quantities', quantities);
-            data.append('units', units);
+            data.append('ingredients', JSON.stringify(ingredients));
+            data.append('types', JSON.stringify(types));
+            data.append('quantities', JSON.stringify(quantities));
+            data.append('units', JSON.stringify(units));
 
             $.ajax({
                 url : "/yojo/post_yori",

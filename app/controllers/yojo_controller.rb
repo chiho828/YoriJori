@@ -112,21 +112,22 @@ class YojoController < ApplicationController
         @yori.user_id = params[:user]
         @yori.save
         
-        @ingredients = params[:ingredients]
-        @types = params[:types]
-        @quantities = params[:quantities]
-        @units = params[:units]
+        @ingredients = JSON.parse(params[:ingredients])
+        @types = JSON.parse(params[:types])
+        @quantities = JSON.parse(params[:quantities])
+        @units = JSON.parse(params[:units])
+        
         for i in 0..@ingredients.length-1
             @recipe = Recipe.new
             @recipe.yori_id = @yori.id
             @recipe.ingredient_id = @ingredients[i]
-            if @types[i] == "1"
+            if @types[i] == 1
                 @recipe.main = true
                 @recipe.seasoning = true
-            elsif @types[i] == "2"
+            elsif @types[i] == 2
                 @recipe.main = true
                 @recipe.seasoning = false
-            elsif @types[i] == "3"
+            elsif @types[i] == 3
                 @recipe.main = false
                 @recipe.seasoning = true
             else
@@ -184,22 +185,23 @@ class YojoController < ApplicationController
         @trash.each do |i|
             i.destroy
         end
-        
-        @ingredients = params[:ingredients]
-        @types = params[:types]
-        @quantities = params[:quantities]
-        @units = params[:units]
+
+        @ingredients = JSON.parse(params[:ingredients])
+        @types = JSON.parse(params[:types])
+        @quantities = JSON.parse(params[:quantities])
+        @units = JSON.parse(params[:units])
+
         for i in 0..@ingredients.length-1
             @recipe = Recipe.new
             @recipe.yori_id = @yori.id
             @recipe.ingredient_id = @ingredients[i]
-            if @types[i] == "1"
+            if @types[i] == 1
                 @recipe.main = true
                 @recipe.seasoning = true
-            elsif @types[i] == "2"
+            elsif @types[i] == 2
                 @recipe.main = true
                 @recipe.seasoning = false
-            elsif @types[i] == "3"
+            elsif @types[i] == 3
                 @recipe.main = false
                 @recipe.seasoning = true
             else
